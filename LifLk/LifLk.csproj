@@ -1,0 +1,1179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DA2DD01A-D8EA-4404-B0F0-9E174EC1F6E9}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LifLk</RootNamespace>
+    <AssemblyName>LifLk</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AspNet.Identity.MySQL">
+      <HintPath>F:\Downloads\aspnet-tools\Samples\Identity\AspNet.Identity.MySQL\bin\Release\AspNet.Identity.MySQL.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Web, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\MySql.Web.6.9.8\lib\net45\MySql.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin.Security.Providers, Version=1.25.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Owin.Security.Providers.1.27\lib\net45\Owin.Security.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.2.0.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.2.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CharacterController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\account.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\character.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\containers.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\custom_texts.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\equipment_slots.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\features.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\guilds.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\guild_roles.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\guild_types.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\guild_type_role_msgs.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\items.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LifDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LifDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LifDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LifDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LifDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\objects_types.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\prices.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\titles.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="art\2D\gui\equip.png" />
+    <Content Include="art\2D\Items\acerba_moretum.png" />
+    <Content Include="art\2D\Items\adipem_nebulo.png" />
+    <Content Include="art\2D\Items\adrenaline_potion.png" />
+    <Content Include="art\2D\Items\adrenaline_preparation.png" />
+    <Content Include="art\2D\Items\aktashite.png" />
+    <Content Include="art\2D\Items\albus_viduae.png" />
+    <Content Include="art\2D\Items\alchemical_glassware.png" />
+    <Content Include="art\2D\Items\alchemists_outfit.png" />
+    <Content Include="art\2D\Items\amethyst.png" />
+    <Content Include="art\2D\Items\animal_calculi.png" />
+    <Content Include="art\2D\Items\animal_trap.png" />
+    <Content Include="art\2D\Items\anvil.png" />
+    <Content Include="art\2D\Items\apple.png" />
+    <Content Include="art\2D\Items\apple_berry_pie.png" />
+    <Content Include="art\2D\Items\apple_buns.png" />
+    <Content Include="art\2D\Items\apple_castle_soup.png" />
+    <Content Include="art\2D\Items\apple_meat_loaf.png" />
+    <Content Include="art\2D\Items\apple_tree_sprout.png" />
+    <Content Include="art\2D\Items\aquila_peccatum.png" />
+    <Content Include="art\2D\Items\aquila_wings_potion.png" />
+    <Content Include="art\2D\Items\aquila_wings_preparation.png" />
+    <Content Include="art\2D\Items\arbalest.png" />
+    <Content Include="art\2D\Items\arrow.png" />
+    <Content Include="art\2D\Items\aureus_magistrum.png" />
+    <Content Include="art\2D\Items\Awlpike.png" />
+    <Content Include="art\2D\Items\bacce_hamsa.png" />
+    <Content Include="art\2D\Items\backpack.png" />
+    <Content Include="art\2D\Items\bacon.png" />
+    <Content Include="art\2D\Items\bag.png" />
+    <Content Include="art\2D\Items\baklava.png" />
+    <Content Include="art\2D\Items\Bardiche.png" />
+    <Content Include="art\2D\Items\bark.png" />
+    <Content Include="art\2D\Items\Barrell_bomb.png" />
+    <Content Include="art\2D\Items\Barrel_nails_bomb.png" />
+    <Content Include="art\2D\Items\bastard_sword.png" />
+    <Content Include="art\2D\Items\BattleAxe.png" />
+    <Content Include="art\2D\Items\bear_hide.png" />
+    <Content Include="art\2D\Items\bear_meat.png" />
+    <Content Include="art\2D\Items\beast_steak.png" />
+    <Content Include="art\2D\Items\bec_de_corbin.png" />
+    <Content Include="art\2D\Items\beef.png" />
+    <Content Include="art\2D\Items\beef_cabbage_hash.png" />
+    <Content Include="art\2D\Items\beef_steak.png" />
+    <Content Include="art\2D\Items\beef_stew.png" />
+    <Content Include="art\2D\Items\berries_in_honey.png" />
+    <Content Include="art\2D\Items\big_bear_head.png" />
+    <Content Include="art\2D\Items\big_deer_head.png" />
+    <Content Include="art\2D\Items\big_falchion.png" />
+    <Content Include="art\2D\Items\big_hide.png" />
+    <Content Include="art\2D\Items\big_intenstines.png" />
+    <Content Include="art\2D\Items\big_moose_head.png" />
+    <Content Include="art\2D\Items\billets.png" />
+    <Content Include="art\2D\Items\bint.png" />
+    <Content Include="art\2D\Items\bixbyite.png" />
+    <Content Include="art\2D\Items\blacksmiths_hammer.png" />
+    <Content Include="art\2D\Items\blacksmiths_outfit.png" />
+    <Content Include="art\2D\Items\blinded_eye.png" />
+    <Content Include="art\2D\Items\boar.png" />
+    <Content Include="art\2D\Items\boards.png" />
+    <Content Include="art\2D\Items\boar_hide.png" />
+    <Content Include="art\2D\Items\boar_spear.png" />
+    <Content Include="art\2D\Items\bodkin_arrow.png" />
+    <Content Include="art\2D\Items\boiled_chicken.png" />
+    <Content Include="art\2D\Items\boiled_eggs.png" />
+    <Content Include="art\2D\Items\boiled_potatoes.png" />
+    <Content Include="art\2D\Items\bolt.png" />
+    <Content Include="art\2D\Items\bones.png" />
+    <Content Include="art\2D\Items\bone_glue.png" />
+    <Content Include="art\2D\Items\bone_meal.png" />
+    <Content Include="art\2D\Items\branch.png" />
+    <Content Include="art\2D\Items\bread.png" />
+    <Content Include="art\2D\Items\breathtaker_poison.png" />
+    <Content Include="art\2D\Items\breathtaker_preparation.png" />
+    <Content Include="art\2D\Items\Brewed_honey.png" />
+    <Content Include="art\2D\Items\brick.png" />
+    <Content Include="art\2D\Items\broadhead_arrow.png" />
+    <Content Include="art\2D\Items\broad_axe.png" />
+    <Content Include="art\2D\Items\buckler_shield.png" />
+    <Content Include="art\2D\Items\buildinglog.png" />
+    <Content Include="art\2D\Items\bull.png" />
+    <Content Include="art\2D\Items\bulls_strength_potion.png" />
+    <Content Include="art\2D\Items\bulls_strength_preparation.png" />
+    <Content Include="art\2D\Items\burmenta_wallo.png" />
+    <Content Include="art\2D\Items\cabbage.png" />
+    <Content Include="art\2D\Items\cabbage_pies.png" />
+    <Content Include="art\2D\Items\caeci_custos.png" />
+    <Content Include="art\2D\Items\cake_with_giblets.png" />
+    <Content Include="art\2D\Items\carpenters_outfit.png" />
+    <Content Include="art\2D\Items\carpenters_toolkit.png" />
+    <Content Include="art\2D\Items\carrot.png" />
+    <Content Include="art\2D\Items\charcoal.png" />
+    <Content Include="art\2D\Items\cheese.png" />
+    <Content Include="art\2D\Items\cheese_buns.png" />
+    <Content Include="art\2D\Items\chicken.png" />
+    <Content Include="art\2D\Items\chickens.png" />
+    <Content Include="art\2D\Items\chicken_meat.png" />
+    <Content Include="art\2D\Items\chicken_pie.png" />
+    <Content Include="art\2D\Items\chorea_iram.png" />
+    <Content Include="art\2D\Items\chrysoberyl.png" />
+    <Content Include="art\2D\Items\claws.png" />
+    <Content Include="art\2D\Items\clay.png" />
+    <Content Include="art\2D\Items\Claymore.png" />
+    <Content Include="art\2D\Items\clay_anvil_form.png" />
+    <Content Include="art\2D\Items\Clay_bomb.png" />
+    <Content Include="art\2D\Items\clay_tile.png" />
+    <Content Include="art\2D\Items\codfish.png" />
+    <Content Include="art\2D\Items\codfish_with_cabbage.png" />
+    <Content Include="art\2D\Items\codfish_with_mushrooms.png" />
+    <Content Include="art\2D\Items\cod_chowder.png" />
+    <Content Include="art\2D\Items\common_bars.png" />
+    <Content Include="art\2D\Items\common_ingots.png" />
+    <Content Include="art\2D\Items\common_lumps.png" />
+    <Content Include="art\2D\Items\composite_bow.png" />
+    <Content Include="art\2D\Items\compote.png" />
+    <Content Include="art\2D\Items\confiture.png" />
+    <Content Include="art\2D\Items\cookies.png" />
+    <Content Include="art\2D\Items\cooking_pot.png" />
+    <Content Include="art\2D\Items\cooks_outfit.png" />
+    <Content Include="art\2D\Items\copper_bar.png" />
+    <Content Include="art\2D\Items\copper_coins.png" />
+    <Content Include="art\2D\Items\copper_ingot.png" />
+    <Content Include="art\2D\Items\copper_ore.png" />
+    <Content Include="art\2D\Items\cottage_pie.png" />
+    <Content Include="art\2D\Items\cow.png" />
+    <Content Include="art\2D\Items\cows.png" />
+    <Content Include="art\2D\Items\crispy_chicken.png" />
+    <Content Include="art\2D\Items\crucible_and_tongs.png" />
+    <Content Include="art\2D\Items\crystalized_bile.png" />
+    <Content Include="art\2D\Items\cudgel.png" />
+    <Content Include="art\2D\Items\curaila_jangha.png" />
+    <Content Include="art\2D\Items\curva_manus.png" />
+    <Content Include="art\2D\Items\decorated_clothes.png" />
+    <Content Include="art\2D\Items\deployed_pavise.png" />
+    <Content Include="art\2D\Items\desertus_smilax.png" />
+    <Content Include="art\2D\Items\diamond.png" />
+    <Content Include="art\2D\Items\digested_feather.png" />
+    <Content Include="art\2D\Items\distiller.png" />
+    <Content Include="art\2D\Items\door_module.png" />
+    <Content Include="art\2D\Items\double_blood_potion.png" />
+    <Content Include="art\2D\Items\double_blood_preparation.png" />
+    <Content Include="art\2D\Items\dough.png" />
+    <Content Include="art\2D\Items\dulcis_radix.png" />
+    <Content Include="art\2D\Items\dull_arrow.png" />
+    <Content Include="art\2D\Items\dull_bolt.png" />
+    <Content Include="art\2D\Items\dung.png" />
+    <Content Include="art\2D\Items\dustali_krabo.png" />
+    <Content Include="art\2D\Items\edible_berries.png" />
+    <Content Include="art\2D\Items\edible_taproot.png" />
+    <Content Include="art\2D\Items\egg.png" />
+    <Content Include="art\2D\Items\eggnog.png" />
+    <Content Include="art\2D\Items\egg_pies.png" />
+    <Content Include="art\2D\Items\emerald.png" />
+    <Content Include="art\2D\Items\empty_bottle.png" />
+    <Content Include="art\2D\Items\engineers_outfit.png" />
+    <Content Include="art\2D\Items\errantia_ludaeo.png" />
+    <Content Include="art\2D\Items\Estoc.png" />
+    <Content Include="art\2D\Items\eternal_sleep_poison.png" />
+    <Content Include="art\2D\Items\eternal_sleep_preparation.png" />
+    <Content Include="art\2D\Items\euclase.png" />
+    <Content Include="art\2D\Items\exclusive_gold_and_silver_amulet.png" />
+    <Content Include="art\2D\Items\exclusive_gold_and_silver_ring.png" />
+    <Content Include="art\2D\Items\fakha_rudob.png" />
+    <Content Include="art\2D\Items\falcem_malleorum.png" />
+    <Content Include="art\2D\Items\Falchion.png" />
+    <Content Include="art\2D\Items\fassari_tolge.png" />
+    <Content Include="art\2D\Items\feathers.png" />
+    <Content Include="art\2D\Items\Fermented_Apple_Juice.png" />
+    <Content Include="art\2D\Items\Fermented_grape_juice.png" />
+    <Content Include="art\2D\Items\fertile_soil.png" />
+    <Content Include="art\2D\Items\filia_prati.png" />
+    <Content Include="art\2D\Items\fire_arrow.png" />
+    <Content Include="art\2D\Items\fishing_pole.png" />
+    <Content Include="art\2D\Items\fish_cakes.png" />
+    <Content Include="art\2D\Items\fish_stew.png" />
+    <Content Include="art\2D\Items\flamberge.png" />
+    <Content Include="art\2D\Items\flanged_mace.png" />
+    <Content Include="art\2D\Items\flavour.png" />
+    <Content Include="art\2D\Items\flax_fibers.png" />
+    <Content Include="art\2D\Items\flax_seeds.png" />
+    <Content Include="art\2D\Items\flax_stem.png" />
+    <Content Include="art\2D\Items\flint_stone.png" />
+    <Content Include="art\2D\Items\flour.png" />
+    <Content Include="art\2D\Items\flux.png" />
+    <Content Include="art\2D\Items\fohatta_torn.png" />
+    <Content Include="art\2D\Items\fried_beast.png" />
+    <Content Include="art\2D\Items\fried_codfish.png" />
+    <Content Include="art\2D\Items\fried_eggs.png" />
+    <Content Include="art\2D\Items\fried_herring.png" />
+    <Content Include="art\2D\Items\fried_salmon.png" />
+    <Content Include="art\2D\Items\fried_salmon_patties.png" />
+    <Content Include="art\2D\Items\fried_trout.png" />
+    <Content Include="art\2D\Items\fullplate_cuirass.png" />
+    <Content Include="art\2D\Items\fullplate_gauntlets.png" />
+    <Content Include="art\2D\Items\fullplate_greaves.png" />
+    <Content Include="art\2D\Items\fullplate_helm.png" />
+    <Content Include="art\2D\Items\fullplate_leggings.png" />
+    <Content Include="art\2D\Items\fullplate_vambraces.png" />
+    <Content Include="art\2D\Items\fur.png" />
+    <Content Include="art\2D\Items\furniture.png" />
+    <Content Include="art\2D\Items\fuskegtra_xelay.png" />
+    <Content Include="art\2D\Items\gahnite.png" />
+    <Content Include="art\2D\Items\garnet.png" />
+    <Content Include="art\2D\Items\gate_module.png" />
+    <Content Include="art\2D\Items\gems.png" />
+    <Content Include="art\2D\Items\Glaive.png" />
+    <Content Include="art\2D\Items\glass.png" />
+    <Content Include="art\2D\Items\glassblowers_toolkit.png" />
+    <Content Include="art\2D\Items\glowing_urine.png" />
+    <Content Include="art\2D\Items\golden_ore.png" />
+    <Content Include="art\2D\Items\gold_and_silver_amulet.png" />
+    <Content Include="art\2D\Items\gold_and_silver_ring.png" />
+    <Content Include="art\2D\Items\gold_bar.png" />
+    <Content Include="art\2D\Items\gold_coins.png" />
+    <Content Include="art\2D\Items\gold_diamond_ring.png" />
+    <Content Include="art\2D\Items\gold_emerald_ring.png" />
+    <Content Include="art\2D\Items\gold_ingot.png" />
+    <Content Include="art\2D\Items\gold_necklace.png" />
+    <Content Include="art\2D\Items\gold_ring.png" />
+    <Content Include="art\2D\Items\gold_sapphire_ring.png" />
+    <Content Include="art\2D\Items\gortaka_messen.png" />
+    <Content Include="art\2D\Items\goulash.png" />
+    <Content Include="art\2D\Items\granite.png" />
+    <Content Include="art\2D\Items\grapes.png" />
+    <Content Include="art\2D\Items\gratias_sivara.png" />
+    <Content Include="art\2D\Items\grave_weight_poison.png" />
+    <Content Include="art\2D\Items\grave_weight_preparation.png" />
+    <Content Include="art\2D\Items\greatberry_pie.png" />
+    <Content Include="art\2D\Items\grossmesser.png" />
+    <Content Include="art\2D\Items\guisarme.png" />
+    <Content Include="art\2D\Items\Half_plate_breastplate.png" />
+    <Content Include="art\2D\Items\Half_plate_gauntlets.png" />
+    <Content Include="art\2D\Items\Half_plate_greaves.png" />
+    <Content Include="art\2D\Items\Half_plate_helm.png" />
+    <Content Include="art\2D\Items\Half_plate_leggings.png" />
+    <Content Include="art\2D\Items\Half_plate_vambraces.png" />
+    <Content Include="art\2D\Items\hallatra_kronye.png" />
+    <Content Include="art\2D\Items\handle.png" />
+    <Content Include="art\2D\Items\hank_of_linen.png" />
+    <Content Include="art\2D\Items\hank_of_silk.png" />
+    <Content Include="art\2D\Items\hank_of_wool.png" />
+    <Content Include="art\2D\Items\hardened_steel_pickaxe.png" />
+    <Content Include="art\2D\Items\hardwood_billet.png" />
+    <Content Include="art\2D\Items\hardwood_board.png" />
+    <Content Include="art\2D\Items\hardy_warhorse.png" />
+    <Content Include="art\2D\Items\hare.png" />
+    <Content Include="art\2D\Items\hares.png" />
+    <Content Include="art\2D\Items\hare_meat.png" />
+    <Content Include="art\2D\Items\hatchet.png" />
+    <Content Include="art\2D\Items\heater_shield.png" />
+    <Content Include="art\2D\Items\heavy_bolt.png" />
+    <Content Include="art\2D\Items\Heavy_Chainmail_Breastplate.png" />
+    <Content Include="art\2D\Items\Heavy_Chainmail_Gauntlets.png" />
+    <Content Include="art\2D\Items\Heavy_Chainmail_Greaves.png" />
+    <Content Include="art\2D\Items\Heavy_Chainmail_Helm.png" />
+    <Content Include="art\2D\Items\Heavy_Chainmail_Leggings.png" />
+    <Content Include="art\2D\Items\Heavy_Chainmail_Vambraces.png" />
+    <Content Include="art\2D\Items\heavy_crossbow.png" />
+    <Content Include="art\2D\Items\Heavy_Leather_Breastplate.png" />
+    <Content Include="art\2D\Items\Heavy_Leather_Gauntlets.png" />
+    <Content Include="art\2D\Items\Heavy_Leather_Greaves.png" />
+    <Content Include="art\2D\Items\Heavy_Leather_Helm.png" />
+    <Content Include="art\2D\Items\Heavy_Leather_Leggings.png" />
+    <Content Include="art\2D\Items\Heavy_Leather_Vambraces.png" />
+    <Content Include="art\2D\Items\heavy_padded_breastplate.png" />
+    <Content Include="art\2D\Items\heavy_padded_gauntlets.png" />
+    <Content Include="art\2D\Items\heavy_padded_greaves.png" />
+    <Content Include="art\2D\Items\heavy_padded_helm.png" />
+    <Content Include="art\2D\Items\heavy_padded_leggings.png" />
+    <Content Include="art\2D\Items\heavy_padded_vambraces.png" />
+    <Content Include="art\2D\Items\Heavy_Scale_Gauntlets.png" />
+    <Content Include="art\2D\Items\Heavy_Scale_Greaves.png" />
+    <Content Include="art\2D\Items\Heavy_Scale_Helm.png" />
+    <Content Include="art\2D\Items\Heavy_Scale_Leggings.png" />
+    <Content Include="art\2D\Items\Heavy_Scale_Tunic.png" />
+    <Content Include="art\2D\Items\Heavy_Scale_Vambraces.png" />
+    <Content Include="art\2D\Items\heavy_targe_shield.png" />
+    <Content Include="art\2D\Items\heavy_warhorse.png" />
+    <Content Include="art\2D\Items\herbalists_sickle.png" />
+    <Content Include="art\2D\Items\herring.png" />
+    <Content Include="art\2D\Items\herring_salad.png" />
+    <Content Include="art\2D\Items\holmatu_stazo.png" />
+    <Content Include="art\2D\Items\honey.png" />
+    <Content Include="art\2D\Items\horn.png" />
+    <Content Include="art\2D\Items\horse.png" />
+    <Content Include="art\2D\Items\horses.png" />
+    <Content Include="art\2D\Items\horse_armor.png" />
+    <Content Include="art\2D\Items\humite.png" />
+    <Content Include="art\2D\Items\huryosa_gulla.png" />
+    <Content Include="art\2D\Items\iron_bar.png" />
+    <Content Include="art\2D\Items\iron_ingot.png" />
+    <Content Include="art\2D\Items\iron_ore.png" />
+    <Content Include="art\2D\Items\Iron_plate_breastplate.png" />
+    <Content Include="art\2D\Items\Iron_plate_gauntlets.png" />
+    <Content Include="art\2D\Items\Iron_plate_greaves.png" />
+    <Content Include="art\2D\Items\Iron_plate_helm.png" />
+    <Content Include="art\2D\Items\Iron_plate_leggings.png" />
+    <Content Include="art\2D\Items\Iron_plate_vambraces.png" />
+    <Content Include="art\2D\Items\iron_will_potion.png" />
+    <Content Include="art\2D\Items\iron_will_preparation.png" />
+    <Content Include="art\2D\Items\irregular_alloy.png" />
+    <Content Include="art\2D\Items\ital_iranta.png" />
+    <Content Include="art\2D\Items\javelin.png" />
+    <Content Include="art\2D\Items\jenaro_vannakam.png" />
+    <Content Include="art\2D\Items\jewelers_toolkit.png" />
+    <Content Include="art\2D\Items\jousting_lance.png" />
+    <Content Include="art\2D\Items\jug.png" />
+    <Content Include="art\2D\Items\jukola_beshaar.png" />
+    <Content Include="art\2D\Items\julienne.png" />
+    <Content Include="art\2D\Items\kacaro_vilko.png" />
+    <Content Include="art\2D\Items\kaleda_mesgano.png" />
+    <Content Include="art\2D\Items\kalya_nori.png" />
+    <Content Include="art\2D\Items\khalari_gratsi.png" />
+    <Content Include="art\2D\Items\kings_alloy_mark.png" />
+    <Content Include="art\2D\Items\kings_beef_stew.png" />
+    <Content Include="art\2D\Items\kite_shield.png" />
+    <Content Include="art\2D\Items\knife.png" />
+    <Content Include="art\2D\Items\knight_sword.png" />
+    <Content Include="art\2D\Items\kromenta_salicia.png" />
+    <Content Include="art\2D\Items\kurupa_andhere.png" />
+    <Content Include="art\2D\Items\kutnohorite.png" />
+    <Content Include="art\2D\Items\kyasaga_sherl.png" />
+    <Content Include="art\2D\Items\lamb_stew_with_cabbage.png" />
+    <Content Include="art\2D\Items\lamp.png" />
+    <Content Include="art\2D\Items\Lance.png" />
+    <Content Include="art\2D\Items\laster_kutta.png" />
+    <Content Include="art\2D\Items\Light_Chainmail_Gauntlets.png" />
+    <Content Include="art\2D\Items\Light_Chainmail_Greaves.png" />
+    <Content Include="art\2D\Items\Light_Chainmail_Helm.png" />
+    <Content Include="art\2D\Items\Light_Chainmail_Leggings.png" />
+    <Content Include="art\2D\Items\Light_Chainmail_Tunic.png" />
+    <Content Include="art\2D\Items\Light_Chainmail_Vambraces.png" />
+    <Content Include="art\2D\Items\light_crossbow.png" />
+    <Content Include="art\2D\Items\Light_Saber.png" />
+    <Content Include="art\2D\Items\Light_Scale_Gauntlets.png" />
+    <Content Include="art\2D\Items\Light_Scale_Greaves.png" />
+    <Content Include="art\2D\Items\Light_Scale_Helm.png" />
+    <Content Include="art\2D\Items\Light_Scale_Leggings.png" />
+    <Content Include="art\2D\Items\Light_Scale_Tunic.png" />
+    <Content Include="art\2D\Items\Light_Scale_Vambraces.png" />
+    <Content Include="art\2D\Items\linen_cloth.png" />
+    <Content Include="art\2D\Items\linen_rope.png" />
+    <Content Include="art\2D\Items\lobos_gamsa.png" />
+    <Content Include="art\2D\Items\lock.png" />
+    <Content Include="art\2D\Items\long_bow.png" />
+    <Content Include="art\2D\Items\long_pike.png" />
+    <Content Include="art\2D\Items\lump_of_copper.png" />
+    <Content Include="art\2D\Items\lump_of_gold.png" />
+    <Content Include="art\2D\Items\lump_of_iron.png" />
+    <Content Include="art\2D\Items\lump_of_silver.png" />
+    <Content Include="art\2D\Items\lump_of_steel.png" />
+    <Content Include="art\2D\Items\lump_of_vostaskus.png" />
+    <Content Include="art\2D\Items\lungs_of_stone_poison.png" />
+    <Content Include="art\2D\Items\lungs_of_stone_preparation.png" />
+    <Content Include="art\2D\Items\mala_fugam.png" />
+    <Content Include="art\2D\Items\mallet.png" />
+    <Content Include="art\2D\Items\Malt.png" />
+    <Content Include="art\2D\Items\marble.png" />
+    <Content Include="art\2D\Items\marble_plate.png" />
+    <Content Include="art\2D\Items\masons_toolkit.png" />
+    <Content Include="art\2D\Items\Maul.png" />
+    <Content Include="art\2D\Items\mauna_boba.png" />
+    <Content Include="art\2D\Items\meat_kabobs.png" />
+    <Content Include="art\2D\Items\meat_stew.png" />
+    <Content Include="art\2D\Items\Medium_Pike.png" />
+    <Content Include="art\2D\Items\meionite.png" />
+    <Content Include="art\2D\Items\memen_anik.png" />
+    <Content Include="art\2D\Items\metal_band.png" />
+    <Content Include="art\2D\Items\metal_sheet.png" />
+    <Content Include="art\2D\Items\milk.png" />
+    <Content Include="art\2D\Items\milky_bread.png" />
+    <Content Include="art\2D\Items\milky_salmon.png" />
+    <Content Include="art\2D\Items\mineral_ingredients.png" />
+    <Content Include="art\2D\Items\monks_outfit.png" />
+    <Content Include="art\2D\Items\mons_bastardus.png" />
+    <Content Include="art\2D\Items\moose_meat.png" />
+    <Content Include="art\2D\Items\morning_star.png" />
+    <Content Include="art\2D\Items\mortar.png" />
+    <Content Include="art\2D\Items\mortar_and_pestle.png" />
+    <Content Include="art\2D\Items\mulled_wine.png" />
+    <Content Include="art\2D\Items\muncha_vana.png" />
+    <Content Include="art\2D\Items\murkha_bola.png" />
+    <Content Include="art\2D\Items\mushroom.png" />
+    <Content Include="art\2D\Items\mutton.png" />
+    <Content Include="art\2D\Items\mutton_steak.png" />
+    <Content Include="art\2D\Items\mutton_with_peas.png" />
+    <Content Include="art\2D\Items\nails.png" />
+    <Content Include="art\2D\Items\naphtha.png" />
+    <Content Include="art\2D\Items\naraen_pandanomo.png" />
+    <Content Include="art\2D\Items\nequissimum_propodium.png" />
+    <Content Include="art\2D\Items\nocte_lumen.png" />
+    <Content Include="art\2D\Items\nordic_axe.png" />
+    <Content Include="art\2D\Items\Nordic_Sword.png" />
+    <Content Include="art\2D\Items\normann_bread.png" />
+    <Content Include="art\2D\Items\Novice_Leather_Breastplate.png" />
+    <Content Include="art\2D\Items\Novice_Leather_Gauntlets.png" />
+    <Content Include="art\2D\Items\Novice_Leather_Greaves.png" />
+    <Content Include="art\2D\Items\Novice_Leather_Helm.png" />
+    <Content Include="art\2D\Items\Novice_Leather_Leggings.png" />
+    <Content Include="art\2D\Items\Novice_Leather_Vambraces.png" />
+    <Content Include="art\2D\Items\Novice_Padded_Breastplate.png" />
+    <Content Include="art\2D\Items\Novice_Padded_Gauntlets.png" />
+    <Content Include="art\2D\Items\Novice_Padded_Greaves.png" />
+    <Content Include="art\2D\Items\Novice_Padded_Helm.png" />
+    <Content Include="art\2D\Items\Novice_Padded_Leggings.png" />
+    <Content Include="art\2D\Items\Novice_Padded_Vambraces.png" />
+    <Content Include="art\2D\Items\numbing_poison.png" />
+    <Content Include="art\2D\Items\numbing_preparation.png" />
+    <Content Include="art\2D\Items\odd_claw.png" />
+    <Content Include="art\2D\Items\omelet.png" />
+    <Content Include="art\2D\Items\onion.png" />
+    <Content Include="art\2D\Items\onion_soup.png" />
+    <Content Include="art\2D\Items\oscularetur.png" />
+    <Content Include="art\2D\Items\overgrown_parasite.png" />
+    <Content Include="art\2D\Items\parsonsite.png" />
+    <Content Include="art\2D\Items\partisan.png" />
+    <Content Include="art\2D\Items\pasta.png" />
+    <Content Include="art\2D\Items\pavise.png" />
+    <Content Include="art\2D\Items\peas.png" />
+    <Content Include="art\2D\Items\pea_porky_soup.png" />
+    <Content Include="art\2D\Items\pea_porridge.png" />
+    <Content Include="art\2D\Items\pea_soup_puree.png" />
+    <Content Include="art\2D\Items\pecene_veprevo_koleno.png" />
+    <Content Include="art\2D\Items\pecuarius_ventus.png" />
+    <Content Include="art\2D\Items\pemmican.png" />
+    <Content Include="art\2D\Items\persetu_hara.png" />
+    <Content Include="art\2D\Items\petra_stellam.png" />
+    <Content Include="art\2D\Items\phlavar_pharest.png" />
+    <Content Include="art\2D\Items\pickaxe.png" />
+    <Content Include="art\2D\Items\piece_of_diseased_hide.png" />
+    <Content Include="art\2D\Items\pig.png" />
+    <Content Include="art\2D\Items\pigs.png" />
+    <Content Include="art\2D\Items\pitaku_koro.png" />
+    <Content Include="art\2D\Items\pitchfork.png" />
+    <Content Include="art\2D\Items\pizza.png" />
+    <Content Include="art\2D\Items\planks.png" />
+    <Content Include="art\2D\Items\poison.png" />
+    <Content Include="art\2D\Items\poisonous_preparation.png" />
+    <Content Include="art\2D\Items\pollaxe.png" />
+    <Content Include="art\2D\Items\pork.png" />
+    <Content Include="art\2D\Items\pork_sausage.png" />
+    <Content Include="art\2D\Items\potato.png" />
+    <Content Include="art\2D\Items\potato_with_mushrooms.png" />
+    <Content Include="art\2D\Items\pouch.png" />
+    <Content Include="art\2D\Items\practice_axe.png" />
+    <Content Include="art\2D\Items\Practice_Bastard_Sword.png" />
+    <Content Include="art\2D\Items\practice_great_axe.png" />
+    <Content Include="art\2D\Items\practice_longsword.png" />
+    <Content Include="art\2D\Items\practice_maul.png" />
+    <Content Include="art\2D\Items\Practice_Sword.png" />
+    <Content Include="art\2D\Items\preparations.png" />
+    <Content Include="art\2D\Items\primitive shield.png" />
+    <Content Include="art\2D\Items\primitive_axe.png" />
+    <Content Include="art\2D\Items\primitive_cooking_pot.png" />
+    <Content Include="art\2D\Items\primitive_crucible_and_stick.png" />
+    <Content Include="art\2D\Items\primitive_cup.png" />
+    <Content Include="art\2D\Items\primitive_fishing_pole.png" />
+    <Content Include="art\2D\Items\primitive_hammer.png" />
+    <Content Include="art\2D\Items\primitive_knife.png" />
+    <Content Include="art\2D\Items\primitive_pickaxe.png" />
+    <Content Include="art\2D\Items\primitive_saw.png" />
+    <Content Include="art\2D\Items\primitive_shield.png" />
+    <Content Include="art\2D\Items\primitive_shovel.png" />
+    <Content Include="art\2D\Items\primitive_sickle.png" />
+    <Content Include="art\2D\Items\pungentibus_chorea.png" />
+    <Content Include="art\2D\Items\purbon.png" />
+    <Content Include="art\2D\Items\rags_eur.png" />
+    <Content Include="art\2D\Items\rags_mon.png" />
+    <Content Include="art\2D\Items\rags_vik.png" />
+    <Content Include="art\2D\Items\rakta_stema.png" />
+    <Content Include="art\2D\Items\ram.png" />
+    <Content Include="art\2D\Items\ravioli.png" />
+    <Content Include="art\2D\Items\refreshing_potion.png" />
+    <Content Include="art\2D\Items\refreshing_preparation.png" />
+    <Content Include="art\2D\Items\Regular_Chainmail_Breastplate.png" />
+    <Content Include="art\2D\Items\Regular_Chainmail_Gauntlets.png" />
+    <Content Include="art\2D\Items\Regular_Chainmail_Greaves.png" />
+    <Content Include="art\2D\Items\Regular_Chainmail_Helm.png" />
+    <Content Include="art\2D\Items\Regular_Chainmail_Leggings.png" />
+    <Content Include="art\2D\Items\Regular_Chainmail_Vambraces.png" />
+    <Content Include="art\2D\Items\Regular_Leather_Breastplate.png" />
+    <Content Include="art\2D\Items\Regular_Leather_Gauntlets.png" />
+    <Content Include="art\2D\Items\Regular_Leather_Greaves.png" />
+    <Content Include="art\2D\Items\Regular_Leather_Helm.png" />
+    <Content Include="art\2D\Items\Regular_Leather_Leggings.png" />
+    <Content Include="art\2D\Items\Regular_Leather_Vambraces.png" />
+    <Content Include="art\2D\Items\Regular_Padded_Breastplate.png" />
+    <Content Include="art\2D\Items\Regular_Padded_Gauntlets.png" />
+    <Content Include="art\2D\Items\Regular_Padded_Greaves.png" />
+    <Content Include="art\2D\Items\Regular_Padded_Helm.png" />
+    <Content Include="art\2D\Items\Regular_Padded_Leggings.png" />
+    <Content Include="art\2D\Items\Regular_Padded_Vambraces.png" />
+    <Content Include="art\2D\Items\Regular_Scale_Gauntlets.png" />
+    <Content Include="art\2D\Items\Regular_Scale_Greaves.png" />
+    <Content Include="art\2D\Items\Regular_Scale_Helm.png" />
+    <Content Include="art\2D\Items\Regular_Scale_Leggings.png" />
+    <Content Include="art\2D\Items\Regular_Scale_Tunic.png" />
+    <Content Include="art\2D\Items\Regular_Scale_Vambraces.png" />
+    <Content Include="art\2D\Items\remerta_poskot.png" />
+    <Content Include="art\2D\Items\Repair_Kit-Big.png" />
+    <Content Include="art\2D\Items\Repair_Kit-Medium.png" />
+    <Content Include="art\2D\Items\Repair_Kit-Small.png" />
+    <Content Include="art\2D\Items\ripyote_quamisy.png" />
+    <Content Include="art\2D\Items\rock.png" />
+    <Content Include="art\2D\Items\rollmops.png" />
+    <Content Include="art\2D\Items\rope.png" />
+    <Content Include="art\2D\Items\rosa_kingsa.png" />
+    <Content Include="art\2D\Items\royal_chainmail_breastplate.png" />
+    <Content Include="art\2D\Items\royal_chainmail_gauntlets.png" />
+    <Content Include="art\2D\Items\royal_chainmail_greaves.png" />
+    <Content Include="art\2D\Items\royal_chainmail_helm.png" />
+    <Content Include="art\2D\Items\royal_chainmail_leggings.png" />
+    <Content Include="art\2D\Items\royal_chainmail_vambraces.png" />
+    <Content Include="art\2D\Items\royal_full_plate_breastplate.png" />
+    <Content Include="art\2D\Items\royal_full_plate_gauntlets.png" />
+    <Content Include="art\2D\Items\royal_full_plate_greaves.png" />
+    <Content Include="art\2D\Items\royal_full_plate_helm.png" />
+    <Content Include="art\2D\Items\royal_full_plate_leggings.png" />
+    <Content Include="art\2D\Items\royal_full_plate_vambraces.png" />
+    <Content Include="art\2D\Items\royal_leather_brestplate.png" />
+    <Content Include="art\2D\Items\royal_leather_gauntlets.png" />
+    <Content Include="art\2D\Items\royal_leather_greaves.png" />
+    <Content Include="art\2D\Items\royal_leather_helm.png" />
+    <Content Include="art\2D\Items\royal_leather_leggings.png" />
+    <Content Include="art\2D\Items\royal_leather_vambraces.png" />
+    <Content Include="art\2D\Items\royal_padded_brestplate.png" />
+    <Content Include="art\2D\Items\royal_padded_gauntlets.png" />
+    <Content Include="art\2D\Items\royal_padded_greaves.png" />
+    <Content Include="art\2D\Items\royal_padded_helm.png" />
+    <Content Include="art\2D\Items\royal_padded_leggings.png" />
+    <Content Include="art\2D\Items\royal_padded_vambraces.png" />
+    <Content Include="art\2D\Items\royal_scale_breastplate.png" />
+    <Content Include="art\2D\Items\royal_scale_gauntlets.png" />
+    <Content Include="art\2D\Items\royal_scale_greaves.png" />
+    <Content Include="art\2D\Items\royal_scale_helm.png" />
+    <Content Include="art\2D\Items\royal_scale_leggings.png" />
+    <Content Include="art\2D\Items\royal_scale_vambraces.png" />
+    <Content Include="art\2D\Items\ruby.png" />
+    <Content Include="art\2D\Items\sack.png" />
+    <Content Include="art\2D\Items\salmon.png" />
+    <Content Include="art\2D\Items\saltare_diabolus.png" />
+    <Content Include="art\2D\Items\samsa.png" />
+    <Content Include="art\2D\Items\sand.png" />
+    <Content Include="art\2D\Items\sapienta_mantis.png" />
+    <Content Include="art\2D\Items\Sapper_Charges.png" />
+    <Content Include="art\2D\Items\sapphire.png" />
+    <Content Include="art\2D\Items\sarmento_gaute.png" />
+    <Content Include="art\2D\Items\saw.png" />
+    <Content Include="art\2D\Items\Scimitar.png" />
+    <Content Include="art\2D\Items\scolecite.png" />
+    <Content Include="art\2D\Items\shaped_granite.png" />
+    <Content Include="art\2D\Items\shaped_rock.png" />
+    <Content Include="art\2D\Items\sheep.png" />
+    <Content Include="art\2D\Items\sheeps.png" />
+    <Content Include="art\2D\Items\sheepskin.png" />
+    <Content Include="art\2D\Items\short_bow.png" />
+    <Content Include="art\2D\Items\short_pike.png" />
+    <Content Include="art\2D\Items\shovel.png" />
+    <Content Include="art\2D\Items\silkworm_cocoon.png" />
+    <Content Include="art\2D\Items\silk_cloth.png" />
+    <Content Include="art\2D\Items\silk_filaments.png" />
+    <Content Include="art\2D\Items\silver_amethyst_ring.png" />
+    <Content Include="art\2D\Items\silver_bar.png" />
+    <Content Include="art\2D\Items\silver_coins.png" />
+    <Content Include="art\2D\Items\silver_garnet_ring.png" />
+    <Content Include="art\2D\Items\silver_ingot.png" />
+    <Content Include="art\2D\Items\silver_jeweled_necklace.png" />
+    <Content Include="art\2D\Items\silver_ore.png" />
+    <Content Include="art\2D\Items\silver_ring.png" />
+    <Content Include="art\2D\Items\silver_ruby_ring.png" />
+    <Content Include="art\2D\Items\simple_bow.png" />
+    <Content Include="art\2D\Items\simple_clothes.png" />
+    <Content Include="art\2D\Items\skinning_knife.png" />
+    <Content Include="art\2D\Items\slate.png" />
+    <Content Include="art\2D\Items\sledge_hammer.png" />
+    <Content Include="art\2D\Items\sling.png" />
+    <Content Include="art\2D\Items\small_intenstines.png" />
+    <Content Include="art\2D\Items\snare_trap.png" />
+    <Content Include="art\2D\Items\snow.png" />
+    <Content Include="art\2D\Items\snowball.png" />
+    <Content Include="art\2D\Items\softwood_billet.png" />
+    <Content Include="art\2D\Items\softwood_board.png" />
+    <Content Include="art\2D\Items\soil.png" />
+    <Content Include="art\2D\Items\spear.png" />
+    <Content Include="art\2D\Items\spirited_warhorse.png" />
+    <Content Include="art\2D\Items\staff.png" />
+    <Content Include="art\2D\Items\stallion.png" />
+    <Content Include="art\2D\Items\steel_bar.png" />
+    <Content Include="art\2D\Items\steel_ingot.png" />
+    <Content Include="art\2D\Items\steppe_soil.png" />
+    <Content Include="art\2D\Items\stew_cabbage.png" />
+    <Content Include="art\2D\Items\Stone_Bomb.png" />
+    <Content Include="art\2D\Items\strange_muscle.png" />
+    <Content Include="art\2D\Items\straw.png" />
+    <Content Include="art\2D\Items\stuffed_rabbit.png" />
+    <Content Include="art\2D\Items\suryodaya_bhagya.png" />
+    <Content Include="art\2D\Items\swift_limbs_potion.png" />
+    <Content Include="art\2D\Items\swift_limbs_preparation.png" />
+    <Content Include="art\2D\Items\swift_mind_potion.png" />
+    <Content Include="art\2D\Items\swift_mind_preparation.png" />
+    <Content Include="art\2D\Items\targe_shield.png" />
+    <Content Include="art\2D\Items\tellurite.png" />
+    <Content Include="art\2D\Items\thick_dried_hide.png" />
+    <Content Include="art\2D\Items\thick_hides.png" />
+    <Content Include="art\2D\Items\thick_leather.png" />
+    <Content Include="art\2D\Items\thin_dried_hide.png" />
+    <Content Include="art\2D\Items\thin_hides.png" />
+    <Content Include="art\2D\Items\thin_leather.png" />
+    <Content Include="art\2D\Items\throwing_axe.png" />
+    <Content Include="art\2D\Items\throwing_knife.png" />
+    <Content Include="art\2D\Items\topasa_maidana.png" />
+    <Content Include="art\2D\Items\torch.png" />
+    <Content Include="art\2D\Items\toughness_potion.png" />
+    <Content Include="art\2D\Items\toughness_preparation.png" />
+    <Content Include="art\2D\Items\tower_shield.png" />
+    <Content Include="art\2D\Items\trout.png" />
+    <Content Include="art\2D\Items\trout_in_berrie_sauce.png" />
+    <Content Include="art\2D\Items\tusk.png" />
+    <Content Include="art\2D\Items\uliya_sundara.png" />
+    <Content Include="art\2D\Items\uncommon_tendon.png" />
+    <Content Include="art\2D\Items\unfired_clay_tile.png" />
+    <Content Include="art\2D\Items\unfired_jug.png" />
+    <Content Include="art\2D\Items\unfired_masterwork_vase.png" />
+    <Content Include="art\2D\Items\unfired_urn.png" />
+    <Content Include="art\2D\Items\unfired_vase.png" />
+    <Content Include="art\2D\Items\urea.png" />
+    <Content Include="art\2D\Items\utrokka_khuru.png" />
+    <Content Include="art\2D\Items\vegetable_soup.png" />
+    <Content Include="art\2D\Items\venision.png" />
+    <Content Include="art\2D\Items\venisson_bratawurst_sausage.png" />
+    <Content Include="art\2D\Items\venisson_stew.png" />
+    <Content Include="art\2D\Items\vertato_zonda.png" />
+    <Content Include="art\2D\Items\viridi_ursae.png" />
+    <Content Include="art\2D\Items\vostaskus_bar.png" />
+    <Content Include="art\2D\Items\vostaskus_ingot.png" />
+    <Content Include="art\2D\Items\waraxe.png" />
+    <Content Include="art\2D\Items\Warfare_Kit_Large.png" />
+    <Content Include="art\2D\Items\Warfare_Kit_Medium.png" />
+    <Content Include="art\2D\Items\Warfare_Kit_Small.png" />
+    <Content Include="art\2D\Items\warhorse.png" />
+    <Content Include="art\2D\Items\war_pick.png" />
+    <Content Include="art\2D\Items\war_scythe.png" />
+    <Content Include="art\2D\Items\water.png" />
+    <Content Include="art\2D\Items\waterzooi.png" />
+    <Content Include="art\2D\Items\weavers_toolkit.png" />
+    <Content Include="art\2D\Items\wheat.png" />
+    <Content Include="art\2D\Items\wheel.png" />
+    <Content Include="art\2D\Items\wild_meat_with_peas.png" />
+    <Content Include="art\2D\Items\wild_plant_fiber.png" />
+    <Content Include="art\2D\Items\wild_soup.png" />
+    <Content Include="art\2D\Items\window_module.png" />
+    <Content Include="art\2D\Items\wine.png" />
+    <Content Include="art\2D\Items\wolf_hide.png" />
+    <Content Include="art\2D\Items\wool_cloth.png" />
+    <Content Include="art\2D\Items\wool_pack.png" />
+    <Content Include="art\2D\Items\yorkshire_pudding.png" />
+    <Content Include="art\2D\Items\zweihaender.png" />
+    <Content Include="art\2D\Objects\3_floor_plaster_house.png" />
+    <Content Include="art\2D\Objects\3_floor_wooden_house.png" />
+    <Content Include="art\2D\Objects\alchemists_table.png" />
+    <Content Include="art\2D\Objects\ancient_column.png" />
+    <Content Include="art\2D\Objects\archery_target.png" />
+    <Content Include="art\2D\Objects\armor_stand.png" />
+    <Content Include="art\2D\Objects\arrow_stand.png" />
+    <Content Include="art\2D\Objects\bark_box.png" />
+    <Content Include="art\2D\Objects\barn.png" />
+    <Content Include="art\2D\Objects\barn_%28wooden%29.png" />
+    <Content Include="art\2D\Objects\barrel.png" />
+    <Content Include="art\2D\Objects\bear_trophy.png" />
+    <Content Include="art\2D\Objects\beehive.png" />
+    <Content Include="art\2D\Objects\beehive_alternate.png" />
+    <Content Include="art\2D\Objects\bench.png" />
+    <Content Include="art\2D\Objects\big_3_floor_plaster_house.png" />
+    <Content Include="art\2D\Objects\big_3_floor_wooden_house.png" />
+    <Content Include="art\2D\Objects\big_cauldron.png" />
+    <Content Include="art\2D\Objects\big_painting.png" />
+    <Content Include="art\2D\Objects\big_wooden_canopy.png" />
+    <Content Include="art\2D\Objects\big_wooden_house.png" />
+    <Content Include="art\2D\Objects\blacksmith_shop.png" />
+    <Content Include="art\2D\Objects\bloomery.png" />
+    <Content Include="art\2D\Objects\bottle_rack.png" />
+    <Content Include="art\2D\Objects\brewing_tank.png" />
+    <Content Include="art\2D\Objects\campfire.png" />
+    <Content Include="art\2D\Objects\carpenter_shop.png" />
+    <Content Include="art\2D\Objects\carpenter_shop_%28wooden%29.png" />
+    <Content Include="art\2D\Objects\cart.png" />
+    <Content Include="art\2D\Objects\castle_angular_tower.png" />
+    <Content Include="art\2D\Objects\castle_gatehouse.png" />
+    <Content Include="art\2D\Objects\castle_tower.png" />
+    <Content Include="art\2D\Objects\castle_wall.png" />
+    <Content Include="art\2D\Objects\castle_wall_diagonal.png" />
+    <Content Include="art\2D\Objects\castle_wall_with_hoarding.png" />
+    <Content Include="art\2D\Objects\chair.png" />
+    <Content Include="art\2D\Objects\chest.png" />
+    <Content Include="art\2D\Objects\coop.png" />
+    <Content Include="art\2D\Objects\crate.png" />
+    <Content Include="art\2D\Objects\decorated_bench.png" />
+    <Content Include="art\2D\Objects\decorated_chair.png" />
+    <Content Include="art\2D\Objects\decorated_table.png" />
+    <Content Include="art\2D\Objects\deer_trophy.png" />
+    <Content Include="art\2D\Objects\defensive_stand.png" />
+    <Content Include="art\2D\Objects\drying_frame.png" />
+    <Content Include="art\2D\Objects\flag_black.png" />
+    <Content Include="art\2D\Objects\flag_white.png" />
+    <Content Include="art\2D\Objects\floor_lamp.png" />
+    <Content Include="art\2D\Objects\forge_and_anvil.png" />
+    <Content Include="art\2D\Objects\fountain.png" />
+    <Content Include="art\2D\Objects\furnace.png" />
+    <Content Include="art\2D\Objects\herbalist_shop.png" />
+    <Content Include="art\2D\Objects\herbalist_shop_%28wooden%29.png" />
+    <Content Include="art\2D\Objects\keep.png" />
+    <Content Include="art\2D\Objects\kiln.png" />
+    <Content Include="art\2D\Objects\kitchen.png" />
+    <Content Include="art\2D\Objects\lamppost.png" />
+    <Content Include="art\2D\Objects\large_decorated_bed.png" />
+    <Content Include="art\2D\Objects\large_keep.png" />
+    <Content Include="art\2D\Objects\large_monument.png" />
+    <Content Include="art\2D\Objects\large_stable.png" />
+    <Content Include="art\2D\Objects\large_statue.png" />
+    <Content Include="art\2D\Objects\large_warehouse.png" />
+    <Content Include="art\2D\Objects\large_wooden_canopy.png" />
+    <Content Include="art\2D\Objects\large_wooden_canopy2.png" />
+    <Content Include="art\2D\Objects\loom.png" />
+    <Content Include="art\2D\Objects\masterwork vase.png" />
+    <Content Include="art\2D\Objects\middle_plaster_house.png" />
+    <Content Include="art\2D\Objects\middle_wooden_house.png" />
+    <Content Include="art\2D\Objects\monument.png" />
+    <Content Include="art\2D\Objects\moose_trophy.png" />
+    <Content Include="art\2D\Objects\oven.png" />
+    <Content Include="art\2D\Objects\painting.png" />
+    <Content Include="art\2D\Objects\palisade_wall.png" />
+    <Content Include="art\2D\Objects\palisade_wall_diagonal.png" />
+    <Content Include="art\2D\Objects\plaster_tiny_shack.png" />
+    <Content Include="art\2D\Objects\plough.png" />
+    <Content Include="art\2D\Objects\potters_wheel.png" />
+    <Content Include="art\2D\Objects\quern.png" />
+    <Content Include="art\2D\Objects\sapper_charge.png" />
+    <Content Include="art\2D\Objects\sawmill.png" />
+    <Content Include="art\2D\Objects\school.png" />
+    <Content Include="art\2D\Objects\school_%28wooden%29.png" />
+    <Content Include="art\2D\Objects\siege_engineer_workshop.png" />
+    <Content Include="art\2D\Objects\sign.png" />
+    <Content Include="art\2D\Objects\signal_fire.png" />
+    <Content Include="art\2D\Objects\simple_bed.png" />
+    <Content Include="art\2D\Objects\sleeping_bag.png" />
+    <Content Include="art\2D\Objects\small_keep.png" />
+    <Content Include="art\2D\Objects\small_painting.png" />
+    <Content Include="art\2D\Objects\small_plaster_house.png" />
+    <Content Include="art\2D\Objects\small_stable.png" />
+    <Content Include="art\2D\Objects\small_wooden_house.png" />
+    <Content Include="art\2D\Objects\snowman_1.png" />
+    <Content Include="art\2D\Objects\spinning_wheel.png" />
+    <Content Include="art\2D\Objects\statue.png" />
+    <Content Include="art\2D\Objects\stone_angular_tower.png" />
+    <Content Include="art\2D\Objects\stone_fence.png" />
+    <Content Include="art\2D\Objects\stone_fence_diagonal.png" />
+    <Content Include="art\2D\Objects\stone_gatehouse.png" />
+    <Content Include="art\2D\Objects\stone_house.png" />
+    <Content Include="art\2D\Objects\stone_inner_gatehouse.png" />
+    <Content Include="art\2D\Objects\stone_inner_tower.png" />
+    <Content Include="art\2D\Objects\stone_tower.png" />
+    <Content Include="art\2D\Objects\stone_wall.png" />
+    <Content Include="art\2D\Objects\stone_wall_diagonal.png" />
+    <Content Include="art\2D\Objects\stone_wall_with_inverted_stairs.png" />
+    <Content Include="art\2D\Objects\stone_wall_with_stairs.png" />
+    <Content Include="art\2D\Objects\stone_wicket.png" />
+    <Content Include="art\2D\Objects\table.png" />
+    <Content Include="art\2D\Objects\tanning_tub.png" />
+    <Content Include="art\2D\Objects\tent.png" />
+    <Content Include="art\2D\Objects\tent_blue.png" />
+    <Content Include="art\2D\Objects\tent_red.png" />
+    <Content Include="art\2D\Objects\Throne.png" />
+    <Content Include="art\2D\Objects\tiny_shack.png" />
+    <Content Include="art\2D\Objects\trader_cart.png" />
+    <Content Include="art\2D\Objects\trading_post.png" />
+    <Content Include="art\2D\Objects\training_dummy.png" />
+    <Content Include="art\2D\Objects\training_field.png" />
+    <Content Include="art\2D\Objects\trebuchet.png" />
+    <Content Include="art\2D\Objects\urn.png" />
+    <Content Include="art\2D\Objects\vase.png" />
+    <Content Include="art\2D\Objects\wall_shelf.png" />
+    <Content Include="art\2D\Objects\wall_shelf_simple.png" />
+    <Content Include="art\2D\Objects\wardrobe.png" />
+    <Content Include="art\2D\Objects\warehouse.png" />
+    <Content Include="art\2D\Objects\warehouse_%28wooden%29.png" />
+    <Content Include="art\2D\Objects\wattle_fence.png" />
+    <Content Include="art\2D\Objects\wattle_fence_diagonal.png" />
+    <Content Include="art\2D\Objects\weapon_rack.png" />
+    <Content Include="art\2D\Objects\well.png" />
+    <Content Include="art\2D\Objects\wheelbarrow.png" />
+    <Content Include="art\2D\Objects\windmill.png" />
+    <Content Include="art\2D\Objects\wine_press.png" />
+    <Content Include="art\2D\Objects\wooden_canopy.png" />
+    <Content Include="art\2D\Objects\wooden_fence.png" />
+    <Content Include="art\2D\Objects\wooden_fence_diagonal.png" />
+    <Content Include="art\2D\Objects\wooden_gatehouse.png" />
+    <Content Include="art\2D\Objects\wooden_gates.png" />
+    <Content Include="art\2D\Objects\wooden_keep.png" />
+    <Content Include="art\2D\Objects\wooden_pillar.png" />
+    <Content Include="art\2D\Objects\wooden_pillar2.png" />
+    <Content Include="art\2D\Objects\wooden_pillar_with_shield.png" />
+    <Content Include="art\2D\Objects\wooden_pillar_with_shield2.png" />
+    <Content Include="art\2D\Objects\wooden_scout_tower.png" />
+    <Content Include="art\2D\Objects\wooden_tiny_shack.png" />
+    <Content Include="art\2D\Objects\wooden_wall.png" />
+    <Content Include="art\2D\Objects\wooden_wall_with_stairs.png" />
+    <Content Include="art\2D\Objects\wooden_wicket.png" />
+    <Content Include="art\2D\Objects\wooden_windmill.png" />
+    <Content Include="art\2D\Objects\workbench.png" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\LifDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LifDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\LifDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LifDB.edmx</DependentUpon>
+      <LastGenOutput>LifDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\LifDB.edmx.diagram">
+      <DependentUpon>LifDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\LifDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LifDB.edmx</DependentUpon>
+      <LastGenOutput>LifDB.cs</LastGenOutput>
+    </Content>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-sec.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Character\Edit.cshtml" />
+    <Content Include="Views\Character\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>20082</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/LifLk</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

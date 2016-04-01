@@ -1,0 +1,356 @@
+﻿@using LifLk.Models
+@model LifLk.Models.character
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>character</h4>
+    <hr />
+<dl class="dl-horizontal">
+<dt>
+    @Html.DisplayNameFor(model => model.IsActive)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.IsActive)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Name)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Name)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.LastName)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.LastName)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.GeoID)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.GeoID)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.GeoAlt)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.GeoAlt)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.RaceID)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.RaceID)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Alignment)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Alignment)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.CriminalSecondsLeft)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.CriminalSecondsLeft)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Strength)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Strength)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.StrengthLock)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.StrengthLock)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Agility)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Agility)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.AgilityLock)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.AgilityLock)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Intellect)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Intellect)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.IntellectLock)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.IntellectLock)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Willpower)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Willpower)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.WillpowerLock)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.WillpowerLock)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Constitution)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Constitution)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.ConstitutionLock)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.ConstitutionLock)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.HardHP)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.HardHP)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.HardStam)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.HardStam)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.SoftHP)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.SoftHP)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.SoftStam)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.SoftStam)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Luck)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.Luck)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.HungerRate)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.HungerRate)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.AlchemyHash)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.AlchemyHash)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.VisibilityHash)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.VisibilityHash)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.appearance)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.appearance)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.TitleMessageID)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.TitleMessageID)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.BindedObjectID)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.BindedObjectID)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.RallyObjectID)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.RallyObjectID)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.LastTimeUsedPraiseYourGodAbility)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.LastTimeUsedPraiseYourGodAbility)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.LastTimeUsedTransmuteIntoGold)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.LastTimeUsedTransmuteIntoGold)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.CreateTimestamp)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.CreateTimestamp)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.DeleteTimestamp)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.DeleteTimestamp)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.account.ID)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.account.ID)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.containers.ID)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.containers.ID)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.guild_roles.Name)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.guild_roles.Name)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.guilds.Name)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.guilds.Name)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.containers1.ID)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.containers1.ID)
+
+</dd>
+
+</dl>
+
+    Инвентарь:
+<div class="items-inventory">
+    @foreach (LifLk.Models.items item in Model.containers1.items)
+    {
+        <div><img src="@Url.Content("~/" + item.objects_types.FaceImage)" title="@item.objects_types.Name&#13;Количество:@item.Quantity&#13;Качество:@item.Quality&#13;Прочность:@item.Durability/@item.CreatedDurability"/>
+        </div>
+    }
+</div>
+    <br/>
+Персонаж:
+<div class="items-equip">
+    <img src="@Url.Content("~/art/2D/gui/equip.png")"/>
+    
+    @foreach (LifLk.Models.items item in Model.containers.items)
+{
+    if (item.equipment_slots.FirstOrDefault().Slot > 13)
+    {
+        continue;
+    }
+        <div class="@string.Format("item-{0}", item.equipment_slots.FirstOrDefault().Slot.ToString())" style="background: url(@Url.Content("~/" + item.objects_types.FaceImage)) center center no-repeat;" title="@item.objects_types.Name&#13;Количество:@item.Quantity&#13;Качество:@item.Quality&#13;Прочность:@item.Durability/@item.CreatedDurability">
+        </div>
+    }
+</div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,1286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LifModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsActive" Type="bool" Nullable="false" />
+          <Property Name="IsGM" Type="bool" Nullable="false" />
+          <Property Name="SteamID" Type="ubigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="character">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsActive" Type="utinyint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="GeoID" Type="uint" />
+          <Property Name="AccountID" Type="uint" Nullable="false" />
+          <Property Name="GeoAlt" Type="usmallint" />
+          <Property Name="RaceID" Type="utinyint" Nullable="false" />
+          <Property Name="Alignment" Type="int" Nullable="false" />
+          <Property Name="CriminalSecondsLeft" Type="uint" Nullable="false" />
+          <Property Name="Strength" Type="uint" Nullable="false" />
+          <Property Name="StrengthLock" Type="tinyint" Nullable="false" />
+          <Property Name="Agility" Type="uint" Nullable="false" />
+          <Property Name="AgilityLock" Type="tinyint" Nullable="false" />
+          <Property Name="Intellect" Type="uint" Nullable="false" />
+          <Property Name="IntellectLock" Type="tinyint" Nullable="false" />
+          <Property Name="Willpower" Type="uint" Nullable="false" />
+          <Property Name="WillpowerLock" Type="tinyint" Nullable="false" />
+          <Property Name="Constitution" Type="uint" Nullable="false" />
+          <Property Name="ConstitutionLock" Type="tinyint" Nullable="false" />
+          <Property Name="RootContainerID" Type="uint" Nullable="false" />
+          <Property Name="EquipmentContainerID" Type="uint" Nullable="false" />
+          <Property Name="HardHP" Type="int" Nullable="false" />
+          <Property Name="HardStam" Type="int" Nullable="false" />
+          <Property Name="SoftHP" Type="int" Nullable="false" />
+          <Property Name="SoftStam" Type="int" Nullable="false" />
+          <Property Name="Luck" Type="uint" Nullable="false" />
+          <Property Name="HungerRate" Type="uint" Nullable="false" />
+          <Property Name="AlchemyHash" Type="binary" MaxLength="90" Nullable="false" />
+          <Property Name="VisibilityHash" Type="binary" MaxLength="90" Nullable="false" />
+          <Property Name="appearance" Type="blob" />
+          <Property Name="GuildID" Type="uint" />
+          <Property Name="GuildRoleID" Type="utinyint" />
+          <Property Name="TitleMessageID" Type="uint" />
+          <Property Name="BindedObjectID" Type="uint" />
+          <Property Name="RallyObjectID" Type="uint" />
+          <Property Name="LastTimeUsedPraiseYourGodAbility" Type="uint" Nullable="false" />
+          <Property Name="LastTimeUsedTransmuteIntoGold" Type="uint" Nullable="false" />
+          <Property Name="CreateTimestamp" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="DeleteTimestamp" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="containers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentID" Type="uint" />
+          <Property Name="ObjectTypeID" Type="uint" Nullable="false" />
+          <Property Name="Quality" Type="utinyint" Nullable="false" />
+          <Property Name="FeatureID" Type="uint" />
+        </EntityType>
+        <EntityType Name="custom_texts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Custom_text" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="equipment_slots">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CharacterID" Type="uint" Nullable="false" />
+          <Property Name="Slot" Type="utinyint" Nullable="false" />
+          <Property Name="ItemID" Type="uint" />
+        </EntityType>
+        <EntityType Name="features">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomtextID" Type="uint" />
+          <Property Name="has_effects" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="guild_roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="utinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="guild_type_role_msgs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="utinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuildTypeID" Type="utinyint" Nullable="false" />
+          <Property Name="GuildRoleID" Type="utinyint" Nullable="false" />
+          <Property Name="MessageID" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="guild_types">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="utinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuildLevel" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MessageID" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="guilds">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" />
+          <Property Name="GuildTypeID" Type="utinyint" Nullable="false" />
+          <Property Name="IsActive" Type="utinyint" Nullable="false" />
+          <Property Name="GuildCharter" Type="varchar" MaxLength="10000" />
+          <Property Name="GuildTag" Type="varchar" MaxLength="4" />
+          <Property Name="CreateTimestamp" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="DeleteTimestamp" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="items">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContainerID" Type="uint" Nullable="false" />
+          <Property Name="ObjectTypeID" Type="uint" Nullable="false" />
+          <Property Name="Quality" Type="utinyint" Nullable="false" />
+          <Property Name="Quantity" Type="uint" Nullable="false" />
+          <Property Name="Durability" Type="usmallint" Nullable="false" />
+          <Property Name="CreatedDurability" Type="usmallint" Nullable="false" />
+          <Property Name="FeatureID" Type="uint" />
+        </EntityType>
+        <EntityType Name="objects_types">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentID" Type="uint" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="IsContainer" Type="bool" Nullable="false" />
+          <Property Name="IsMovableObject" Type="bool" Nullable="false" />
+          <Property Name="IsUnmovableobject" Type="bool" Nullable="false" />
+          <Property Name="IsTool" Type="bool" Nullable="false" />
+          <Property Name="IsDevice" Type="bool" Nullable="false" />
+          <Property Name="IsDoor" Type="bool" Nullable="false" />
+          <Property Name="MaxContSize" Type="uint" />
+          <Property Name="Length" Type="utinyint" />
+          <Property Name="MaxStackSize" Type="uint" />
+          <Property Name="UnitWeight" Type="uint" />
+          <Property Name="BackgndImage" Type="varchar" MaxLength="250" />
+          <Property Name="WorkAreaTop" Type="usmallint" />
+          <Property Name="WorkAreaLeft" Type="usmallint" />
+          <Property Name="WorkAreaWidth" Type="usmallint" />
+          <Property Name="WorkAreaHeight" Type="usmallint" />
+          <Property Name="BtnCloseTop" Type="usmallint" />
+          <Property Name="BtnCloseLeft" Type="usmallint" />
+          <Property Name="FaceImage" Type="varchar" MaxLength="250" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="BasePrice" Type="uint" />
+          <Property Name="OwnerTimeout" Type="uint" />
+        </EntityType>
+        <EntityType Name="prices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="objectid" Type="uint" Nullable="false" />
+          <Property Name="price" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="titles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TitleMessageID" Type="uint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AccountID">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_character_EquipmentContainerID">
+          <End Role="containers" Type="Self.containers" Multiplicity="1" />
+          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="containers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character">
+              <PropertyRef Name="EquipmentContainerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_character_guild_roles">
+          <End Role="guild_roles" Type="Self.guild_roles" Multiplicity="0..1" />
+          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character">
+              <PropertyRef Name="GuildRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContainersObjectTypeID">
+          <End Role="objects_types" Type="Self.objects_types" Multiplicity="1" />
+          <End Role="containers" Type="Self.containers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objects_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="containers">
+              <PropertyRef Name="ObjectTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContanersFeaturesID">
+          <End Role="features" Type="Self.features" Multiplicity="0..1" />
+          <End Role="containers" Type="Self.containers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="features">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="containers">
+              <PropertyRef Name="FeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipment_slots_character">
+          <End Role="character" Type="Self.character" Multiplicity="1" />
+          <End Role="equipment_slots" Type="Self.equipment_slots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="equipment_slots">
+              <PropertyRef Name="CharacterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipment_slots_items">
+          <End Role="items" Type="Self.items" Multiplicity="0..1" />
+          <End Role="equipment_slots" Type="Self.equipment_slots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="equipment_slots">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeauturesCustomTextID">
+          <End Role="custom_texts" Type="Self.custom_texts" Multiplicity="0..1" />
+          <End Role="features" Type="Self.features" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="custom_texts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="features">
+              <PropertyRef Name="CustomtextID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_type_role_msgs_guild_roles">
+          <End Role="guild_roles" Type="Self.guild_roles" Multiplicity="1" />
+          <End Role="guild_type_role_msgs" Type="Self.guild_type_role_msgs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_type_role_msgs">
+              <PropertyRef Name="GuildRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_type_role_msgs_guild_types">
+          <End Role="guild_types" Type="Self.guild_types" Multiplicity="1" />
+          <End Role="guild_type_role_msgs" Type="Self.guild_type_role_msgs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_type_role_msgs">
+              <PropertyRef Name="GuildTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuildID">
+          <End Role="guilds" Type="Self.guilds" Multiplicity="0..1" />
+          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guilds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character">
+              <PropertyRef Name="GuildID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guilds_guild_types">
+          <End Role="guild_types" Type="Self.guild_types" Multiplicity="1" />
+          <End Role="guilds" Type="Self.guilds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guilds">
+              <PropertyRef Name="GuildTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemsContainerID">
+          <End Role="containers" Type="Self.containers" Multiplicity="1" />
+          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="containers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="items">
+              <PropertyRef Name="ContainerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemsFeaturesID">
+          <End Role="features" Type="Self.features" Multiplicity="0..1" />
+          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="features">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="items">
+              <PropertyRef Name="FeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemsObjectTypeID">
+          <End Role="objects_types" Type="Self.objects_types" Multiplicity="1" />
+          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objects_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="items">
+              <PropertyRef Name="ObjectTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_objectstypes">
+          <End Role="objects_types" Type="Self.objects_types" Multiplicity="1" />
+          <End Role="prices" Type="Self.prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objects_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="prices">
+              <PropertyRef Name="objectid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParentID">
+          <End Role="containers" Type="Self.containers" Multiplicity="0..1" />
+          <End Role="containers1" Type="Self.containers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="containers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="containers1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RootContainerID">
+          <End Role="containers" Type="Self.containers" Multiplicity="1" />
+          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="containers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character">
+              <PropertyRef Name="RootContainerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKObjectsTypesParentID">
+          <End Role="objects_types" Type="Self.objects_types" Multiplicity="0..1" />
+          <End Role="objects_types1" Type="Self.objects_types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objects_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="objects_types1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LifModelStoreContainer">
+          <EntitySet Name="account" EntityType="Self.account" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="character" EntityType="Self.character" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="containers" EntityType="Self.containers" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="custom_texts" EntityType="Self.custom_texts" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="equipment_slots" EntityType="Self.equipment_slots" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="features" EntityType="Self.features" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="guild_roles" EntityType="Self.guild_roles" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="guild_type_role_msgs" EntityType="Self.guild_type_role_msgs" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="guild_types" EntityType="Self.guild_types" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="guilds" EntityType="Self.guilds" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="items" EntityType="Self.items" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="objects_types" EntityType="Self.objects_types" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="prices" EntityType="Self.prices" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="titles" EntityType="Self.titles" Schema="lif_1" store:Type="Tables" />
+          <AssociationSet Name="FK_AccountID" Association="Self.FK_AccountID">
+            <End Role="account" EntitySet="account" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_character_EquipmentContainerID" Association="Self.FK_character_EquipmentContainerID">
+            <End Role="containers" EntitySet="containers" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_character_guild_roles" Association="Self.FK_character_guild_roles">
+            <End Role="guild_roles" EntitySet="guild_roles" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContainersObjectTypeID" Association="Self.FK_ContainersObjectTypeID">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="containers" EntitySet="containers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContanersFeaturesID" Association="Self.FK_ContanersFeaturesID">
+            <End Role="features" EntitySet="features" />
+            <End Role="containers" EntitySet="containers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipment_slots_character" Association="Self.FK_equipment_slots_character">
+            <End Role="character" EntitySet="character" />
+            <End Role="equipment_slots" EntitySet="equipment_slots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipment_slots_items" Association="Self.FK_equipment_slots_items">
+            <End Role="items" EntitySet="items" />
+            <End Role="equipment_slots" EntitySet="equipment_slots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeauturesCustomTextID" Association="Self.FK_FeauturesCustomTextID">
+            <End Role="custom_texts" EntitySet="custom_texts" />
+            <End Role="features" EntitySet="features" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_type_role_msgs_guild_roles" Association="Self.FK_guild_type_role_msgs_guild_roles">
+            <End Role="guild_roles" EntitySet="guild_roles" />
+            <End Role="guild_type_role_msgs" EntitySet="guild_type_role_msgs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_type_role_msgs_guild_types" Association="Self.FK_guild_type_role_msgs_guild_types">
+            <End Role="guild_types" EntitySet="guild_types" />
+            <End Role="guild_type_role_msgs" EntitySet="guild_type_role_msgs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuildID" Association="Self.FK_GuildID">
+            <End Role="guilds" EntitySet="guilds" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guilds_guild_types" Association="Self.FK_guilds_guild_types">
+            <End Role="guild_types" EntitySet="guild_types" />
+            <End Role="guilds" EntitySet="guilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemsContainerID" Association="Self.FK_ItemsContainerID">
+            <End Role="containers" EntitySet="containers" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemsFeaturesID" Association="Self.FK_ItemsFeaturesID">
+            <End Role="features" EntitySet="features" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemsObjectTypeID" Association="Self.FK_ItemsObjectTypeID">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_objectstypes" Association="Self.FK_objectstypes">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="prices" EntitySet="prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParentID" Association="Self.FK_ParentID">
+            <End Role="containers" EntitySet="containers" />
+            <End Role="containers1" EntitySet="containers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RootContainerID" Association="Self.FK_RootContainerID">
+            <End Role="containers" EntitySet="containers" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FKObjectsTypesParentID" Association="Self.FKObjectsTypesParentID">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="objects_types1" EntitySet="objects_types" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LifModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsGM" Type="Boolean" Nullable="false" />
+          <Property Name="SteamID" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="character" Relationship="Self.FK_AccountID" FromRole="account" ToRole="character" />
+        </EntityType>
+        <EntityType Name="character">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Byte" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GeoID" Type="Int64" />
+          <Property Name="AccountID" Type="Int64" Nullable="false" />
+          <Property Name="GeoAlt" Type="Int32" />
+          <Property Name="RaceID" Type="Byte" Nullable="false" />
+          <Property Name="Alignment" Type="Int32" Nullable="false" />
+          <Property Name="CriminalSecondsLeft" Type="Int64" Nullable="false" />
+          <Property Name="Strength" Type="Int64" Nullable="false" />
+          <Property Name="StrengthLock" Type="SByte" Nullable="false" />
+          <Property Name="Agility" Type="Int64" Nullable="false" />
+          <Property Name="AgilityLock" Type="SByte" Nullable="false" />
+          <Property Name="Intellect" Type="Int64" Nullable="false" />
+          <Property Name="IntellectLock" Type="SByte" Nullable="false" />
+          <Property Name="Willpower" Type="Int64" Nullable="false" />
+          <Property Name="WillpowerLock" Type="SByte" Nullable="false" />
+          <Property Name="Constitution" Type="Int64" Nullable="false" />
+          <Property Name="ConstitutionLock" Type="SByte" Nullable="false" />
+          <Property Name="RootContainerID" Type="Int64" Nullable="false" />
+          <Property Name="EquipmentContainerID" Type="Int64" Nullable="false" />
+          <Property Name="HardHP" Type="Int32" Nullable="false" />
+          <Property Name="HardStam" Type="Int32" Nullable="false" />
+          <Property Name="SoftHP" Type="Int32" Nullable="false" />
+          <Property Name="SoftStam" Type="Int32" Nullable="false" />
+          <Property Name="Luck" Type="Int64" Nullable="false" />
+          <Property Name="HungerRate" Type="Int64" Nullable="false" />
+          <Property Name="AlchemyHash" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="VisibilityHash" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="appearance" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="GuildID" Type="Int64" />
+          <Property Name="GuildRoleID" Type="Byte" />
+          <Property Name="TitleMessageID" Type="Int64" />
+          <Property Name="BindedObjectID" Type="Int64" />
+          <Property Name="RallyObjectID" Type="Int64" />
+          <Property Name="LastTimeUsedPraiseYourGodAbility" Type="Int64" Nullable="false" />
+          <Property Name="LastTimeUsedTransmuteIntoGold" Type="Int64" Nullable="false" />
+          <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" />
+          <Property Name="DeleteTimestamp" Type="DateTime" />
+          <NavigationProperty Name="account" Relationship="Self.FK_AccountID" FromRole="character" ToRole="account" />
+          <NavigationProperty Name="containers" Relationship="Self.FK_character_EquipmentContainerID" FromRole="character" ToRole="containers" />
+          <NavigationProperty Name="guild_roles" Relationship="Self.FK_character_guild_roles" FromRole="character" ToRole="guild_roles" />
+          <NavigationProperty Name="equipment_slots" Relationship="Self.FK_equipment_slots_character" FromRole="character" ToRole="equipment_slots" />
+          <NavigationProperty Name="guilds" Relationship="Self.FK_GuildID" FromRole="character" ToRole="guilds" />
+          <NavigationProperty Name="containers1" Relationship="Self.FK_RootContainerID" FromRole="character" ToRole="containers" />
+        </EntityType>
+        <EntityType Name="containers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentID" Type="Int64" />
+          <Property Name="ObjectTypeID" Type="Int64" Nullable="false" />
+          <Property Name="Quality" Type="Byte" Nullable="false" />
+          <Property Name="FeatureID" Type="Int64" />
+          <NavigationProperty Name="character" Relationship="Self.FK_character_EquipmentContainerID" FromRole="containers" ToRole="character" />
+          <NavigationProperty Name="character1" Relationship="Self.FK_RootContainerID" FromRole="containers" ToRole="character" />
+          <NavigationProperty Name="objects_types" Relationship="Self.FK_ContainersObjectTypeID" FromRole="containers" ToRole="objects_types" />
+          <NavigationProperty Name="features" Relationship="Self.FK_ContanersFeaturesID" FromRole="containers" ToRole="features" />
+          <NavigationProperty Name="items" Relationship="Self.FK_ItemsContainerID" FromRole="containers" ToRole="items" />
+          <NavigationProperty Name="containers1" Relationship="Self.FK_ParentID" FromRole="containers" ToRole="containers1" />
+          <NavigationProperty Name="containers2" Relationship="Self.FK_ParentID" FromRole="containers1" ToRole="containers" />
+        </EntityType>
+        <EntityType Name="custom_texts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Custom_text" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="features" Relationship="Self.FK_FeauturesCustomTextID" FromRole="custom_texts" ToRole="features" />
+        </EntityType>
+        <EntityType Name="equipment_slots">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CharacterID" Type="Int64" Nullable="false" />
+          <Property Name="Slot" Type="Byte" Nullable="false" />
+          <Property Name="ItemID" Type="Int64" />
+          <NavigationProperty Name="character" Relationship="Self.FK_equipment_slots_character" FromRole="equipment_slots" ToRole="character" />
+          <NavigationProperty Name="items" Relationship="Self.FK_equipment_slots_items" FromRole="equipment_slots" ToRole="items" />
+        </EntityType>
+        <EntityType Name="features">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomtextID" Type="Int64" />
+          <Property Name="has_effects" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="containers" Relationship="Self.FK_ContanersFeaturesID" FromRole="features" ToRole="containers" />
+          <NavigationProperty Name="custom_texts" Relationship="Self.FK_FeauturesCustomTextID" FromRole="features" ToRole="custom_texts" />
+          <NavigationProperty Name="items" Relationship="Self.FK_ItemsFeaturesID" FromRole="features" ToRole="items" />
+        </EntityType>
+        <EntityType Name="guild_roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="character" Relationship="Self.FK_character_guild_roles" FromRole="guild_roles" ToRole="character" />
+          <NavigationProperty Name="guild_type_role_msgs" Relationship="Self.FK_guild_type_role_msgs_guild_roles" FromRole="guild_roles" ToRole="guild_type_role_msgs" />
+        </EntityType>
+        <EntityType Name="guild_type_role_msgs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuildTypeID" Type="Byte" Nullable="false" />
+          <Property Name="GuildRoleID" Type="Byte" Nullable="false" />
+          <Property Name="MessageID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="guild_roles" Relationship="Self.FK_guild_type_role_msgs_guild_roles" FromRole="guild_type_role_msgs" ToRole="guild_roles" />
+          <NavigationProperty Name="guild_types" Relationship="Self.FK_guild_type_role_msgs_guild_types" FromRole="guild_type_role_msgs" ToRole="guild_types" />
+        </EntityType>
+        <EntityType Name="guild_types">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuildLevel" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MessageID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="guild_type_role_msgs" Relationship="Self.FK_guild_type_role_msgs_guild_types" FromRole="guild_types" ToRole="guild_type_role_msgs" />
+          <NavigationProperty Name="guilds" Relationship="Self.FK_guilds_guild_types" FromRole="guild_types" ToRole="guilds" />
+        </EntityType>
+        <EntityType Name="guilds">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="GuildTypeID" Type="Byte" Nullable="false" />
+          <Property Name="IsActive" Type="Byte" Nullable="false" />
+          <Property Name="GuildCharter" Type="String" MaxLength="10000" FixedLength="false" Unicode="false" />
+          <Property Name="GuildTag" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" />
+          <Property Name="DeleteTimestamp" Type="DateTime" />
+          <NavigationProperty Name="character" Relationship="Self.FK_GuildID" FromRole="guilds" ToRole="character" />
+          <NavigationProperty Name="guild_types" Relationship="Self.FK_guilds_guild_types" FromRole="guilds" ToRole="guild_types" />
+        </EntityType>
+        <EntityType Name="items">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContainerID" Type="Int64" Nullable="false" />
+          <Property Name="ObjectTypeID" Type="Int64" Nullable="false" />
+          <Property Name="Quality" Type="Byte" Nullable="false" />
+          <Property Name="Quantity" Type="Int64" Nullable="false" />
+          <Property Name="Durability" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDurability" Type="Int32" Nullable="false" />
+          <Property Name="FeatureID" Type="Int64" />
+          <NavigationProperty Name="containers" Relationship="Self.FK_ItemsContainerID" FromRole="items" ToRole="containers" />
+          <NavigationProperty Name="equipment_slots" Relationship="Self.FK_equipment_slots_items" FromRole="items" ToRole="equipment_slots" />
+          <NavigationProperty Name="features" Relationship="Self.FK_ItemsFeaturesID" FromRole="items" ToRole="features" />
+          <NavigationProperty Name="objects_types" Relationship="Self.FK_ItemsObjectTypeID" FromRole="items" ToRole="objects_types" />
+        </EntityType>
+        <EntityType Name="objects_types">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentID" Type="Int64" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsContainer" Type="Boolean" Nullable="false" />
+          <Property Name="IsMovableObject" Type="Boolean" Nullable="false" />
+          <Property Name="IsUnmovableobject" Type="Boolean" Nullable="false" />
+          <Property Name="IsTool" Type="Boolean" Nullable="false" />
+          <Property Name="IsDevice" Type="Boolean" Nullable="false" />
+          <Property Name="IsDoor" Type="Boolean" Nullable="false" />
+          <Property Name="MaxContSize" Type="Int64" />
+          <Property Name="Length" Type="Byte" />
+          <Property Name="MaxStackSize" Type="Int64" />
+          <Property Name="UnitWeight" Type="Int64" />
+          <Property Name="BackgndImage" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="WorkAreaTop" Type="Int32" />
+          <Property Name="WorkAreaLeft" Type="Int32" />
+          <Property Name="WorkAreaWidth" Type="Int32" />
+          <Property Name="WorkAreaHeight" Type="Int32" />
+          <Property Name="BtnCloseTop" Type="Int32" />
+          <Property Name="BtnCloseLeft" Type="Int32" />
+          <Property Name="FaceImage" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="BasePrice" Type="Int64" />
+          <Property Name="OwnerTimeout" Type="Int64" />
+          <NavigationProperty Name="containers" Relationship="Self.FK_ContainersObjectTypeID" FromRole="objects_types" ToRole="containers" />
+          <NavigationProperty Name="items" Relationship="Self.FK_ItemsObjectTypeID" FromRole="objects_types" ToRole="items" />
+          <NavigationProperty Name="prices" Relationship="Self.FK_objectstypes" FromRole="objects_types" ToRole="prices" />
+          <NavigationProperty Name="objects_types1" Relationship="Self.FKObjectsTypesParentID" FromRole="objects_types" ToRole="objects_types1" />
+          <NavigationProperty Name="objects_types2" Relationship="Self.FKObjectsTypesParentID" FromRole="objects_types1" ToRole="objects_types" />
+        </EntityType>
+        <EntityType Name="prices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="objectid" Type="Int64" Nullable="false" />
+          <Property Name="price" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="objects_types" Relationship="Self.FK_objectstypes" FromRole="prices" ToRole="objects_types" />
+        </EntityType>
+        <EntityType Name="titles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TitleMessageID" Type="Int64" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AccountID">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_character_EquipmentContainerID">
+          <End Role="containers" Type="Self.containers" Multiplicity="1" />
+          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="containers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character">
+              <PropertyRef Name="EquipmentContainerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_character_guild_roles">
+          <End Role="guild_roles" Type="Self.guild_roles" Multiplicity="0..1" />
+          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character">
+              <PropertyRef Name="GuildRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipment_slots_character">
+          <End Role="character" Type="Self.character" Multiplicity="1" />
+          <End Role="equipment_slots" Type="Self.equipment_slots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="equipment_slots">
+              <PropertyRef Name="CharacterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuildID">
+          <End Role="guilds" Type="Self.guilds" Multiplicity="0..1" />
+          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guilds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character">
+              <PropertyRef Name="GuildID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RootContainerID">
+          <End Role="containers" Type="Self.containers" Multiplicity="1" />
+          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="containers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character">
+              <PropertyRef Name="RootContainerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContainersObjectTypeID">
+          <End Role="objects_types" Type="Self.objects_types" Multiplicity="1" />
+          <End Role="containers" Type="Self.containers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objects_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="containers">
+              <PropertyRef Name="ObjectTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContanersFeaturesID">
+          <End Role="features" Type="Self.features" Multiplicity="0..1" />
+          <End Role="containers" Type="Self.containers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="features">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="containers">
+              <PropertyRef Name="FeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemsContainerID">
+          <End Role="containers" Type="Self.containers" Multiplicity="1" />
+          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="containers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="items">
+              <PropertyRef Name="ContainerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParentID">
+          <End Role="containers" Type="Self.containers" Multiplicity="0..1" />
+          <End Role="containers1" Type="Self.containers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="containers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="containers1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeauturesCustomTextID">
+          <End Role="custom_texts" Type="Self.custom_texts" Multiplicity="0..1" />
+          <End Role="features" Type="Self.features" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="custom_texts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="features">
+              <PropertyRef Name="CustomtextID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipment_slots_items">
+          <End Role="items" Type="Self.items" Multiplicity="0..1" />
+          <End Role="equipment_slots" Type="Self.equipment_slots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="equipment_slots">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemsFeaturesID">
+          <End Role="features" Type="Self.features" Multiplicity="0..1" />
+          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="features">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="items">
+              <PropertyRef Name="FeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_type_role_msgs_guild_roles">
+          <End Role="guild_roles" Type="Self.guild_roles" Multiplicity="1" />
+          <End Role="guild_type_role_msgs" Type="Self.guild_type_role_msgs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_type_role_msgs">
+              <PropertyRef Name="GuildRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_type_role_msgs_guild_types">
+          <End Role="guild_types" Type="Self.guild_types" Multiplicity="1" />
+          <End Role="guild_type_role_msgs" Type="Self.guild_type_role_msgs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_type_role_msgs">
+              <PropertyRef Name="GuildTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guilds_guild_types">
+          <End Role="guild_types" Type="Self.guild_types" Multiplicity="1" />
+          <End Role="guilds" Type="Self.guilds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guilds">
+              <PropertyRef Name="GuildTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemsObjectTypeID">
+          <End Role="objects_types" Type="Self.objects_types" Multiplicity="1" />
+          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objects_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="items">
+              <PropertyRef Name="ObjectTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_objectstypes">
+          <End Role="objects_types" Type="Self.objects_types" Multiplicity="1" />
+          <End Role="prices" Type="Self.prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objects_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="prices">
+              <PropertyRef Name="objectid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKObjectsTypesParentID">
+          <End Role="objects_types" Type="Self.objects_types" Multiplicity="0..1" />
+          <End Role="objects_types1" Type="Self.objects_types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objects_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="objects_types1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LifDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="account" EntityType="Self.account" />
+          <EntitySet Name="character" EntityType="Self.character" />
+          <EntitySet Name="containers" EntityType="Self.containers" />
+          <EntitySet Name="custom_texts" EntityType="Self.custom_texts" />
+          <EntitySet Name="equipment_slots" EntityType="Self.equipment_slots" />
+          <EntitySet Name="features" EntityType="Self.features" />
+          <EntitySet Name="guild_roles" EntityType="Self.guild_roles" />
+          <EntitySet Name="guild_type_role_msgs" EntityType="Self.guild_type_role_msgs" />
+          <EntitySet Name="guild_types" EntityType="Self.guild_types" />
+          <EntitySet Name="guilds" EntityType="Self.guilds" />
+          <EntitySet Name="items" EntityType="Self.items" />
+          <EntitySet Name="objects_types" EntityType="Self.objects_types" />
+          <EntitySet Name="prices" EntityType="Self.prices" />
+          <EntitySet Name="titles" EntityType="Self.titles" />
+          <AssociationSet Name="FK_AccountID" Association="Self.FK_AccountID">
+            <End Role="account" EntitySet="account" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_character_EquipmentContainerID" Association="Self.FK_character_EquipmentContainerID">
+            <End Role="containers" EntitySet="containers" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_character_guild_roles" Association="Self.FK_character_guild_roles">
+            <End Role="guild_roles" EntitySet="guild_roles" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipment_slots_character" Association="Self.FK_equipment_slots_character">
+            <End Role="character" EntitySet="character" />
+            <End Role="equipment_slots" EntitySet="equipment_slots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuildID" Association="Self.FK_GuildID">
+            <End Role="guilds" EntitySet="guilds" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RootContainerID" Association="Self.FK_RootContainerID">
+            <End Role="containers" EntitySet="containers" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContainersObjectTypeID" Association="Self.FK_ContainersObjectTypeID">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="containers" EntitySet="containers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContanersFeaturesID" Association="Self.FK_ContanersFeaturesID">
+            <End Role="features" EntitySet="features" />
+            <End Role="containers" EntitySet="containers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemsContainerID" Association="Self.FK_ItemsContainerID">
+            <End Role="containers" EntitySet="containers" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParentID" Association="Self.FK_ParentID">
+            <End Role="containers" EntitySet="containers" />
+            <End Role="containers1" EntitySet="containers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeauturesCustomTextID" Association="Self.FK_FeauturesCustomTextID">
+            <End Role="custom_texts" EntitySet="custom_texts" />
+            <End Role="features" EntitySet="features" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipment_slots_items" Association="Self.FK_equipment_slots_items">
+            <End Role="items" EntitySet="items" />
+            <End Role="equipment_slots" EntitySet="equipment_slots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemsFeaturesID" Association="Self.FK_ItemsFeaturesID">
+            <End Role="features" EntitySet="features" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_type_role_msgs_guild_roles" Association="Self.FK_guild_type_role_msgs_guild_roles">
+            <End Role="guild_roles" EntitySet="guild_roles" />
+            <End Role="guild_type_role_msgs" EntitySet="guild_type_role_msgs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_type_role_msgs_guild_types" Association="Self.FK_guild_type_role_msgs_guild_types">
+            <End Role="guild_types" EntitySet="guild_types" />
+            <End Role="guild_type_role_msgs" EntitySet="guild_type_role_msgs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guilds_guild_types" Association="Self.FK_guilds_guild_types">
+            <End Role="guild_types" EntitySet="guild_types" />
+            <End Role="guilds" EntitySet="guilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemsObjectTypeID" Association="Self.FK_ItemsObjectTypeID">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_objectstypes" Association="Self.FK_objectstypes">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="prices" EntitySet="prices" />
+          </AssociationSet>
+          <AssociationSet Name="FKObjectsTypesParentID" Association="Self.FKObjectsTypesParentID">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="objects_types1" EntitySet="objects_types" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LifModelStoreContainer" CdmEntityContainer="LifDB">
+          <EntitySetMapping Name="account">
+            <EntityTypeMapping TypeName="LifModel.account">
+              <MappingFragment StoreEntitySet="account">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsGM" ColumnName="IsGM" />
+                <ScalarProperty Name="SteamID" ColumnName="SteamID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="character">
+            <EntityTypeMapping TypeName="LifModel.character">
+              <MappingFragment StoreEntitySet="character">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="GeoID" ColumnName="GeoID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="GeoAlt" ColumnName="GeoAlt" />
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+                <ScalarProperty Name="Alignment" ColumnName="Alignment" />
+                <ScalarProperty Name="CriminalSecondsLeft" ColumnName="CriminalSecondsLeft" />
+                <ScalarProperty Name="Strength" ColumnName="Strength" />
+                <ScalarProperty Name="StrengthLock" ColumnName="StrengthLock" />
+                <ScalarProperty Name="Agility" ColumnName="Agility" />
+                <ScalarProperty Name="AgilityLock" ColumnName="AgilityLock" />
+                <ScalarProperty Name="Intellect" ColumnName="Intellect" />
+                <ScalarProperty Name="IntellectLock" ColumnName="IntellectLock" />
+                <ScalarProperty Name="Willpower" ColumnName="Willpower" />
+                <ScalarProperty Name="WillpowerLock" ColumnName="WillpowerLock" />
+                <ScalarProperty Name="Constitution" ColumnName="Constitution" />
+                <ScalarProperty Name="ConstitutionLock" ColumnName="ConstitutionLock" />
+                <ScalarProperty Name="RootContainerID" ColumnName="RootContainerID" />
+                <ScalarProperty Name="EquipmentContainerID" ColumnName="EquipmentContainerID" />
+                <ScalarProperty Name="HardHP" ColumnName="HardHP" />
+                <ScalarProperty Name="HardStam" ColumnName="HardStam" />
+                <ScalarProperty Name="SoftHP" ColumnName="SoftHP" />
+                <ScalarProperty Name="SoftStam" ColumnName="SoftStam" />
+                <ScalarProperty Name="Luck" ColumnName="Luck" />
+                <ScalarProperty Name="HungerRate" ColumnName="HungerRate" />
+                <ScalarProperty Name="AlchemyHash" ColumnName="AlchemyHash" />
+                <ScalarProperty Name="VisibilityHash" ColumnName="VisibilityHash" />
+                <ScalarProperty Name="appearance" ColumnName="appearance" />
+                <ScalarProperty Name="GuildID" ColumnName="GuildID" />
+                <ScalarProperty Name="GuildRoleID" ColumnName="GuildRoleID" />
+                <ScalarProperty Name="TitleMessageID" ColumnName="TitleMessageID" />
+                <ScalarProperty Name="BindedObjectID" ColumnName="BindedObjectID" />
+                <ScalarProperty Name="RallyObjectID" ColumnName="RallyObjectID" />
+                <ScalarProperty Name="LastTimeUsedPraiseYourGodAbility" ColumnName="LastTimeUsedPraiseYourGodAbility" />
+                <ScalarProperty Name="LastTimeUsedTransmuteIntoGold" ColumnName="LastTimeUsedTransmuteIntoGold" />
+                <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+                <ScalarProperty Name="DeleteTimestamp" ColumnName="DeleteTimestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="containers">
+            <EntityTypeMapping TypeName="LifModel.containers">
+              <MappingFragment StoreEntitySet="containers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="ObjectTypeID" ColumnName="ObjectTypeID" />
+                <ScalarProperty Name="Quality" ColumnName="Quality" />
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="custom_texts">
+            <EntityTypeMapping TypeName="LifModel.custom_texts">
+              <MappingFragment StoreEntitySet="custom_texts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Custom_text" ColumnName="Custom_text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipment_slots">
+            <EntityTypeMapping TypeName="LifModel.equipment_slots">
+              <MappingFragment StoreEntitySet="equipment_slots">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
+                <ScalarProperty Name="Slot" ColumnName="Slot" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="features">
+            <EntityTypeMapping TypeName="LifModel.features">
+              <MappingFragment StoreEntitySet="features">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomtextID" ColumnName="CustomtextID" />
+                <ScalarProperty Name="has_effects" ColumnName="has_effects" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guild_roles">
+            <EntityTypeMapping TypeName="LifModel.guild_roles">
+              <MappingFragment StoreEntitySet="guild_roles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guild_type_role_msgs">
+            <EntityTypeMapping TypeName="LifModel.guild_type_role_msgs">
+              <MappingFragment StoreEntitySet="guild_type_role_msgs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GuildTypeID" ColumnName="GuildTypeID" />
+                <ScalarProperty Name="GuildRoleID" ColumnName="GuildRoleID" />
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guild_types">
+            <EntityTypeMapping TypeName="LifModel.guild_types">
+              <MappingFragment StoreEntitySet="guild_types">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GuildLevel" ColumnName="GuildLevel" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guilds">
+            <EntityTypeMapping TypeName="LifModel.guilds">
+              <MappingFragment StoreEntitySet="guilds">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GuildTypeID" ColumnName="GuildTypeID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="GuildCharter" ColumnName="GuildCharter" />
+                <ScalarProperty Name="GuildTag" ColumnName="GuildTag" />
+                <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+                <ScalarProperty Name="DeleteTimestamp" ColumnName="DeleteTimestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="items">
+            <EntityTypeMapping TypeName="LifModel.items">
+              <MappingFragment StoreEntitySet="items">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ContainerID" ColumnName="ContainerID" />
+                <ScalarProperty Name="ObjectTypeID" ColumnName="ObjectTypeID" />
+                <ScalarProperty Name="Quality" ColumnName="Quality" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Durability" ColumnName="Durability" />
+                <ScalarProperty Name="CreatedDurability" ColumnName="CreatedDurability" />
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="objects_types">
+            <EntityTypeMapping TypeName="LifModel.objects_types">
+              <MappingFragment StoreEntitySet="objects_types">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsContainer" ColumnName="IsContainer" />
+                <ScalarProperty Name="IsMovableObject" ColumnName="IsMovableObject" />
+                <ScalarProperty Name="IsUnmovableobject" ColumnName="IsUnmovableobject" />
+                <ScalarProperty Name="IsTool" ColumnName="IsTool" />
+                <ScalarProperty Name="IsDevice" ColumnName="IsDevice" />
+                <ScalarProperty Name="IsDoor" ColumnName="IsDoor" />
+                <ScalarProperty Name="MaxContSize" ColumnName="MaxContSize" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="MaxStackSize" ColumnName="MaxStackSize" />
+                <ScalarProperty Name="UnitWeight" ColumnName="UnitWeight" />
+                <ScalarProperty Name="BackgndImage" ColumnName="BackgndImage" />
+                <ScalarProperty Name="WorkAreaTop" ColumnName="WorkAreaTop" />
+                <ScalarProperty Name="WorkAreaLeft" ColumnName="WorkAreaLeft" />
+                <ScalarProperty Name="WorkAreaWidth" ColumnName="WorkAreaWidth" />
+                <ScalarProperty Name="WorkAreaHeight" ColumnName="WorkAreaHeight" />
+                <ScalarProperty Name="BtnCloseTop" ColumnName="BtnCloseTop" />
+                <ScalarProperty Name="BtnCloseLeft" ColumnName="BtnCloseLeft" />
+                <ScalarProperty Name="FaceImage" ColumnName="FaceImage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+                <ScalarProperty Name="OwnerTimeout" ColumnName="OwnerTimeout" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prices">
+            <EntityTypeMapping TypeName="LifModel.prices">
+              <MappingFragment StoreEntitySet="prices">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="objectid" ColumnName="objectid" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="titles">
+            <EntityTypeMapping TypeName="LifModel.titles">
+              <MappingFragment StoreEntitySet="titles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TitleMessageID" ColumnName="TitleMessageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.Owin.Security
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <!--<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>-->
+        <!--<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"})</li>-->
+        <!--<li>@Html.ActionLink("Log in Steam", "ExternalLogin", "Account", routeValues: new {provider = "Steam", returnUrl = (string) null}, htmlAttributes: new {id = "loginLink"})</li>-->
+        @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = (string)null }))
+        {
+        @Html.AntiForgeryToken()
+            var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+                foreach (AuthenticationDescription p in loginProviders)
+                {
+                    <li><button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">Log In</button></li>
+                    <!--<li>@Ajax.ActionLink("Log In", "ExternalLogin", "Account", routeValues: new { provider = "Steam", returnUrl = (string)null }, ajaxOptions: new AjaxOptions { HttpMethod = "POST", OnSuccess = "function (returndata) { if (returndata.ok) window.location = returndata.newurl;}"})</li>-->
+                }
+        }
+    </ul>
+}
