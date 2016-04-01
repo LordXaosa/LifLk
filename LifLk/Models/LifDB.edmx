@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LifModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LifModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="account">
           <Key>
             <PropertyRef Name="ID" />
@@ -59,6 +59,43 @@
           <Property Name="CreateTimestamp" Type="timestamp" Precision="0" Nullable="false" />
           <Property Name="DeleteTimestamp" Type="timestamp" Precision="0" />
         </EntityType>
+        <EntityType Name="character_effects">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayerEffectID" Type="utinyint" Nullable="false" />
+          <Property Name="CharacterID" Type="uint" Nullable="false" />
+          <Property Name="Magnitude" Type="uint" Nullable="false" />
+          <Property Name="DurationLeft" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="character_titles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CharacterID" Type="uint" Nullable="false" />
+          <Property Name="TitleID" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="chars_deathlog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Time" Type="uint" Nullable="false" />
+          <Property Name="CharID" Type="uint" Nullable="false" />
+          <Property Name="KillerID" Type="uint" Nullable="false" />
+          <Property Name="IsKnockout" Type="utinyint" />
+        </EntityType>
+        <EntityType Name="claims">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuildLandID" Type="uint" />
+          <Property Name="PersonalLandID" Type="uint" />
+          <Property Name="SupportPoints" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="containers">
           <Key>
             <PropertyRef Name="ID" />
@@ -75,6 +112,25 @@
           </Key>
           <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Custom_text" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="effects">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="utinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Effect_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ResultPreparationID" Type="uint" />
+          <Property Name="ResultPotionID" Type="uint" />
+          <Property Name="PlayerEffectID" Type="utinyint" />
+        </EntityType>
+        <EntityType Name="effects_sets">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EffectID1" Type="utinyint" Nullable="false" />
+          <Property Name="EffectID2" Type="utinyint" />
+          <Property Name="EffectID3" Type="utinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="equipment_slots">
           <Key>
@@ -93,12 +149,86 @@
           <Property Name="CustomtextID" Type="uint" />
           <Property Name="has_effects" Type="bool" Nullable="false" />
         </EntityType>
+        <EntityType Name="guild_actions_processed">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TicketID" Type="ubigint" Nullable="false" />
+          <Property Name="ActionType" Type="enum" Nullable="false" />
+          <Property Name="ProcessedStatus" Type="enum" Nullable="false" />
+          <Property Name="ProducerCharID" Type="uint" />
+          <Property Name="ProducerCharDeletedID" Type="uint" />
+          <Property Name="GuildID" Type="uint" />
+          <Property Name="GuildDeletedID" Type="uint" />
+          <Property Name="CharID" Type="uint" />
+          <Property Name="CharDeletedID" Type="uint" />
+          <Property Name="GuildName" Type="varchar" MaxLength="45" />
+          <Property Name="GuildTag" Type="varchar" MaxLength="4" />
+          <Property Name="GuildCharter" Type="varchar" MaxLength="10000" />
+          <Property Name="GuildTypeID" Type="utinyint" />
+          <Property Name="CharIsKicked" Type="utinyint" Nullable="false" />
+          <Property Name="CharGuildRoleID" Type="utinyint" />
+          <Property Name="OtherGuildID" Type="uint" />
+          <Property Name="OtherGuildDeletedID" Type="uint" />
+          <Property Name="StandingTypeID" Type="utinyint" />
+          <Property Name="ProcessedTimestamp" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="guild_actions_queue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TicketID" Type="ubigint" Nullable="false" />
+          <Property Name="ActionType" Type="enum" Nullable="false" />
+          <Property Name="ProducerCharID" Type="uint" Nullable="false" />
+          <Property Name="GuildID" Type="uint" />
+          <Property Name="CharID" Type="uint" />
+          <Property Name="GuildName" Type="varchar" MaxLength="45" />
+          <Property Name="GuildTag" Type="varchar" MaxLength="4" />
+          <Property Name="GuildCharter" Type="varchar" MaxLength="10000" />
+          <Property Name="GuildTypeID" Type="utinyint" />
+          <Property Name="CharIsKicked" Type="utinyint" Nullable="false" />
+          <Property Name="CharGuildRoleID" Type="utinyint" />
+          <Property Name="OtherGuildID" Type="uint" />
+          <Property Name="StandingTypeID" Type="utinyint" />
+          <Property Name="AddedTimestamp" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="OwnerConnectionID" Type="uint" Nullable="false" />
+          <Property Name="OwnedTimestamp" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="guild_lands">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuildID" Type="uint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="CenterGeoID" Type="uint" Nullable="false" />
+          <Property Name="Radius" Type="uint" Nullable="false" />
+          <Property Name="LandType" Type="uint" Nullable="false" />
+        </EntityType>
         <EntityType Name="guild_roles">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="utinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="guild_standing_types">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="utinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="guild_standings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuildID1" Type="uint" Nullable="false" />
+          <Property Name="GuildID2" Type="uint" Nullable="false" />
+          <Property Name="StandingTypeID" Type="utinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="guild_type_role_msgs">
           <Key>
@@ -131,6 +261,15 @@
           <Property Name="CreateTimestamp" Type="timestamp" Precision="0" Nullable="false" />
           <Property Name="DeleteTimestamp" Type="timestamp" Precision="0" />
         </EntityType>
+        <EntityType Name="item_effects">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemID" Type="uint" Nullable="false" />
+          <Property Name="EffectID" Type="utinyint" Nullable="false" />
+          <Property Name="Magnitude" Type="usmallint" Nullable="false" />
+        </EntityType>
         <EntityType Name="items">
           <Key>
             <PropertyRef Name="ID" />
@@ -143,6 +282,33 @@
           <Property Name="Durability" Type="usmallint" Nullable="false" />
           <Property Name="CreatedDurability" Type="usmallint" Nullable="false" />
           <Property Name="FeatureID" Type="uint" />
+        </EntityType>
+        <EntityType Name="lifdscp_online_character">
+          <Key>
+            <PropertyRef Name="CharacterID" />
+          </Key>
+          <Property Name="CharacterID" Type="uint" Nullable="false" />
+          <Property Name="LoggedInAt" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lifdscp_online_history">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="ubigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CharacterID" Type="uint" Nullable="false" />
+          <Property Name="LoggedInAt" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="LoggedOutAt" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="IsLoggedOut" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="message" Type="varchar" MaxLength="9999" Nullable="false" />
+          <Property Name="ip" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="steamid" Type="ubigint" />
         </EntityType>
         <EntityType Name="objects_types">
           <Key>
@@ -173,6 +339,17 @@
           <Property Name="BasePrice" Type="uint" />
           <Property Name="OwnerTimeout" Type="uint" />
         </EntityType>
+        <EntityType Name="personal_lands">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CharID" Type="uint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="GeoID1" Type="uint" Nullable="false" />
+          <Property Name="GeoID2" Type="uint" Nullable="false" />
+          <Property Name="IsTemp" Type="utinyint" Nullable="false" />
+        </EntityType>
         <EntityType Name="prices">
           <Key>
             <PropertyRef Name="id" />
@@ -180,6 +357,44 @@
           <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="objectid" Type="uint" Nullable="false" />
           <Property Name="price" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="race">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="utinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="skill_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Parent" Type="uint" />
+          <Property Name="Group" Type="utinyint" />
+          <Property Name="PrimaryStat" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="SecondaryStat" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="MasterMessageID" Type="uint" />
+          <Property Name="GMMessageID" Type="uint" />
+        </EntityType>
+        <EntityType Name="skills">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CharacterID" Type="uint" Nullable="false" />
+          <Property Name="SkillTypeID" Type="uint" Nullable="false" />
+          <Property Name="SkillAmount" Type="uint" Nullable="false" />
+          <Property Name="LockStatus" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="titles">
           <Key>
@@ -198,6 +413,18 @@
             </Principal>
             <Dependent Role="character">
               <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_character_effects_character">
+          <End Role="character" Type="Self.character" Multiplicity="1" />
+          <End Role="character_effects" Type="Self.character_effects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character_effects">
+              <PropertyRef Name="CharacterID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -225,6 +452,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_character_race">
+          <End Role="race" Type="Self.race" Multiplicity="1" />
+          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="race">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_character_titles_character">
+          <End Role="character" Type="Self.character" Multiplicity="1" />
+          <End Role="character_titles" Type="Self.character_titles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character_titles">
+              <PropertyRef Name="CharacterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_character_titles_titles">
+          <End Role="titles" Type="Self.titles" Multiplicity="1" />
+          <End Role="character_titles" Type="Self.character_titles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="titles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character_titles">
+              <PropertyRef Name="TitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CharacterID">
+          <End Role="character" Type="Self.character" Multiplicity="1" />
+          <End Role="skills" Type="Self.skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="skills">
+              <PropertyRef Name="CharacterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_claims_guild_lands">
+          <End Role="guild_lands" Type="Self.guild_lands" Multiplicity="0..1" />
+          <End Role="claims" Type="Self.claims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_lands">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="claims">
+              <PropertyRef Name="GuildLandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_claims_personal_lands">
+          <End Role="personal_lands" Type="Self.personal_lands" Multiplicity="0..1" />
+          <End Role="claims" Type="Self.claims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_lands">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="claims">
+              <PropertyRef Name="PersonalLandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ContainersObjectTypeID">
           <End Role="objects_types" Type="Self.objects_types" Multiplicity="1" />
           <End Role="containers" Type="Self.containers" Multiplicity="*" />
@@ -246,6 +545,66 @@
             </Principal>
             <Dependent Role="containers">
               <PropertyRef Name="FeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_effects_result_potion_objects_types">
+          <End Role="objects_types" Type="Self.objects_types" Multiplicity="0..1" />
+          <End Role="effects" Type="Self.effects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objects_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="effects">
+              <PropertyRef Name="ResultPotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_effects_result_preparation_objects_types">
+          <End Role="objects_types" Type="Self.objects_types" Multiplicity="0..1" />
+          <End Role="effects" Type="Self.effects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objects_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="effects">
+              <PropertyRef Name="ResultPreparationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_effects_sets_effects_1">
+          <End Role="effects" Type="Self.effects" Multiplicity="1" />
+          <End Role="effects_sets" Type="Self.effects_sets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="effects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="effects_sets">
+              <PropertyRef Name="EffectID1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_effects_sets_effects_2">
+          <End Role="effects" Type="Self.effects" Multiplicity="0..1" />
+          <End Role="effects_sets" Type="Self.effects_sets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="effects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="effects_sets">
+              <PropertyRef Name="EffectID2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_effects_sets_effects_3">
+          <End Role="effects" Type="Self.effects" Multiplicity="1" />
+          <End Role="effects_sets" Type="Self.effects_sets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="effects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="effects_sets">
+              <PropertyRef Name="EffectID3" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -282,6 +641,162 @@
             </Principal>
             <Dependent Role="features">
               <PropertyRef Name="CustomtextID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_processed_character1">
+          <End Role="character" Type="Self.character" Multiplicity="0..1" />
+          <End Role="guild_actions_processed" Type="Self.guild_actions_processed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_processed">
+              <PropertyRef Name="ProducerCharID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_queue_character1">
+          <End Role="character" Type="Self.character" Multiplicity="1" />
+          <End Role="guild_actions_queue" Type="Self.guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="ProducerCharID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_queue_character2">
+          <End Role="character" Type="Self.character" Multiplicity="0..1" />
+          <End Role="guild_actions_queue" Type="Self.guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="CharID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_queue_guild_roles">
+          <End Role="guild_roles" Type="Self.guild_roles" Multiplicity="0..1" />
+          <End Role="guild_actions_queue" Type="Self.guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="CharGuildRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_queue_guild_standing_types">
+          <End Role="guild_standing_types" Type="Self.guild_standing_types" Multiplicity="0..1" />
+          <End Role="guild_actions_queue" Type="Self.guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_standing_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="StandingTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_queue_guild_types">
+          <End Role="guild_types" Type="Self.guild_types" Multiplicity="0..1" />
+          <End Role="guild_actions_queue" Type="Self.guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="GuildTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_queue_guilds1">
+          <End Role="guilds" Type="Self.guilds" Multiplicity="0..1" />
+          <End Role="guild_actions_queue" Type="Self.guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guilds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="GuildID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_queue_guilds2">
+          <End Role="guilds" Type="Self.guilds" Multiplicity="0..1" />
+          <End Role="guild_actions_queue" Type="Self.guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guilds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="OtherGuildID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_lands_character">
+          <End Role="character" Type="Self.character" Multiplicity="1" />
+          <End Role="personal_lands" Type="Self.personal_lands" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="personal_lands">
+              <PropertyRef Name="CharID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_lands_guilds">
+          <End Role="guilds" Type="Self.guilds" Multiplicity="1" />
+          <End Role="guild_lands" Type="Self.guild_lands" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guilds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_lands">
+              <PropertyRef Name="GuildID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_standings_guild_standing_types">
+          <End Role="guild_standing_types" Type="Self.guild_standing_types" Multiplicity="1" />
+          <End Role="guild_standings" Type="Self.guild_standings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_standing_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_standings">
+              <PropertyRef Name="StandingTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_standings_guilds1">
+          <End Role="guilds" Type="Self.guilds" Multiplicity="1" />
+          <End Role="guild_standings" Type="Self.guild_standings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guilds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_standings">
+              <PropertyRef Name="GuildID1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_standings_guilds2">
+          <End Role="guilds" Type="Self.guilds" Multiplicity="1" />
+          <End Role="guild_standings" Type="Self.guild_standings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guilds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_standings">
+              <PropertyRef Name="GuildID2" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -330,6 +845,30 @@
             </Principal>
             <Dependent Role="guilds">
               <PropertyRef Name="GuildTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_effects_effects">
+          <End Role="effects" Type="Self.effects" Multiplicity="1" />
+          <End Role="item_effects" Type="Self.item_effects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="effects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="item_effects">
+              <PropertyRef Name="EffectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemEffectsItemID">
+          <End Role="items" Type="Self.items" Multiplicity="1" />
+          <End Role="item_effects" Type="Self.item_effects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="item_effects">
+              <PropertyRef Name="ItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -405,6 +944,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SkillTypeID">
+          <End Role="skill_type" Type="Self.skill_type" Multiplicity="1" />
+          <End Role="skills" Type="Self.skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="skill_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="skills">
+              <PropertyRef Name="SkillTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkillTypeParentID">
+          <End Role="skill_type" Type="Self.skill_type" Multiplicity="0..1" />
+          <End Role="skill_type1" Type="Self.skill_type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="skill_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="skill_type1">
+              <PropertyRef Name="Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKObjectsTypesParentID">
           <End Role="objects_types" Type="Self.objects_types" Multiplicity="0..1" />
           <End Role="objects_types1" Type="Self.objects_types" Multiplicity="*" />
@@ -417,24 +980,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="f_deleteItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lif_1">
+          <Parameter Name="inItemID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="f_fromGeoID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lif_1">
+          <Parameter Name="geoID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="LifModelStoreContainer">
           <EntitySet Name="account" EntityType="Self.account" Schema="lif_1" store:Type="Tables" />
           <EntitySet Name="character" EntityType="Self.character" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="character_effects" EntityType="Self.character_effects" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="character_titles" EntityType="Self.character_titles" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="chars_deathlog" EntityType="Self.chars_deathlog" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="claims" EntityType="Self.claims" Schema="lif_1" store:Type="Tables" />
           <EntitySet Name="containers" EntityType="Self.containers" Schema="lif_1" store:Type="Tables" />
           <EntitySet Name="custom_texts" EntityType="Self.custom_texts" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="effects" EntityType="Self.effects" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="effects_sets" EntityType="Self.effects_sets" Schema="lif_1" store:Type="Tables" />
           <EntitySet Name="equipment_slots" EntityType="Self.equipment_slots" Schema="lif_1" store:Type="Tables" />
           <EntitySet Name="features" EntityType="Self.features" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="guild_actions_processed" EntityType="Self.guild_actions_processed" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="guild_actions_queue" EntityType="Self.guild_actions_queue" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="guild_lands" EntityType="Self.guild_lands" Schema="lif_1" store:Type="Tables" />
           <EntitySet Name="guild_roles" EntityType="Self.guild_roles" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="guild_standing_types" EntityType="Self.guild_standing_types" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="guild_standings" EntityType="Self.guild_standings" Schema="lif_1" store:Type="Tables" />
           <EntitySet Name="guild_type_role_msgs" EntityType="Self.guild_type_role_msgs" Schema="lif_1" store:Type="Tables" />
           <EntitySet Name="guild_types" EntityType="Self.guild_types" Schema="lif_1" store:Type="Tables" />
           <EntitySet Name="guilds" EntityType="Self.guilds" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="item_effects" EntityType="Self.item_effects" Schema="lif_1" store:Type="Tables" />
           <EntitySet Name="items" EntityType="Self.items" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="lifdscp_online_character" EntityType="Self.lifdscp_online_character" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="lifdscp_online_history" EntityType="Self.lifdscp_online_history" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="logs" EntityType="Self.logs" Schema="lif_1" store:Type="Tables" />
           <EntitySet Name="objects_types" EntityType="Self.objects_types" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="personal_lands" EntityType="Self.personal_lands" Schema="lif_1" store:Type="Tables" />
           <EntitySet Name="prices" EntityType="Self.prices" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="race" EntityType="Self.race" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="skill_type" EntityType="Self.skill_type" Schema="lif_1" store:Type="Tables" />
+          <EntitySet Name="skills" EntityType="Self.skills" Schema="lif_1" store:Type="Tables" />
           <EntitySet Name="titles" EntityType="Self.titles" Schema="lif_1" store:Type="Tables" />
           <AssociationSet Name="FK_AccountID" Association="Self.FK_AccountID">
             <End Role="account" EntitySet="account" />
             <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_character_effects_character" Association="Self.FK_character_effects_character">
+            <End Role="character" EntitySet="character" />
+            <End Role="character_effects" EntitySet="character_effects" />
           </AssociationSet>
           <AssociationSet Name="FK_character_EquipmentContainerID" Association="Self.FK_character_EquipmentContainerID">
             <End Role="containers" EntitySet="containers" />
@@ -444,6 +1037,30 @@
             <End Role="guild_roles" EntitySet="guild_roles" />
             <End Role="character" EntitySet="character" />
           </AssociationSet>
+          <AssociationSet Name="FK_character_race" Association="Self.FK_character_race">
+            <End Role="race" EntitySet="race" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_character_titles_character" Association="Self.FK_character_titles_character">
+            <End Role="character" EntitySet="character" />
+            <End Role="character_titles" EntitySet="character_titles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_character_titles_titles" Association="Self.FK_character_titles_titles">
+            <End Role="titles" EntitySet="titles" />
+            <End Role="character_titles" EntitySet="character_titles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CharacterID" Association="Self.FK_CharacterID">
+            <End Role="character" EntitySet="character" />
+            <End Role="skills" EntitySet="skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_claims_guild_lands" Association="Self.FK_claims_guild_lands">
+            <End Role="guild_lands" EntitySet="guild_lands" />
+            <End Role="claims" EntitySet="claims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_claims_personal_lands" Association="Self.FK_claims_personal_lands">
+            <End Role="personal_lands" EntitySet="personal_lands" />
+            <End Role="claims" EntitySet="claims" />
+          </AssociationSet>
           <AssociationSet Name="FK_ContainersObjectTypeID" Association="Self.FK_ContainersObjectTypeID">
             <End Role="objects_types" EntitySet="objects_types" />
             <End Role="containers" EntitySet="containers" />
@@ -451,6 +1068,26 @@
           <AssociationSet Name="FK_ContanersFeaturesID" Association="Self.FK_ContanersFeaturesID">
             <End Role="features" EntitySet="features" />
             <End Role="containers" EntitySet="containers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_effects_result_potion_objects_types" Association="Self.FK_effects_result_potion_objects_types">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="effects" EntitySet="effects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_effects_result_preparation_objects_types" Association="Self.FK_effects_result_preparation_objects_types">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="effects" EntitySet="effects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_effects_sets_effects_1" Association="Self.FK_effects_sets_effects_1">
+            <End Role="effects" EntitySet="effects" />
+            <End Role="effects_sets" EntitySet="effects_sets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_effects_sets_effects_2" Association="Self.FK_effects_sets_effects_2">
+            <End Role="effects" EntitySet="effects" />
+            <End Role="effects_sets" EntitySet="effects_sets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_effects_sets_effects_3" Association="Self.FK_effects_sets_effects_3">
+            <End Role="effects" EntitySet="effects" />
+            <End Role="effects_sets" EntitySet="effects_sets" />
           </AssociationSet>
           <AssociationSet Name="FK_equipment_slots_character" Association="Self.FK_equipment_slots_character">
             <End Role="character" EntitySet="character" />
@@ -463,6 +1100,58 @@
           <AssociationSet Name="FK_FeauturesCustomTextID" Association="Self.FK_FeauturesCustomTextID">
             <End Role="custom_texts" EntitySet="custom_texts" />
             <End Role="features" EntitySet="features" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_processed_character1" Association="Self.FK_guild_actions_processed_character1">
+            <End Role="character" EntitySet="character" />
+            <End Role="guild_actions_processed" EntitySet="guild_actions_processed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_character1" Association="Self.FK_guild_actions_queue_character1">
+            <End Role="character" EntitySet="character" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_character2" Association="Self.FK_guild_actions_queue_character2">
+            <End Role="character" EntitySet="character" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_guild_roles" Association="Self.FK_guild_actions_queue_guild_roles">
+            <End Role="guild_roles" EntitySet="guild_roles" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_guild_standing_types" Association="Self.FK_guild_actions_queue_guild_standing_types">
+            <End Role="guild_standing_types" EntitySet="guild_standing_types" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_guild_types" Association="Self.FK_guild_actions_queue_guild_types">
+            <End Role="guild_types" EntitySet="guild_types" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_guilds1" Association="Self.FK_guild_actions_queue_guilds1">
+            <End Role="guilds" EntitySet="guilds" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_guilds2" Association="Self.FK_guild_actions_queue_guilds2">
+            <End Role="guilds" EntitySet="guilds" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_lands_character" Association="Self.FK_guild_lands_character">
+            <End Role="character" EntitySet="character" />
+            <End Role="personal_lands" EntitySet="personal_lands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_lands_guilds" Association="Self.FK_guild_lands_guilds">
+            <End Role="guilds" EntitySet="guilds" />
+            <End Role="guild_lands" EntitySet="guild_lands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_standings_guild_standing_types" Association="Self.FK_guild_standings_guild_standing_types">
+            <End Role="guild_standing_types" EntitySet="guild_standing_types" />
+            <End Role="guild_standings" EntitySet="guild_standings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_standings_guilds1" Association="Self.FK_guild_standings_guilds1">
+            <End Role="guilds" EntitySet="guilds" />
+            <End Role="guild_standings" EntitySet="guild_standings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_standings_guilds2" Association="Self.FK_guild_standings_guilds2">
+            <End Role="guilds" EntitySet="guilds" />
+            <End Role="guild_standings" EntitySet="guild_standings" />
           </AssociationSet>
           <AssociationSet Name="FK_guild_type_role_msgs_guild_roles" Association="Self.FK_guild_type_role_msgs_guild_roles">
             <End Role="guild_roles" EntitySet="guild_roles" />
@@ -479,6 +1168,14 @@
           <AssociationSet Name="FK_guilds_guild_types" Association="Self.FK_guilds_guild_types">
             <End Role="guild_types" EntitySet="guild_types" />
             <End Role="guilds" EntitySet="guilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_effects_effects" Association="Self.FK_item_effects_effects">
+            <End Role="effects" EntitySet="effects" />
+            <End Role="item_effects" EntitySet="item_effects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemEffectsItemID" Association="Self.FK_ItemEffectsItemID">
+            <End Role="items" EntitySet="items" />
+            <End Role="item_effects" EntitySet="item_effects" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemsContainerID" Association="Self.FK_ItemsContainerID">
             <End Role="containers" EntitySet="containers" />
@@ -504,16 +1201,257 @@
             <End Role="containers" EntitySet="containers" />
             <End Role="character" EntitySet="character" />
           </AssociationSet>
+          <AssociationSet Name="FK_SkillTypeID" Association="Self.FK_SkillTypeID">
+            <End Role="skill_type" EntitySet="skill_type" />
+            <End Role="skills" EntitySet="skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkillTypeParentID" Association="Self.FK_SkillTypeParentID">
+            <End Role="skill_type" EntitySet="skill_type" />
+            <End Role="skill_type1" EntitySet="skill_type" />
+          </AssociationSet>
           <AssociationSet Name="FKObjectsTypesParentID" Association="Self.FKObjectsTypesParentID">
             <End Role="objects_types" EntitySet="objects_types" />
             <End Role="objects_types1" EntitySet="objects_types" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LifModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LifDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="account" EntityType="LifModel.account" />
+          <EntitySet Name="character" EntityType="LifModel.character" />
+          <EntitySet Name="character_effects" EntityType="LifModel.character_effects" />
+          <EntitySet Name="character_titles" EntityType="LifModel.character_titles" />
+          <EntitySet Name="chars_deathlog" EntityType="LifModel.chars_deathlog" />
+          <EntitySet Name="claims" EntityType="LifModel.claims" />
+          <EntitySet Name="containers" EntityType="LifModel.containers" />
+          <EntitySet Name="custom_texts" EntityType="LifModel.custom_texts" />
+          <EntitySet Name="effects" EntityType="LifModel.effects" />
+          <EntitySet Name="effects_sets" EntityType="LifModel.effects_sets" />
+          <EntitySet Name="equipment_slots" EntityType="LifModel.equipment_slots" />
+          <EntitySet Name="features" EntityType="LifModel.features" />
+          <EntitySet Name="guild_actions_processed" EntityType="LifModel.guild_actions_processed" />
+          <EntitySet Name="guild_actions_queue" EntityType="LifModel.guild_actions_queue" />
+          <EntitySet Name="guild_lands" EntityType="LifModel.guild_lands" />
+          <EntitySet Name="guild_roles" EntityType="LifModel.guild_roles" />
+          <EntitySet Name="guild_standing_types" EntityType="LifModel.guild_standing_types" />
+          <EntitySet Name="guild_standings" EntityType="LifModel.guild_standings" />
+          <EntitySet Name="guild_type_role_msgs" EntityType="LifModel.guild_type_role_msgs" />
+          <EntitySet Name="guild_types" EntityType="LifModel.guild_types" />
+          <EntitySet Name="guilds" EntityType="LifModel.guilds" />
+          <EntitySet Name="item_effects" EntityType="LifModel.item_effects" />
+          <EntitySet Name="items" EntityType="LifModel.items" />
+          <EntitySet Name="lifdscp_online_character" EntityType="LifModel.lifdscp_online_character" />
+          <EntitySet Name="lifdscp_online_history" EntityType="LifModel.lifdscp_online_history" />
+          <EntitySet Name="objects_types" EntityType="LifModel.objects_types" />
+          <EntitySet Name="personal_lands" EntityType="LifModel.personal_lands" />
+          <EntitySet Name="prices" EntityType="LifModel.prices" />
+          <EntitySet Name="race" EntityType="LifModel.race" />
+          <EntitySet Name="roles" EntityType="LifModel.roles" />
+          <EntitySet Name="skill_type" EntityType="LifModel.skill_type" />
+          <EntitySet Name="skills" EntityType="LifModel.skills" />
+          <EntitySet Name="titles" EntityType="LifModel.titles" />
+          <AssociationSet Name="FK_AccountID" Association="LifModel.FK_AccountID">
+            <End Role="account" EntitySet="account" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_character_effects_character" Association="LifModel.FK_character_effects_character">
+            <End Role="character" EntitySet="character" />
+            <End Role="character_effects" EntitySet="character_effects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_character_EquipmentContainerID" Association="LifModel.FK_character_EquipmentContainerID">
+            <End Role="containers" EntitySet="containers" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_character_guild_roles" Association="LifModel.FK_character_guild_roles">
+            <End Role="guild_roles" EntitySet="guild_roles" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_character_race" Association="LifModel.FK_character_race">
+            <End Role="race" EntitySet="race" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_character_titles_character" Association="LifModel.FK_character_titles_character">
+            <End Role="character" EntitySet="character" />
+            <End Role="character_titles" EntitySet="character_titles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CharacterID" Association="LifModel.FK_CharacterID">
+            <End Role="character" EntitySet="character" />
+            <End Role="skills" EntitySet="skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipment_slots_character" Association="LifModel.FK_equipment_slots_character">
+            <End Role="character" EntitySet="character" />
+            <End Role="equipment_slots" EntitySet="equipment_slots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_processed_character1" Association="LifModel.FK_guild_actions_processed_character1">
+            <End Role="character" EntitySet="character" />
+            <End Role="guild_actions_processed" EntitySet="guild_actions_processed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_character1" Association="LifModel.FK_guild_actions_queue_character1">
+            <End Role="character" EntitySet="character" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_character2" Association="LifModel.FK_guild_actions_queue_character2">
+            <End Role="character" EntitySet="character" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_lands_character" Association="LifModel.FK_guild_lands_character">
+            <End Role="character" EntitySet="character" />
+            <End Role="personal_lands" EntitySet="personal_lands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuildID" Association="LifModel.FK_GuildID">
+            <End Role="guilds" EntitySet="guilds" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RootContainerID" Association="LifModel.FK_RootContainerID">
+            <End Role="containers" EntitySet="containers" />
+            <End Role="character" EntitySet="character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_character_titles_titles" Association="LifModel.FK_character_titles_titles">
+            <End Role="titles" EntitySet="titles" />
+            <End Role="character_titles" EntitySet="character_titles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_claims_guild_lands" Association="LifModel.FK_claims_guild_lands">
+            <End Role="guild_lands" EntitySet="guild_lands" />
+            <End Role="claims" EntitySet="claims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_claims_personal_lands" Association="LifModel.FK_claims_personal_lands">
+            <End Role="personal_lands" EntitySet="personal_lands" />
+            <End Role="claims" EntitySet="claims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContainersObjectTypeID" Association="LifModel.FK_ContainersObjectTypeID">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="containers" EntitySet="containers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContanersFeaturesID" Association="LifModel.FK_ContanersFeaturesID">
+            <End Role="features" EntitySet="features" />
+            <End Role="containers" EntitySet="containers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemsContainerID" Association="LifModel.FK_ItemsContainerID">
+            <End Role="containers" EntitySet="containers" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParentID" Association="LifModel.FK_ParentID">
+            <End Role="containers" EntitySet="containers" />
+            <End Role="containers1" EntitySet="containers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeauturesCustomTextID" Association="LifModel.FK_FeauturesCustomTextID">
+            <End Role="custom_texts" EntitySet="custom_texts" />
+            <End Role="features" EntitySet="features" />
+          </AssociationSet>
+          <AssociationSet Name="FK_effects_result_potion_objects_types" Association="LifModel.FK_effects_result_potion_objects_types">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="effects" EntitySet="effects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_effects_result_preparation_objects_types" Association="LifModel.FK_effects_result_preparation_objects_types">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="effects" EntitySet="effects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_effects_sets_effects_1" Association="LifModel.FK_effects_sets_effects_1">
+            <End Role="effects" EntitySet="effects" />
+            <End Role="effects_sets" EntitySet="effects_sets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_effects_sets_effects_2" Association="LifModel.FK_effects_sets_effects_2">
+            <End Role="effects" EntitySet="effects" />
+            <End Role="effects_sets" EntitySet="effects_sets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_effects_sets_effects_3" Association="LifModel.FK_effects_sets_effects_3">
+            <End Role="effects" EntitySet="effects" />
+            <End Role="effects_sets" EntitySet="effects_sets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_effects_effects" Association="LifModel.FK_item_effects_effects">
+            <End Role="effects" EntitySet="effects" />
+            <End Role="item_effects" EntitySet="item_effects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipment_slots_items" Association="LifModel.FK_equipment_slots_items">
+            <End Role="items" EntitySet="items" />
+            <End Role="equipment_slots" EntitySet="equipment_slots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemsFeaturesID" Association="LifModel.FK_ItemsFeaturesID">
+            <End Role="features" EntitySet="features" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_guild_roles" Association="LifModel.FK_guild_actions_queue_guild_roles">
+            <End Role="guild_roles" EntitySet="guild_roles" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_guild_standing_types" Association="LifModel.FK_guild_actions_queue_guild_standing_types">
+            <End Role="guild_standing_types" EntitySet="guild_standing_types" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_guild_types" Association="LifModel.FK_guild_actions_queue_guild_types">
+            <End Role="guild_types" EntitySet="guild_types" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_guilds1" Association="LifModel.FK_guild_actions_queue_guilds1">
+            <End Role="guilds" EntitySet="guilds" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_actions_queue_guilds2" Association="LifModel.FK_guild_actions_queue_guilds2">
+            <End Role="guilds" EntitySet="guilds" />
+            <End Role="guild_actions_queue" EntitySet="guild_actions_queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_lands_guilds" Association="LifModel.FK_guild_lands_guilds">
+            <End Role="guilds" EntitySet="guilds" />
+            <End Role="guild_lands" EntitySet="guild_lands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_type_role_msgs_guild_roles" Association="LifModel.FK_guild_type_role_msgs_guild_roles">
+            <End Role="guild_roles" EntitySet="guild_roles" />
+            <End Role="guild_type_role_msgs" EntitySet="guild_type_role_msgs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_standings_guild_standing_types" Association="LifModel.FK_guild_standings_guild_standing_types">
+            <End Role="guild_standing_types" EntitySet="guild_standing_types" />
+            <End Role="guild_standings" EntitySet="guild_standings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_standings_guilds1" Association="LifModel.FK_guild_standings_guilds1">
+            <End Role="guilds" EntitySet="guilds" />
+            <End Role="guild_standings" EntitySet="guild_standings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_standings_guilds2" Association="LifModel.FK_guild_standings_guilds2">
+            <End Role="guilds" EntitySet="guilds" />
+            <End Role="guild_standings" EntitySet="guild_standings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guild_type_role_msgs_guild_types" Association="LifModel.FK_guild_type_role_msgs_guild_types">
+            <End Role="guild_types" EntitySet="guild_types" />
+            <End Role="guild_type_role_msgs" EntitySet="guild_type_role_msgs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guilds_guild_types" Association="LifModel.FK_guilds_guild_types">
+            <End Role="guild_types" EntitySet="guild_types" />
+            <End Role="guilds" EntitySet="guilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemEffectsItemID" Association="LifModel.FK_ItemEffectsItemID">
+            <End Role="items" EntitySet="items" />
+            <End Role="item_effects" EntitySet="item_effects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemsObjectTypeID" Association="LifModel.FK_ItemsObjectTypeID">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_objectstypes" Association="LifModel.FK_objectstypes">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="prices" EntitySet="prices" />
+          </AssociationSet>
+          <AssociationSet Name="FKObjectsTypesParentID" Association="LifModel.FKObjectsTypesParentID">
+            <End Role="objects_types" EntitySet="objects_types" />
+            <End Role="objects_types1" EntitySet="objects_types" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkillTypeID" Association="LifModel.FK_SkillTypeID">
+            <End Role="skill_type" EntitySet="skill_type" />
+            <End Role="skills" EntitySet="skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkillTypeParentID" Association="LifModel.FK_SkillTypeParentID">
+            <End Role="skill_type" EntitySet="skill_type" />
+            <End Role="skill_type1" EntitySet="skill_type" />
+          </AssociationSet>
+          <FunctionImport Name="f_deleteItem">
+          <Parameter Name="inItemID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f_fromGeoID">
+          <Parameter Name="geoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="logs" EntityType="LifModel.logs" />
+        </EntityContainer>
         <EntityType Name="account">
           <Key>
             <PropertyRef Name="ID" />
@@ -522,7 +1460,7 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsGM" Type="Boolean" Nullable="false" />
           <Property Name="SteamID" Type="Decimal" Nullable="false" />
-          <NavigationProperty Name="character" Relationship="Self.FK_AccountID" FromRole="account" ToRole="character" />
+          <NavigationProperty Name="character" Relationship="LifModel.FK_AccountID" FromRole="account" ToRole="character" />
         </EntityType>
         <EntityType Name="character">
           <Key>
@@ -530,8 +1468,8 @@
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IsActive" Type="Byte" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="GeoID" Type="Int64" />
           <Property Name="AccountID" Type="Int64" Nullable="false" />
           <Property Name="GeoAlt" Type="Int32" />
@@ -556,8 +1494,8 @@
           <Property Name="SoftStam" Type="Int32" Nullable="false" />
           <Property Name="Luck" Type="Int64" Nullable="false" />
           <Property Name="HungerRate" Type="Int64" Nullable="false" />
-          <Property Name="AlchemyHash" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="VisibilityHash" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="AlchemyHash" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="VisibilityHash" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="appearance" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="GuildID" Type="Int64" />
           <Property Name="GuildRoleID" Type="Byte" />
@@ -568,12 +1506,62 @@
           <Property Name="LastTimeUsedTransmuteIntoGold" Type="Int64" Nullable="false" />
           <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" />
           <Property Name="DeleteTimestamp" Type="DateTime" />
-          <NavigationProperty Name="account" Relationship="Self.FK_AccountID" FromRole="character" ToRole="account" />
-          <NavigationProperty Name="containers" Relationship="Self.FK_character_EquipmentContainerID" FromRole="character" ToRole="containers" />
-          <NavigationProperty Name="guild_roles" Relationship="Self.FK_character_guild_roles" FromRole="character" ToRole="guild_roles" />
-          <NavigationProperty Name="equipment_slots" Relationship="Self.FK_equipment_slots_character" FromRole="character" ToRole="equipment_slots" />
-          <NavigationProperty Name="guilds" Relationship="Self.FK_GuildID" FromRole="character" ToRole="guilds" />
-          <NavigationProperty Name="containers1" Relationship="Self.FK_RootContainerID" FromRole="character" ToRole="containers" />
+          <NavigationProperty Name="account" Relationship="LifModel.FK_AccountID" FromRole="character" ToRole="account" />
+          <NavigationProperty Name="character_effects" Relationship="LifModel.FK_character_effects_character" FromRole="character" ToRole="character_effects" />
+          <NavigationProperty Name="containers" Relationship="LifModel.FK_character_EquipmentContainerID" FromRole="character" ToRole="containers" />
+          <NavigationProperty Name="guild_roles" Relationship="LifModel.FK_character_guild_roles" FromRole="character" ToRole="guild_roles" />
+          <NavigationProperty Name="race" Relationship="LifModel.FK_character_race" FromRole="character" ToRole="race" />
+          <NavigationProperty Name="character_titles" Relationship="LifModel.FK_character_titles_character" FromRole="character" ToRole="character_titles" />
+          <NavigationProperty Name="skills" Relationship="LifModel.FK_CharacterID" FromRole="character" ToRole="skills" />
+          <NavigationProperty Name="equipment_slots" Relationship="LifModel.FK_equipment_slots_character" FromRole="character" ToRole="equipment_slots" />
+          <NavigationProperty Name="guild_actions_processed" Relationship="LifModel.FK_guild_actions_processed_character1" FromRole="character" ToRole="guild_actions_processed" />
+          <NavigationProperty Name="guild_actions_queue" Relationship="LifModel.FK_guild_actions_queue_character1" FromRole="character" ToRole="guild_actions_queue" />
+          <NavigationProperty Name="guild_actions_queue1" Relationship="LifModel.FK_guild_actions_queue_character2" FromRole="character" ToRole="guild_actions_queue" />
+          <NavigationProperty Name="personal_lands" Relationship="LifModel.FK_guild_lands_character" FromRole="character" ToRole="personal_lands" />
+          <NavigationProperty Name="guilds" Relationship="LifModel.FK_GuildID" FromRole="character" ToRole="guilds" />
+          <NavigationProperty Name="containers1" Relationship="LifModel.FK_RootContainerID" FromRole="character" ToRole="containers" />
+        </EntityType>
+        <EntityType Name="character_effects">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerEffectID" Type="Byte" Nullable="false" />
+          <Property Name="CharacterID" Type="Int64" Nullable="false" />
+          <Property Name="Magnitude" Type="Int64" Nullable="false" />
+          <Property Name="DurationLeft" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="character" Relationship="LifModel.FK_character_effects_character" FromRole="character_effects" ToRole="character" />
+        </EntityType>
+        <EntityType Name="character_titles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CharacterID" Type="Int64" Nullable="false" />
+          <Property Name="TitleID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="character" Relationship="LifModel.FK_character_titles_character" FromRole="character_titles" ToRole="character" />
+          <NavigationProperty Name="titles" Relationship="LifModel.FK_character_titles_titles" FromRole="character_titles" ToRole="titles" />
+        </EntityType>
+        <EntityType Name="chars_deathlog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Time" Type="Int64" Nullable="false" />
+          <Property Name="CharID" Type="Int64" Nullable="false" />
+          <Property Name="KillerID" Type="Int64" Nullable="false" />
+          <Property Name="IsKnockout" Type="Byte" />
+        </EntityType>
+        <EntityType Name="claims">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuildLandID" Type="Int64" />
+          <Property Name="PersonalLandID" Type="Int64" />
+          <Property Name="SupportPoints" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="guild_lands" Relationship="LifModel.FK_claims_guild_lands" FromRole="claims" ToRole="guild_lands" />
+          <NavigationProperty Name="personal_lands" Relationship="LifModel.FK_claims_personal_lands" FromRole="claims" ToRole="personal_lands" />
         </EntityType>
         <EntityType Name="containers">
           <Key>
@@ -584,21 +1572,49 @@
           <Property Name="ObjectTypeID" Type="Int64" Nullable="false" />
           <Property Name="Quality" Type="Byte" Nullable="false" />
           <Property Name="FeatureID" Type="Int64" />
-          <NavigationProperty Name="character" Relationship="Self.FK_character_EquipmentContainerID" FromRole="containers" ToRole="character" />
-          <NavigationProperty Name="character1" Relationship="Self.FK_RootContainerID" FromRole="containers" ToRole="character" />
-          <NavigationProperty Name="objects_types" Relationship="Self.FK_ContainersObjectTypeID" FromRole="containers" ToRole="objects_types" />
-          <NavigationProperty Name="features" Relationship="Self.FK_ContanersFeaturesID" FromRole="containers" ToRole="features" />
-          <NavigationProperty Name="items" Relationship="Self.FK_ItemsContainerID" FromRole="containers" ToRole="items" />
-          <NavigationProperty Name="containers1" Relationship="Self.FK_ParentID" FromRole="containers" ToRole="containers1" />
-          <NavigationProperty Name="containers2" Relationship="Self.FK_ParentID" FromRole="containers1" ToRole="containers" />
+          <NavigationProperty Name="character" Relationship="LifModel.FK_character_EquipmentContainerID" FromRole="containers" ToRole="character" />
+          <NavigationProperty Name="character1" Relationship="LifModel.FK_RootContainerID" FromRole="containers" ToRole="character" />
+          <NavigationProperty Name="objects_types" Relationship="LifModel.FK_ContainersObjectTypeID" FromRole="containers" ToRole="objects_types" />
+          <NavigationProperty Name="features" Relationship="LifModel.FK_ContanersFeaturesID" FromRole="containers" ToRole="features" />
+          <NavigationProperty Name="items" Relationship="LifModel.FK_ItemsContainerID" FromRole="containers" ToRole="items" />
+          <NavigationProperty Name="containers1" Relationship="LifModel.FK_ParentID" FromRole="containers" ToRole="containers1" />
+          <NavigationProperty Name="containers2" Relationship="LifModel.FK_ParentID" FromRole="containers1" ToRole="containers" />
         </EntityType>
         <EntityType Name="custom_texts">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Custom_text" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="features" Relationship="Self.FK_FeauturesCustomTextID" FromRole="custom_texts" ToRole="features" />
+          <Property Name="Custom_text" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="features" Relationship="LifModel.FK_FeauturesCustomTextID" FromRole="custom_texts" ToRole="features" />
+        </EntityType>
+        <EntityType Name="effects">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Effect_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ResultPreparationID" Type="Int64" />
+          <Property Name="ResultPotionID" Type="Int64" />
+          <Property Name="PlayerEffectID" Type="Byte" />
+          <NavigationProperty Name="objects_types" Relationship="LifModel.FK_effects_result_potion_objects_types" FromRole="effects" ToRole="objects_types" />
+          <NavigationProperty Name="objects_types1" Relationship="LifModel.FK_effects_result_preparation_objects_types" FromRole="effects" ToRole="objects_types" />
+          <NavigationProperty Name="effects_sets" Relationship="LifModel.FK_effects_sets_effects_1" FromRole="effects" ToRole="effects_sets" />
+          <NavigationProperty Name="effects_sets1" Relationship="LifModel.FK_effects_sets_effects_2" FromRole="effects" ToRole="effects_sets" />
+          <NavigationProperty Name="effects_sets2" Relationship="LifModel.FK_effects_sets_effects_3" FromRole="effects" ToRole="effects_sets" />
+          <NavigationProperty Name="item_effects" Relationship="LifModel.FK_item_effects_effects" FromRole="effects" ToRole="item_effects" />
+        </EntityType>
+        <EntityType Name="effects_sets">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EffectID1" Type="Byte" Nullable="false" />
+          <Property Name="EffectID2" Type="Byte" />
+          <Property Name="EffectID3" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="effects" Relationship="LifModel.FK_effects_sets_effects_1" FromRole="effects_sets" ToRole="effects" />
+          <NavigationProperty Name="effects1" Relationship="LifModel.FK_effects_sets_effects_2" FromRole="effects_sets" ToRole="effects" />
+          <NavigationProperty Name="effects2" Relationship="LifModel.FK_effects_sets_effects_3" FromRole="effects_sets" ToRole="effects" />
         </EntityType>
         <EntityType Name="equipment_slots">
           <Key>
@@ -608,8 +1624,8 @@
           <Property Name="CharacterID" Type="Int64" Nullable="false" />
           <Property Name="Slot" Type="Byte" Nullable="false" />
           <Property Name="ItemID" Type="Int64" />
-          <NavigationProperty Name="character" Relationship="Self.FK_equipment_slots_character" FromRole="equipment_slots" ToRole="character" />
-          <NavigationProperty Name="items" Relationship="Self.FK_equipment_slots_items" FromRole="equipment_slots" ToRole="items" />
+          <NavigationProperty Name="character" Relationship="LifModel.FK_equipment_slots_character" FromRole="equipment_slots" ToRole="character" />
+          <NavigationProperty Name="items" Relationship="LifModel.FK_equipment_slots_items" FromRole="equipment_slots" ToRole="items" />
         </EntityType>
         <EntityType Name="features">
           <Key>
@@ -618,18 +1634,108 @@
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomtextID" Type="Int64" />
           <Property Name="has_effects" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="containers" Relationship="Self.FK_ContanersFeaturesID" FromRole="features" ToRole="containers" />
-          <NavigationProperty Name="custom_texts" Relationship="Self.FK_FeauturesCustomTextID" FromRole="features" ToRole="custom_texts" />
-          <NavigationProperty Name="items" Relationship="Self.FK_ItemsFeaturesID" FromRole="features" ToRole="items" />
+          <NavigationProperty Name="containers" Relationship="LifModel.FK_ContanersFeaturesID" FromRole="features" ToRole="containers" />
+          <NavigationProperty Name="custom_texts" Relationship="LifModel.FK_FeauturesCustomTextID" FromRole="features" ToRole="custom_texts" />
+          <NavigationProperty Name="items" Relationship="LifModel.FK_ItemsFeaturesID" FromRole="features" ToRole="items" />
+        </EntityType>
+        <EntityType Name="guild_actions_processed">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketID" Type="Decimal" Nullable="false" />
+          <Property Name="ActionType" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="ProcessedStatus" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="ProducerCharID" Type="Int64" />
+          <Property Name="ProducerCharDeletedID" Type="Int64" />
+          <Property Name="GuildID" Type="Int64" />
+          <Property Name="GuildDeletedID" Type="Int64" />
+          <Property Name="CharID" Type="Int64" />
+          <Property Name="CharDeletedID" Type="Int64" />
+          <Property Name="GuildName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="GuildTag" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="GuildCharter" Type="String" MaxLength="10000" FixedLength="false" Unicode="false" />
+          <Property Name="GuildTypeID" Type="Byte" />
+          <Property Name="CharIsKicked" Type="Byte" Nullable="false" />
+          <Property Name="CharGuildRoleID" Type="Byte" />
+          <Property Name="OtherGuildID" Type="Int64" />
+          <Property Name="OtherGuildDeletedID" Type="Int64" />
+          <Property Name="StandingTypeID" Type="Byte" />
+          <Property Name="ProcessedTimestamp" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="character" Relationship="LifModel.FK_guild_actions_processed_character1" FromRole="guild_actions_processed" ToRole="character" />
+        </EntityType>
+        <EntityType Name="guild_actions_queue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketID" Type="Decimal" Nullable="false" />
+          <Property Name="ActionType" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="ProducerCharID" Type="Int64" Nullable="false" />
+          <Property Name="GuildID" Type="Int64" />
+          <Property Name="CharID" Type="Int64" />
+          <Property Name="GuildName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="GuildTag" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="GuildCharter" Type="String" MaxLength="10000" FixedLength="false" Unicode="false" />
+          <Property Name="GuildTypeID" Type="Byte" />
+          <Property Name="CharIsKicked" Type="Byte" Nullable="false" />
+          <Property Name="CharGuildRoleID" Type="Byte" />
+          <Property Name="OtherGuildID" Type="Int64" />
+          <Property Name="StandingTypeID" Type="Byte" />
+          <Property Name="AddedTimestamp" Type="DateTime" Nullable="false" />
+          <Property Name="OwnerConnectionID" Type="Int64" Nullable="false" />
+          <Property Name="OwnedTimestamp" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="character" Relationship="LifModel.FK_guild_actions_queue_character1" FromRole="guild_actions_queue" ToRole="character" />
+          <NavigationProperty Name="character1" Relationship="LifModel.FK_guild_actions_queue_character2" FromRole="guild_actions_queue" ToRole="character" />
+          <NavigationProperty Name="guild_roles" Relationship="LifModel.FK_guild_actions_queue_guild_roles" FromRole="guild_actions_queue" ToRole="guild_roles" />
+          <NavigationProperty Name="guild_standing_types" Relationship="LifModel.FK_guild_actions_queue_guild_standing_types" FromRole="guild_actions_queue" ToRole="guild_standing_types" />
+          <NavigationProperty Name="guild_types" Relationship="LifModel.FK_guild_actions_queue_guild_types" FromRole="guild_actions_queue" ToRole="guild_types" />
+          <NavigationProperty Name="guilds" Relationship="LifModel.FK_guild_actions_queue_guilds1" FromRole="guild_actions_queue" ToRole="guilds" />
+          <NavigationProperty Name="guilds1" Relationship="LifModel.FK_guild_actions_queue_guilds2" FromRole="guild_actions_queue" ToRole="guilds" />
+        </EntityType>
+        <EntityType Name="guild_lands">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuildID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CenterGeoID" Type="Int64" Nullable="false" />
+          <Property Name="Radius" Type="Int64" Nullable="false" />
+          <Property Name="LandType" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="claims" Relationship="LifModel.FK_claims_guild_lands" FromRole="guild_lands" ToRole="claims" />
+          <NavigationProperty Name="guilds" Relationship="LifModel.FK_guild_lands_guilds" FromRole="guild_lands" ToRole="guilds" />
         </EntityType>
         <EntityType Name="guild_roles">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="character" Relationship="Self.FK_character_guild_roles" FromRole="guild_roles" ToRole="character" />
-          <NavigationProperty Name="guild_type_role_msgs" Relationship="Self.FK_guild_type_role_msgs_guild_roles" FromRole="guild_roles" ToRole="guild_type_role_msgs" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="character" Relationship="LifModel.FK_character_guild_roles" FromRole="guild_roles" ToRole="character" />
+          <NavigationProperty Name="guild_actions_queue" Relationship="LifModel.FK_guild_actions_queue_guild_roles" FromRole="guild_roles" ToRole="guild_actions_queue" />
+          <NavigationProperty Name="guild_type_role_msgs" Relationship="LifModel.FK_guild_type_role_msgs_guild_roles" FromRole="guild_roles" ToRole="guild_type_role_msgs" />
+        </EntityType>
+        <EntityType Name="guild_standing_types">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="guild_actions_queue" Relationship="LifModel.FK_guild_actions_queue_guild_standing_types" FromRole="guild_standing_types" ToRole="guild_actions_queue" />
+          <NavigationProperty Name="guild_standings" Relationship="LifModel.FK_guild_standings_guild_standing_types" FromRole="guild_standing_types" ToRole="guild_standings" />
+        </EntityType>
+        <EntityType Name="guild_standings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuildID1" Type="Int64" Nullable="false" />
+          <Property Name="GuildID2" Type="Int64" Nullable="false" />
+          <Property Name="StandingTypeID" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="guild_standing_types" Relationship="LifModel.FK_guild_standings_guild_standing_types" FromRole="guild_standings" ToRole="guild_standing_types" />
+          <NavigationProperty Name="guilds" Relationship="LifModel.FK_guild_standings_guilds1" FromRole="guild_standings" ToRole="guilds" />
+          <NavigationProperty Name="guilds1" Relationship="LifModel.FK_guild_standings_guilds2" FromRole="guild_standings" ToRole="guilds" />
         </EntityType>
         <EntityType Name="guild_type_role_msgs">
           <Key>
@@ -639,8 +1745,8 @@
           <Property Name="GuildTypeID" Type="Byte" Nullable="false" />
           <Property Name="GuildRoleID" Type="Byte" Nullable="false" />
           <Property Name="MessageID" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="guild_roles" Relationship="Self.FK_guild_type_role_msgs_guild_roles" FromRole="guild_type_role_msgs" ToRole="guild_roles" />
-          <NavigationProperty Name="guild_types" Relationship="Self.FK_guild_type_role_msgs_guild_types" FromRole="guild_type_role_msgs" ToRole="guild_types" />
+          <NavigationProperty Name="guild_roles" Relationship="LifModel.FK_guild_type_role_msgs_guild_roles" FromRole="guild_type_role_msgs" ToRole="guild_roles" />
+          <NavigationProperty Name="guild_types" Relationship="LifModel.FK_guild_type_role_msgs_guild_types" FromRole="guild_type_role_msgs" ToRole="guild_types" />
         </EntityType>
         <EntityType Name="guild_types">
           <Key>
@@ -648,10 +1754,11 @@
           </Key>
           <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GuildLevel" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="MessageID" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="guild_type_role_msgs" Relationship="Self.FK_guild_type_role_msgs_guild_types" FromRole="guild_types" ToRole="guild_type_role_msgs" />
-          <NavigationProperty Name="guilds" Relationship="Self.FK_guilds_guild_types" FromRole="guild_types" ToRole="guilds" />
+          <NavigationProperty Name="guild_actions_queue" Relationship="LifModel.FK_guild_actions_queue_guild_types" FromRole="guild_types" ToRole="guild_actions_queue" />
+          <NavigationProperty Name="guild_type_role_msgs" Relationship="LifModel.FK_guild_type_role_msgs_guild_types" FromRole="guild_types" ToRole="guild_type_role_msgs" />
+          <NavigationProperty Name="guilds" Relationship="LifModel.FK_guilds_guild_types" FromRole="guild_types" ToRole="guilds" />
         </EntityType>
         <EntityType Name="guilds">
           <Key>
@@ -665,8 +1772,24 @@
           <Property Name="GuildTag" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" />
           <Property Name="DeleteTimestamp" Type="DateTime" />
-          <NavigationProperty Name="character" Relationship="Self.FK_GuildID" FromRole="guilds" ToRole="character" />
-          <NavigationProperty Name="guild_types" Relationship="Self.FK_guilds_guild_types" FromRole="guilds" ToRole="guild_types" />
+          <NavigationProperty Name="character" Relationship="LifModel.FK_GuildID" FromRole="guilds" ToRole="character" />
+          <NavigationProperty Name="guild_actions_queue" Relationship="LifModel.FK_guild_actions_queue_guilds1" FromRole="guilds" ToRole="guild_actions_queue" />
+          <NavigationProperty Name="guild_actions_queue1" Relationship="LifModel.FK_guild_actions_queue_guilds2" FromRole="guilds" ToRole="guild_actions_queue" />
+          <NavigationProperty Name="guild_lands" Relationship="LifModel.FK_guild_lands_guilds" FromRole="guilds" ToRole="guild_lands" />
+          <NavigationProperty Name="guild_standings" Relationship="LifModel.FK_guild_standings_guilds1" FromRole="guilds" ToRole="guild_standings" />
+          <NavigationProperty Name="guild_standings1" Relationship="LifModel.FK_guild_standings_guilds2" FromRole="guilds" ToRole="guild_standings" />
+          <NavigationProperty Name="guild_types" Relationship="LifModel.FK_guilds_guild_types" FromRole="guilds" ToRole="guild_types" />
+        </EntityType>
+        <EntityType Name="item_effects">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemID" Type="Int64" Nullable="false" />
+          <Property Name="EffectID" Type="Byte" Nullable="false" />
+          <Property Name="Magnitude" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="effects" Relationship="LifModel.FK_item_effects_effects" FromRole="item_effects" ToRole="effects" />
+          <NavigationProperty Name="items" Relationship="LifModel.FK_ItemEffectsItemID" FromRole="item_effects" ToRole="items" />
         </EntityType>
         <EntityType Name="items">
           <Key>
@@ -680,10 +1803,28 @@
           <Property Name="Durability" Type="Int32" Nullable="false" />
           <Property Name="CreatedDurability" Type="Int32" Nullable="false" />
           <Property Name="FeatureID" Type="Int64" />
-          <NavigationProperty Name="containers" Relationship="Self.FK_ItemsContainerID" FromRole="items" ToRole="containers" />
-          <NavigationProperty Name="equipment_slots" Relationship="Self.FK_equipment_slots_items" FromRole="items" ToRole="equipment_slots" />
-          <NavigationProperty Name="features" Relationship="Self.FK_ItemsFeaturesID" FromRole="items" ToRole="features" />
-          <NavigationProperty Name="objects_types" Relationship="Self.FK_ItemsObjectTypeID" FromRole="items" ToRole="objects_types" />
+          <NavigationProperty Name="containers" Relationship="LifModel.FK_ItemsContainerID" FromRole="items" ToRole="containers" />
+          <NavigationProperty Name="equipment_slots" Relationship="LifModel.FK_equipment_slots_items" FromRole="items" ToRole="equipment_slots" />
+          <NavigationProperty Name="features" Relationship="LifModel.FK_ItemsFeaturesID" FromRole="items" ToRole="features" />
+          <NavigationProperty Name="item_effects" Relationship="LifModel.FK_ItemEffectsItemID" FromRole="items" ToRole="item_effects" />
+          <NavigationProperty Name="objects_types" Relationship="LifModel.FK_ItemsObjectTypeID" FromRole="items" ToRole="objects_types" />
+        </EntityType>
+        <EntityType Name="lifdscp_online_character">
+          <Key>
+            <PropertyRef Name="CharacterID" />
+          </Key>
+          <Property Name="CharacterID" Type="Int64" Nullable="false" />
+          <Property Name="LoggedInAt" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lifdscp_online_history">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CharacterID" Type="Int64" Nullable="false" />
+          <Property Name="LoggedInAt" Type="DateTime" Nullable="false" />
+          <Property Name="LoggedOutAt" Type="DateTime" Nullable="false" />
+          <Property Name="IsLoggedOut" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="objects_types">
           <Key>
@@ -691,7 +1832,7 @@
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ParentID" Type="Int64" />
-          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="IsContainer" Type="Boolean" Nullable="false" />
           <Property Name="IsMovableObject" Type="Boolean" Nullable="false" />
           <Property Name="IsUnmovableobject" Type="Boolean" Nullable="false" />
@@ -713,11 +1854,26 @@
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="BasePrice" Type="Int64" />
           <Property Name="OwnerTimeout" Type="Int64" />
-          <NavigationProperty Name="containers" Relationship="Self.FK_ContainersObjectTypeID" FromRole="objects_types" ToRole="containers" />
-          <NavigationProperty Name="items" Relationship="Self.FK_ItemsObjectTypeID" FromRole="objects_types" ToRole="items" />
-          <NavigationProperty Name="prices" Relationship="Self.FK_objectstypes" FromRole="objects_types" ToRole="prices" />
-          <NavigationProperty Name="objects_types1" Relationship="Self.FKObjectsTypesParentID" FromRole="objects_types" ToRole="objects_types1" />
-          <NavigationProperty Name="objects_types2" Relationship="Self.FKObjectsTypesParentID" FromRole="objects_types1" ToRole="objects_types" />
+          <NavigationProperty Name="containers" Relationship="LifModel.FK_ContainersObjectTypeID" FromRole="objects_types" ToRole="containers" />
+          <NavigationProperty Name="effects" Relationship="LifModel.FK_effects_result_potion_objects_types" FromRole="objects_types" ToRole="effects" />
+          <NavigationProperty Name="effects1" Relationship="LifModel.FK_effects_result_preparation_objects_types" FromRole="objects_types" ToRole="effects" />
+          <NavigationProperty Name="items" Relationship="LifModel.FK_ItemsObjectTypeID" FromRole="objects_types" ToRole="items" />
+          <NavigationProperty Name="prices" Relationship="LifModel.FK_objectstypes" FromRole="objects_types" ToRole="prices" />
+          <NavigationProperty Name="objects_types1" Relationship="LifModel.FKObjectsTypesParentID" FromRole="objects_types" ToRole="objects_types1" />
+          <NavigationProperty Name="objects_types2" Relationship="LifModel.FKObjectsTypesParentID" FromRole="objects_types1" ToRole="objects_types" />
+        </EntityType>
+        <EntityType Name="personal_lands">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CharID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GeoID1" Type="Int64" Nullable="false" />
+          <Property Name="GeoID2" Type="Int64" Nullable="false" />
+          <Property Name="IsTemp" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="character" Relationship="LifModel.FK_guild_lands_character" FromRole="personal_lands" ToRole="character" />
+          <NavigationProperty Name="claims" Relationship="LifModel.FK_claims_personal_lands" FromRole="personal_lands" ToRole="claims" />
         </EntityType>
         <EntityType Name="prices">
           <Key>
@@ -726,19 +1882,64 @@
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="objectid" Type="Int64" Nullable="false" />
           <Property Name="price" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="objects_types" Relationship="Self.FK_objectstypes" FromRole="prices" ToRole="objects_types" />
+          <NavigationProperty Name="objects_types" Relationship="LifModel.FK_objectstypes" FromRole="prices" ToRole="objects_types" />
+        </EntityType>
+        <EntityType Name="race">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="character" Relationship="LifModel.FK_character_race" FromRole="race" ToRole="character" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="skill_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Parent" Type="Int64" />
+          <Property Name="Group" Type="Byte" />
+          <Property Name="PrimaryStat" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="SecondaryStat" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="MasterMessageID" Type="Int64" />
+          <Property Name="GMMessageID" Type="Int64" />
+          <NavigationProperty Name="skills" Relationship="LifModel.FK_SkillTypeID" FromRole="skill_type" ToRole="skills" />
+          <NavigationProperty Name="skill_type1" Relationship="LifModel.FK_SkillTypeParentID" FromRole="skill_type" ToRole="skill_type1" />
+          <NavigationProperty Name="skill_type2" Relationship="LifModel.FK_SkillTypeParentID" FromRole="skill_type1" ToRole="skill_type" />
+        </EntityType>
+        <EntityType Name="skills">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CharacterID" Type="Int64" Nullable="false" />
+          <Property Name="SkillTypeID" Type="Int64" Nullable="false" />
+          <Property Name="SkillAmount" Type="Int64" Nullable="false" />
+          <Property Name="LockStatus" Type="SByte" Nullable="false" />
+          <NavigationProperty Name="character" Relationship="LifModel.FK_CharacterID" FromRole="skills" ToRole="character" />
+          <NavigationProperty Name="skill_type" Relationship="LifModel.FK_SkillTypeID" FromRole="skills" ToRole="skill_type" />
         </EntityType>
         <EntityType Name="titles">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="TitleMessageID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="character_titles" Relationship="LifModel.FK_character_titles_titles" FromRole="titles" ToRole="character_titles" />
         </EntityType>
         <Association Name="FK_AccountID">
-          <End Role="account" Type="Self.account" Multiplicity="1" />
-          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <End Type="LifModel.account" Role="account" Multiplicity="1" />
+          <End Type="LifModel.character" Role="character" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="account">
               <PropertyRef Name="ID" />
@@ -748,9 +1949,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_character_effects_character">
+          <End Type="LifModel.character" Role="character" Multiplicity="1" />
+          <End Type="LifModel.character_effects" Role="character_effects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character_effects">
+              <PropertyRef Name="CharacterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_character_EquipmentContainerID">
-          <End Role="containers" Type="Self.containers" Multiplicity="1" />
-          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <End Type="LifModel.containers" Role="containers" Multiplicity="1" />
+          <End Type="LifModel.character" Role="character" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="containers">
               <PropertyRef Name="ID" />
@@ -761,8 +1974,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_character_guild_roles">
-          <End Role="guild_roles" Type="Self.guild_roles" Multiplicity="0..1" />
-          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <End Type="LifModel.guild_roles" Role="guild_roles" Multiplicity="0..1" />
+          <End Type="LifModel.character" Role="character" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="guild_roles">
               <PropertyRef Name="ID" />
@@ -772,9 +1985,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_character_race">
+          <End Type="LifModel.race" Role="race" Multiplicity="1" />
+          <End Type="LifModel.character" Role="character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="race">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_character_titles_character">
+          <End Type="LifModel.character" Role="character" Multiplicity="1" />
+          <End Type="LifModel.character_titles" Role="character_titles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character_titles">
+              <PropertyRef Name="CharacterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CharacterID">
+          <End Type="LifModel.character" Role="character" Multiplicity="1" />
+          <End Type="LifModel.skills" Role="skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="skills">
+              <PropertyRef Name="CharacterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_equipment_slots_character">
-          <End Role="character" Type="Self.character" Multiplicity="1" />
-          <End Role="equipment_slots" Type="Self.equipment_slots" Multiplicity="*" />
+          <End Type="LifModel.character" Role="character" Multiplicity="1" />
+          <End Type="LifModel.equipment_slots" Role="equipment_slots" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="character">
               <PropertyRef Name="ID" />
@@ -784,9 +2033,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_guild_actions_processed_character1">
+          <End Type="LifModel.character" Role="character" Multiplicity="0..1" />
+          <End Type="LifModel.guild_actions_processed" Role="guild_actions_processed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_processed">
+              <PropertyRef Name="ProducerCharID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_queue_character1">
+          <End Type="LifModel.character" Role="character" Multiplicity="1" />
+          <End Type="LifModel.guild_actions_queue" Role="guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="ProducerCharID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_queue_character2">
+          <End Type="LifModel.character" Role="character" Multiplicity="0..1" />
+          <End Type="LifModel.guild_actions_queue" Role="guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="CharID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_lands_character">
+          <End Type="LifModel.character" Role="character" Multiplicity="1" />
+          <End Type="LifModel.personal_lands" Role="personal_lands" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="character">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="personal_lands">
+              <PropertyRef Name="CharID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GuildID">
-          <End Role="guilds" Type="Self.guilds" Multiplicity="0..1" />
-          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <End Type="LifModel.guilds" Role="guilds" Multiplicity="0..1" />
+          <End Type="LifModel.character" Role="character" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="guilds">
               <PropertyRef Name="ID" />
@@ -797,8 +2094,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RootContainerID">
-          <End Role="containers" Type="Self.containers" Multiplicity="1" />
-          <End Role="character" Type="Self.character" Multiplicity="*" />
+          <End Type="LifModel.containers" Role="containers" Multiplicity="1" />
+          <End Type="LifModel.character" Role="character" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="containers">
               <PropertyRef Name="ID" />
@@ -808,9 +2105,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_character_titles_titles">
+          <End Type="LifModel.titles" Role="titles" Multiplicity="1" />
+          <End Type="LifModel.character_titles" Role="character_titles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="titles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="character_titles">
+              <PropertyRef Name="TitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_claims_guild_lands">
+          <End Type="LifModel.guild_lands" Role="guild_lands" Multiplicity="0..1" />
+          <End Type="LifModel.claims" Role="claims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_lands">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="claims">
+              <PropertyRef Name="GuildLandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_claims_personal_lands">
+          <End Type="LifModel.personal_lands" Role="personal_lands" Multiplicity="0..1" />
+          <End Type="LifModel.claims" Role="claims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_lands">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="claims">
+              <PropertyRef Name="PersonalLandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ContainersObjectTypeID">
-          <End Role="objects_types" Type="Self.objects_types" Multiplicity="1" />
-          <End Role="containers" Type="Self.containers" Multiplicity="*" />
+          <End Type="LifModel.objects_types" Role="objects_types" Multiplicity="1" />
+          <End Type="LifModel.containers" Role="containers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="objects_types">
               <PropertyRef Name="ID" />
@@ -821,8 +2154,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ContanersFeaturesID">
-          <End Role="features" Type="Self.features" Multiplicity="0..1" />
-          <End Role="containers" Type="Self.containers" Multiplicity="*" />
+          <End Type="LifModel.features" Role="features" Multiplicity="0..1" />
+          <End Type="LifModel.containers" Role="containers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="features">
               <PropertyRef Name="ID" />
@@ -833,8 +2166,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ItemsContainerID">
-          <End Role="containers" Type="Self.containers" Multiplicity="1" />
-          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <End Type="LifModel.containers" Role="containers" Multiplicity="1" />
+          <End Type="LifModel.items" Role="items" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="containers">
               <PropertyRef Name="ID" />
@@ -845,8 +2178,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ParentID">
-          <End Role="containers" Type="Self.containers" Multiplicity="0..1" />
-          <End Role="containers1" Type="Self.containers" Multiplicity="*" />
+          <End Type="LifModel.containers" Role="containers" Multiplicity="0..1" />
+          <End Type="LifModel.containers" Role="containers1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="containers">
               <PropertyRef Name="ID" />
@@ -857,8 +2190,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FeauturesCustomTextID">
-          <End Role="custom_texts" Type="Self.custom_texts" Multiplicity="0..1" />
-          <End Role="features" Type="Self.features" Multiplicity="*" />
+          <End Type="LifModel.custom_texts" Role="custom_texts" Multiplicity="0..1" />
+          <End Type="LifModel.features" Role="features" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="custom_texts">
               <PropertyRef Name="ID" />
@@ -868,9 +2201,81 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_effects_result_potion_objects_types">
+          <End Type="LifModel.objects_types" Role="objects_types" Multiplicity="0..1" />
+          <End Type="LifModel.effects" Role="effects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objects_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="effects">
+              <PropertyRef Name="ResultPotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_effects_result_preparation_objects_types">
+          <End Type="LifModel.objects_types" Role="objects_types" Multiplicity="0..1" />
+          <End Type="LifModel.effects" Role="effects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objects_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="effects">
+              <PropertyRef Name="ResultPreparationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_effects_sets_effects_1">
+          <End Type="LifModel.effects" Role="effects" Multiplicity="1" />
+          <End Type="LifModel.effects_sets" Role="effects_sets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="effects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="effects_sets">
+              <PropertyRef Name="EffectID1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_effects_sets_effects_2">
+          <End Type="LifModel.effects" Role="effects" Multiplicity="0..1" />
+          <End Type="LifModel.effects_sets" Role="effects_sets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="effects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="effects_sets">
+              <PropertyRef Name="EffectID2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_effects_sets_effects_3">
+          <End Type="LifModel.effects" Role="effects" Multiplicity="1" />
+          <End Type="LifModel.effects_sets" Role="effects_sets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="effects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="effects_sets">
+              <PropertyRef Name="EffectID3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_effects_effects">
+          <End Type="LifModel.effects" Role="effects" Multiplicity="1" />
+          <End Type="LifModel.item_effects" Role="item_effects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="effects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="item_effects">
+              <PropertyRef Name="EffectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_equipment_slots_items">
-          <End Role="items" Type="Self.items" Multiplicity="0..1" />
-          <End Role="equipment_slots" Type="Self.equipment_slots" Multiplicity="*" />
+          <End Type="LifModel.items" Role="items" Multiplicity="0..1" />
+          <End Type="LifModel.equipment_slots" Role="equipment_slots" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="items">
               <PropertyRef Name="ID" />
@@ -881,8 +2286,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ItemsFeaturesID">
-          <End Role="features" Type="Self.features" Multiplicity="0..1" />
-          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <End Type="LifModel.features" Role="features" Multiplicity="0..1" />
+          <End Type="LifModel.items" Role="items" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="features">
               <PropertyRef Name="ID" />
@@ -892,9 +2297,81 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_guild_actions_queue_guild_roles">
+          <End Type="LifModel.guild_roles" Role="guild_roles" Multiplicity="0..1" />
+          <End Type="LifModel.guild_actions_queue" Role="guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="CharGuildRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_queue_guild_standing_types">
+          <End Type="LifModel.guild_standing_types" Role="guild_standing_types" Multiplicity="0..1" />
+          <End Type="LifModel.guild_actions_queue" Role="guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_standing_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="StandingTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_queue_guild_types">
+          <End Type="LifModel.guild_types" Role="guild_types" Multiplicity="0..1" />
+          <End Type="LifModel.guild_actions_queue" Role="guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="GuildTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_queue_guilds1">
+          <End Type="LifModel.guilds" Role="guilds" Multiplicity="0..1" />
+          <End Type="LifModel.guild_actions_queue" Role="guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guilds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="GuildID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_actions_queue_guilds2">
+          <End Type="LifModel.guilds" Role="guilds" Multiplicity="0..1" />
+          <End Type="LifModel.guild_actions_queue" Role="guild_actions_queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guilds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_actions_queue">
+              <PropertyRef Name="OtherGuildID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_lands_guilds">
+          <End Type="LifModel.guilds" Role="guilds" Multiplicity="1" />
+          <End Type="LifModel.guild_lands" Role="guild_lands" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guilds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_lands">
+              <PropertyRef Name="GuildID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_guild_type_role_msgs_guild_roles">
-          <End Role="guild_roles" Type="Self.guild_roles" Multiplicity="1" />
-          <End Role="guild_type_role_msgs" Type="Self.guild_type_role_msgs" Multiplicity="*" />
+          <End Type="LifModel.guild_roles" Role="guild_roles" Multiplicity="1" />
+          <End Type="LifModel.guild_type_role_msgs" Role="guild_type_role_msgs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="guild_roles">
               <PropertyRef Name="ID" />
@@ -904,9 +2381,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_guild_standings_guild_standing_types">
+          <End Type="LifModel.guild_standing_types" Role="guild_standing_types" Multiplicity="1" />
+          <End Type="LifModel.guild_standings" Role="guild_standings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guild_standing_types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_standings">
+              <PropertyRef Name="StandingTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_standings_guilds1">
+          <End Type="LifModel.guilds" Role="guilds" Multiplicity="1" />
+          <End Type="LifModel.guild_standings" Role="guild_standings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guilds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_standings">
+              <PropertyRef Name="GuildID1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guild_standings_guilds2">
+          <End Type="LifModel.guilds" Role="guilds" Multiplicity="1" />
+          <End Type="LifModel.guild_standings" Role="guild_standings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guilds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="guild_standings">
+              <PropertyRef Name="GuildID2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_guild_type_role_msgs_guild_types">
-          <End Role="guild_types" Type="Self.guild_types" Multiplicity="1" />
-          <End Role="guild_type_role_msgs" Type="Self.guild_type_role_msgs" Multiplicity="*" />
+          <End Type="LifModel.guild_types" Role="guild_types" Multiplicity="1" />
+          <End Type="LifModel.guild_type_role_msgs" Role="guild_type_role_msgs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="guild_types">
               <PropertyRef Name="ID" />
@@ -917,8 +2430,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_guilds_guild_types">
-          <End Role="guild_types" Type="Self.guild_types" Multiplicity="1" />
-          <End Role="guilds" Type="Self.guilds" Multiplicity="*" />
+          <End Type="LifModel.guild_types" Role="guild_types" Multiplicity="1" />
+          <End Type="LifModel.guilds" Role="guilds" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="guild_types">
               <PropertyRef Name="ID" />
@@ -928,9 +2441,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ItemEffectsItemID">
+          <End Type="LifModel.items" Role="items" Multiplicity="1" />
+          <End Type="LifModel.item_effects" Role="item_effects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="item_effects">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ItemsObjectTypeID">
-          <End Role="objects_types" Type="Self.objects_types" Multiplicity="1" />
-          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <End Type="LifModel.objects_types" Role="objects_types" Multiplicity="1" />
+          <End Type="LifModel.items" Role="items" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="objects_types">
               <PropertyRef Name="ID" />
@@ -941,8 +2466,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_objectstypes">
-          <End Role="objects_types" Type="Self.objects_types" Multiplicity="1" />
-          <End Role="prices" Type="Self.prices" Multiplicity="*" />
+          <End Type="LifModel.objects_types" Role="objects_types" Multiplicity="1" />
+          <End Type="LifModel.prices" Role="prices" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="objects_types">
               <PropertyRef Name="ID" />
@@ -953,8 +2478,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FKObjectsTypesParentID">
-          <End Role="objects_types" Type="Self.objects_types" Multiplicity="0..1" />
-          <End Role="objects_types1" Type="Self.objects_types" Multiplicity="*" />
+          <End Type="LifModel.objects_types" Role="objects_types" Multiplicity="0..1" />
+          <End Type="LifModel.objects_types" Role="objects_types1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="objects_types">
               <PropertyRef Name="ID" />
@@ -964,98 +2489,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="LifDB" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="account" EntityType="Self.account" />
-          <EntitySet Name="character" EntityType="Self.character" />
-          <EntitySet Name="containers" EntityType="Self.containers" />
-          <EntitySet Name="custom_texts" EntityType="Self.custom_texts" />
-          <EntitySet Name="equipment_slots" EntityType="Self.equipment_slots" />
-          <EntitySet Name="features" EntityType="Self.features" />
-          <EntitySet Name="guild_roles" EntityType="Self.guild_roles" />
-          <EntitySet Name="guild_type_role_msgs" EntityType="Self.guild_type_role_msgs" />
-          <EntitySet Name="guild_types" EntityType="Self.guild_types" />
-          <EntitySet Name="guilds" EntityType="Self.guilds" />
-          <EntitySet Name="items" EntityType="Self.items" />
-          <EntitySet Name="objects_types" EntityType="Self.objects_types" />
-          <EntitySet Name="prices" EntityType="Self.prices" />
-          <EntitySet Name="titles" EntityType="Self.titles" />
-          <AssociationSet Name="FK_AccountID" Association="Self.FK_AccountID">
-            <End Role="account" EntitySet="account" />
-            <End Role="character" EntitySet="character" />
-          </AssociationSet>
-          <AssociationSet Name="FK_character_EquipmentContainerID" Association="Self.FK_character_EquipmentContainerID">
-            <End Role="containers" EntitySet="containers" />
-            <End Role="character" EntitySet="character" />
-          </AssociationSet>
-          <AssociationSet Name="FK_character_guild_roles" Association="Self.FK_character_guild_roles">
-            <End Role="guild_roles" EntitySet="guild_roles" />
-            <End Role="character" EntitySet="character" />
-          </AssociationSet>
-          <AssociationSet Name="FK_equipment_slots_character" Association="Self.FK_equipment_slots_character">
-            <End Role="character" EntitySet="character" />
-            <End Role="equipment_slots" EntitySet="equipment_slots" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GuildID" Association="Self.FK_GuildID">
-            <End Role="guilds" EntitySet="guilds" />
-            <End Role="character" EntitySet="character" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RootContainerID" Association="Self.FK_RootContainerID">
-            <End Role="containers" EntitySet="containers" />
-            <End Role="character" EntitySet="character" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ContainersObjectTypeID" Association="Self.FK_ContainersObjectTypeID">
-            <End Role="objects_types" EntitySet="objects_types" />
-            <End Role="containers" EntitySet="containers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ContanersFeaturesID" Association="Self.FK_ContanersFeaturesID">
-            <End Role="features" EntitySet="features" />
-            <End Role="containers" EntitySet="containers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ItemsContainerID" Association="Self.FK_ItemsContainerID">
-            <End Role="containers" EntitySet="containers" />
-            <End Role="items" EntitySet="items" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ParentID" Association="Self.FK_ParentID">
-            <End Role="containers" EntitySet="containers" />
-            <End Role="containers1" EntitySet="containers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FeauturesCustomTextID" Association="Self.FK_FeauturesCustomTextID">
-            <End Role="custom_texts" EntitySet="custom_texts" />
-            <End Role="features" EntitySet="features" />
-          </AssociationSet>
-          <AssociationSet Name="FK_equipment_slots_items" Association="Self.FK_equipment_slots_items">
-            <End Role="items" EntitySet="items" />
-            <End Role="equipment_slots" EntitySet="equipment_slots" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ItemsFeaturesID" Association="Self.FK_ItemsFeaturesID">
-            <End Role="features" EntitySet="features" />
-            <End Role="items" EntitySet="items" />
-          </AssociationSet>
-          <AssociationSet Name="FK_guild_type_role_msgs_guild_roles" Association="Self.FK_guild_type_role_msgs_guild_roles">
-            <End Role="guild_roles" EntitySet="guild_roles" />
-            <End Role="guild_type_role_msgs" EntitySet="guild_type_role_msgs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_guild_type_role_msgs_guild_types" Association="Self.FK_guild_type_role_msgs_guild_types">
-            <End Role="guild_types" EntitySet="guild_types" />
-            <End Role="guild_type_role_msgs" EntitySet="guild_type_role_msgs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_guilds_guild_types" Association="Self.FK_guilds_guild_types">
-            <End Role="guild_types" EntitySet="guild_types" />
-            <End Role="guilds" EntitySet="guilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ItemsObjectTypeID" Association="Self.FK_ItemsObjectTypeID">
-            <End Role="objects_types" EntitySet="objects_types" />
-            <End Role="items" EntitySet="items" />
-          </AssociationSet>
-          <AssociationSet Name="FK_objectstypes" Association="Self.FK_objectstypes">
-            <End Role="objects_types" EntitySet="objects_types" />
-            <End Role="prices" EntitySet="prices" />
-          </AssociationSet>
-          <AssociationSet Name="FKObjectsTypesParentID" Association="Self.FKObjectsTypesParentID">
-            <End Role="objects_types" EntitySet="objects_types" />
-            <End Role="objects_types1" EntitySet="objects_types" />
-          </AssociationSet>
-        </EntityContainer>
+        <Association Name="FK_SkillTypeID">
+          <End Type="LifModel.skill_type" Role="skill_type" Multiplicity="1" />
+          <End Type="LifModel.skills" Role="skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="skill_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="skills">
+              <PropertyRef Name="SkillTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkillTypeParentID">
+          <End Type="LifModel.skill_type" Role="skill_type" Multiplicity="0..1" />
+          <End Type="LifModel.skill_type" Role="skill_type1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="skill_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="skill_type1">
+              <PropertyRef Name="Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" />
+          <Property Name="message" Type="String" Nullable="false" MaxLength="9999" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="steamid" Type="Int64" Nullable="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1065,198 +2532,435 @@
           <EntitySetMapping Name="account">
             <EntityTypeMapping TypeName="LifModel.account">
               <MappingFragment StoreEntitySet="account">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IsGM" ColumnName="IsGM" />
                 <ScalarProperty Name="SteamID" ColumnName="SteamID" />
+                <ScalarProperty Name="IsGM" ColumnName="IsGM" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="character">
             <EntityTypeMapping TypeName="LifModel.character">
               <MappingFragment StoreEntitySet="character">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="GeoID" ColumnName="GeoID" />
-                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
-                <ScalarProperty Name="GeoAlt" ColumnName="GeoAlt" />
-                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
-                <ScalarProperty Name="Alignment" ColumnName="Alignment" />
-                <ScalarProperty Name="CriminalSecondsLeft" ColumnName="CriminalSecondsLeft" />
-                <ScalarProperty Name="Strength" ColumnName="Strength" />
-                <ScalarProperty Name="StrengthLock" ColumnName="StrengthLock" />
-                <ScalarProperty Name="Agility" ColumnName="Agility" />
-                <ScalarProperty Name="AgilityLock" ColumnName="AgilityLock" />
-                <ScalarProperty Name="Intellect" ColumnName="Intellect" />
-                <ScalarProperty Name="IntellectLock" ColumnName="IntellectLock" />
-                <ScalarProperty Name="Willpower" ColumnName="Willpower" />
-                <ScalarProperty Name="WillpowerLock" ColumnName="WillpowerLock" />
-                <ScalarProperty Name="Constitution" ColumnName="Constitution" />
-                <ScalarProperty Name="ConstitutionLock" ColumnName="ConstitutionLock" />
-                <ScalarProperty Name="RootContainerID" ColumnName="RootContainerID" />
-                <ScalarProperty Name="EquipmentContainerID" ColumnName="EquipmentContainerID" />
-                <ScalarProperty Name="HardHP" ColumnName="HardHP" />
-                <ScalarProperty Name="HardStam" ColumnName="HardStam" />
-                <ScalarProperty Name="SoftHP" ColumnName="SoftHP" />
-                <ScalarProperty Name="SoftStam" ColumnName="SoftStam" />
-                <ScalarProperty Name="Luck" ColumnName="Luck" />
-                <ScalarProperty Name="HungerRate" ColumnName="HungerRate" />
-                <ScalarProperty Name="AlchemyHash" ColumnName="AlchemyHash" />
-                <ScalarProperty Name="VisibilityHash" ColumnName="VisibilityHash" />
-                <ScalarProperty Name="appearance" ColumnName="appearance" />
-                <ScalarProperty Name="GuildID" ColumnName="GuildID" />
-                <ScalarProperty Name="GuildRoleID" ColumnName="GuildRoleID" />
-                <ScalarProperty Name="TitleMessageID" ColumnName="TitleMessageID" />
-                <ScalarProperty Name="BindedObjectID" ColumnName="BindedObjectID" />
-                <ScalarProperty Name="RallyObjectID" ColumnName="RallyObjectID" />
-                <ScalarProperty Name="LastTimeUsedPraiseYourGodAbility" ColumnName="LastTimeUsedPraiseYourGodAbility" />
-                <ScalarProperty Name="LastTimeUsedTransmuteIntoGold" ColumnName="LastTimeUsedTransmuteIntoGold" />
-                <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
                 <ScalarProperty Name="DeleteTimestamp" ColumnName="DeleteTimestamp" />
+                <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+                <ScalarProperty Name="LastTimeUsedTransmuteIntoGold" ColumnName="LastTimeUsedTransmuteIntoGold" />
+                <ScalarProperty Name="LastTimeUsedPraiseYourGodAbility" ColumnName="LastTimeUsedPraiseYourGodAbility" />
+                <ScalarProperty Name="RallyObjectID" ColumnName="RallyObjectID" />
+                <ScalarProperty Name="BindedObjectID" ColumnName="BindedObjectID" />
+                <ScalarProperty Name="TitleMessageID" ColumnName="TitleMessageID" />
+                <ScalarProperty Name="GuildRoleID" ColumnName="GuildRoleID" />
+                <ScalarProperty Name="GuildID" ColumnName="GuildID" />
+                <ScalarProperty Name="appearance" ColumnName="appearance" />
+                <ScalarProperty Name="VisibilityHash" ColumnName="VisibilityHash" />
+                <ScalarProperty Name="AlchemyHash" ColumnName="AlchemyHash" />
+                <ScalarProperty Name="HungerRate" ColumnName="HungerRate" />
+                <ScalarProperty Name="Luck" ColumnName="Luck" />
+                <ScalarProperty Name="SoftStam" ColumnName="SoftStam" />
+                <ScalarProperty Name="SoftHP" ColumnName="SoftHP" />
+                <ScalarProperty Name="HardStam" ColumnName="HardStam" />
+                <ScalarProperty Name="HardHP" ColumnName="HardHP" />
+                <ScalarProperty Name="EquipmentContainerID" ColumnName="EquipmentContainerID" />
+                <ScalarProperty Name="RootContainerID" ColumnName="RootContainerID" />
+                <ScalarProperty Name="ConstitutionLock" ColumnName="ConstitutionLock" />
+                <ScalarProperty Name="Constitution" ColumnName="Constitution" />
+                <ScalarProperty Name="WillpowerLock" ColumnName="WillpowerLock" />
+                <ScalarProperty Name="Willpower" ColumnName="Willpower" />
+                <ScalarProperty Name="IntellectLock" ColumnName="IntellectLock" />
+                <ScalarProperty Name="Intellect" ColumnName="Intellect" />
+                <ScalarProperty Name="AgilityLock" ColumnName="AgilityLock" />
+                <ScalarProperty Name="Agility" ColumnName="Agility" />
+                <ScalarProperty Name="StrengthLock" ColumnName="StrengthLock" />
+                <ScalarProperty Name="Strength" ColumnName="Strength" />
+                <ScalarProperty Name="CriminalSecondsLeft" ColumnName="CriminalSecondsLeft" />
+                <ScalarProperty Name="Alignment" ColumnName="Alignment" />
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+                <ScalarProperty Name="GeoAlt" ColumnName="GeoAlt" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="GeoID" ColumnName="GeoID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="character_effects">
+            <EntityTypeMapping TypeName="LifModel.character_effects">
+              <MappingFragment StoreEntitySet="character_effects">
+                <ScalarProperty Name="DurationLeft" ColumnName="DurationLeft" />
+                <ScalarProperty Name="Magnitude" ColumnName="Magnitude" />
+                <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
+                <ScalarProperty Name="PlayerEffectID" ColumnName="PlayerEffectID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="character_titles">
+            <EntityTypeMapping TypeName="LifModel.character_titles">
+              <MappingFragment StoreEntitySet="character_titles">
+                <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+                <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chars_deathlog">
+            <EntityTypeMapping TypeName="LifModel.chars_deathlog">
+              <MappingFragment StoreEntitySet="chars_deathlog">
+                <ScalarProperty Name="IsKnockout" ColumnName="IsKnockout" />
+                <ScalarProperty Name="KillerID" ColumnName="KillerID" />
+                <ScalarProperty Name="CharID" ColumnName="CharID" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="claims">
+            <EntityTypeMapping TypeName="LifModel.claims">
+              <MappingFragment StoreEntitySet="claims">
+                <ScalarProperty Name="SupportPoints" ColumnName="SupportPoints" />
+                <ScalarProperty Name="PersonalLandID" ColumnName="PersonalLandID" />
+                <ScalarProperty Name="GuildLandID" ColumnName="GuildLandID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="containers">
             <EntityTypeMapping TypeName="LifModel.containers">
               <MappingFragment StoreEntitySet="containers">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="ObjectTypeID" ColumnName="ObjectTypeID" />
-                <ScalarProperty Name="Quality" ColumnName="Quality" />
                 <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+                <ScalarProperty Name="Quality" ColumnName="Quality" />
+                <ScalarProperty Name="ObjectTypeID" ColumnName="ObjectTypeID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="custom_texts">
             <EntityTypeMapping TypeName="LifModel.custom_texts">
               <MappingFragment StoreEntitySet="custom_texts">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Custom_text" ColumnName="Custom_text" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="effects">
+            <EntityTypeMapping TypeName="LifModel.effects">
+              <MappingFragment StoreEntitySet="effects">
+                <ScalarProperty Name="PlayerEffectID" ColumnName="PlayerEffectID" />
+                <ScalarProperty Name="ResultPotionID" ColumnName="ResultPotionID" />
+                <ScalarProperty Name="ResultPreparationID" ColumnName="ResultPreparationID" />
+                <ScalarProperty Name="Effect_name" ColumnName="Effect_name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="effects_sets">
+            <EntityTypeMapping TypeName="LifModel.effects_sets">
+              <MappingFragment StoreEntitySet="effects_sets">
+                <ScalarProperty Name="EffectID3" ColumnName="EffectID3" />
+                <ScalarProperty Name="EffectID2" ColumnName="EffectID2" />
+                <ScalarProperty Name="EffectID1" ColumnName="EffectID1" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="equipment_slots">
             <EntityTypeMapping TypeName="LifModel.equipment_slots">
               <MappingFragment StoreEntitySet="equipment_slots">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
-                <ScalarProperty Name="Slot" ColumnName="Slot" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="Slot" ColumnName="Slot" />
+                <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="features">
             <EntityTypeMapping TypeName="LifModel.features">
               <MappingFragment StoreEntitySet="features">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CustomtextID" ColumnName="CustomtextID" />
                 <ScalarProperty Name="has_effects" ColumnName="has_effects" />
+                <ScalarProperty Name="CustomtextID" ColumnName="CustomtextID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guild_actions_processed">
+            <EntityTypeMapping TypeName="LifModel.guild_actions_processed">
+              <MappingFragment StoreEntitySet="guild_actions_processed">
+                <ScalarProperty Name="ProcessedTimestamp" ColumnName="ProcessedTimestamp" />
+                <ScalarProperty Name="StandingTypeID" ColumnName="StandingTypeID" />
+                <ScalarProperty Name="OtherGuildDeletedID" ColumnName="OtherGuildDeletedID" />
+                <ScalarProperty Name="OtherGuildID" ColumnName="OtherGuildID" />
+                <ScalarProperty Name="CharGuildRoleID" ColumnName="CharGuildRoleID" />
+                <ScalarProperty Name="CharIsKicked" ColumnName="CharIsKicked" />
+                <ScalarProperty Name="GuildTypeID" ColumnName="GuildTypeID" />
+                <ScalarProperty Name="GuildCharter" ColumnName="GuildCharter" />
+                <ScalarProperty Name="GuildTag" ColumnName="GuildTag" />
+                <ScalarProperty Name="GuildName" ColumnName="GuildName" />
+                <ScalarProperty Name="CharDeletedID" ColumnName="CharDeletedID" />
+                <ScalarProperty Name="CharID" ColumnName="CharID" />
+                <ScalarProperty Name="GuildDeletedID" ColumnName="GuildDeletedID" />
+                <ScalarProperty Name="GuildID" ColumnName="GuildID" />
+                <ScalarProperty Name="ProducerCharDeletedID" ColumnName="ProducerCharDeletedID" />
+                <ScalarProperty Name="ProducerCharID" ColumnName="ProducerCharID" />
+                <ScalarProperty Name="ProcessedStatus" ColumnName="ProcessedStatus" />
+                <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guild_actions_queue">
+            <EntityTypeMapping TypeName="LifModel.guild_actions_queue">
+              <MappingFragment StoreEntitySet="guild_actions_queue">
+                <ScalarProperty Name="OwnedTimestamp" ColumnName="OwnedTimestamp" />
+                <ScalarProperty Name="OwnerConnectionID" ColumnName="OwnerConnectionID" />
+                <ScalarProperty Name="AddedTimestamp" ColumnName="AddedTimestamp" />
+                <ScalarProperty Name="StandingTypeID" ColumnName="StandingTypeID" />
+                <ScalarProperty Name="OtherGuildID" ColumnName="OtherGuildID" />
+                <ScalarProperty Name="CharGuildRoleID" ColumnName="CharGuildRoleID" />
+                <ScalarProperty Name="CharIsKicked" ColumnName="CharIsKicked" />
+                <ScalarProperty Name="GuildTypeID" ColumnName="GuildTypeID" />
+                <ScalarProperty Name="GuildCharter" ColumnName="GuildCharter" />
+                <ScalarProperty Name="GuildTag" ColumnName="GuildTag" />
+                <ScalarProperty Name="GuildName" ColumnName="GuildName" />
+                <ScalarProperty Name="CharID" ColumnName="CharID" />
+                <ScalarProperty Name="GuildID" ColumnName="GuildID" />
+                <ScalarProperty Name="ProducerCharID" ColumnName="ProducerCharID" />
+                <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guild_lands">
+            <EntityTypeMapping TypeName="LifModel.guild_lands">
+              <MappingFragment StoreEntitySet="guild_lands">
+                <ScalarProperty Name="LandType" ColumnName="LandType" />
+                <ScalarProperty Name="Radius" ColumnName="Radius" />
+                <ScalarProperty Name="CenterGeoID" ColumnName="CenterGeoID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GuildID" ColumnName="GuildID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="guild_roles">
             <EntityTypeMapping TypeName="LifModel.guild_roles">
               <MappingFragment StoreEntitySet="guild_roles">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guild_standing_types">
+            <EntityTypeMapping TypeName="LifModel.guild_standing_types">
+              <MappingFragment StoreEntitySet="guild_standing_types">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guild_standings">
+            <EntityTypeMapping TypeName="LifModel.guild_standings">
+              <MappingFragment StoreEntitySet="guild_standings">
+                <ScalarProperty Name="StandingTypeID" ColumnName="StandingTypeID" />
+                <ScalarProperty Name="GuildID2" ColumnName="GuildID2" />
+                <ScalarProperty Name="GuildID1" ColumnName="GuildID1" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="guild_type_role_msgs">
             <EntityTypeMapping TypeName="LifModel.guild_type_role_msgs">
               <MappingFragment StoreEntitySet="guild_type_role_msgs">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="GuildTypeID" ColumnName="GuildTypeID" />
-                <ScalarProperty Name="GuildRoleID" ColumnName="GuildRoleID" />
                 <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="GuildRoleID" ColumnName="GuildRoleID" />
+                <ScalarProperty Name="GuildTypeID" ColumnName="GuildTypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="guild_types">
             <EntityTypeMapping TypeName="LifModel.guild_types">
               <MappingFragment StoreEntitySet="guild_types">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="GuildLevel" ColumnName="GuildLevel" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GuildLevel" ColumnName="GuildLevel" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="guilds">
             <EntityTypeMapping TypeName="LifModel.guilds">
               <MappingFragment StoreEntitySet="guilds">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="GuildTypeID" ColumnName="GuildTypeID" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="GuildCharter" ColumnName="GuildCharter" />
-                <ScalarProperty Name="GuildTag" ColumnName="GuildTag" />
-                <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
                 <ScalarProperty Name="DeleteTimestamp" ColumnName="DeleteTimestamp" />
+                <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+                <ScalarProperty Name="GuildTag" ColumnName="GuildTag" />
+                <ScalarProperty Name="GuildCharter" ColumnName="GuildCharter" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="GuildTypeID" ColumnName="GuildTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="item_effects">
+            <EntityTypeMapping TypeName="LifModel.item_effects">
+              <MappingFragment StoreEntitySet="item_effects">
+                <ScalarProperty Name="Magnitude" ColumnName="Magnitude" />
+                <ScalarProperty Name="EffectID" ColumnName="EffectID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="items">
             <EntityTypeMapping TypeName="LifModel.items">
               <MappingFragment StoreEntitySet="items">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ContainerID" ColumnName="ContainerID" />
-                <ScalarProperty Name="ObjectTypeID" ColumnName="ObjectTypeID" />
-                <ScalarProperty Name="Quality" ColumnName="Quality" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Durability" ColumnName="Durability" />
-                <ScalarProperty Name="CreatedDurability" ColumnName="CreatedDurability" />
                 <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+                <ScalarProperty Name="CreatedDurability" ColumnName="CreatedDurability" />
+                <ScalarProperty Name="Durability" ColumnName="Durability" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Quality" ColumnName="Quality" />
+                <ScalarProperty Name="ObjectTypeID" ColumnName="ObjectTypeID" />
+                <ScalarProperty Name="ContainerID" ColumnName="ContainerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lifdscp_online_character">
+            <EntityTypeMapping TypeName="LifModel.lifdscp_online_character">
+              <MappingFragment StoreEntitySet="lifdscp_online_character">
+                <ScalarProperty Name="LoggedInAt" ColumnName="LoggedInAt" />
+                <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lifdscp_online_history">
+            <EntityTypeMapping TypeName="LifModel.lifdscp_online_history">
+              <MappingFragment StoreEntitySet="lifdscp_online_history">
+                <ScalarProperty Name="IsLoggedOut" ColumnName="IsLoggedOut" />
+                <ScalarProperty Name="LoggedOutAt" ColumnName="LoggedOutAt" />
+                <ScalarProperty Name="LoggedInAt" ColumnName="LoggedInAt" />
+                <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="objects_types">
             <EntityTypeMapping TypeName="LifModel.objects_types">
               <MappingFragment StoreEntitySet="objects_types">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="IsContainer" ColumnName="IsContainer" />
-                <ScalarProperty Name="IsMovableObject" ColumnName="IsMovableObject" />
-                <ScalarProperty Name="IsUnmovableobject" ColumnName="IsUnmovableobject" />
-                <ScalarProperty Name="IsTool" ColumnName="IsTool" />
-                <ScalarProperty Name="IsDevice" ColumnName="IsDevice" />
-                <ScalarProperty Name="IsDoor" ColumnName="IsDoor" />
-                <ScalarProperty Name="MaxContSize" ColumnName="MaxContSize" />
-                <ScalarProperty Name="Length" ColumnName="Length" />
-                <ScalarProperty Name="MaxStackSize" ColumnName="MaxStackSize" />
-                <ScalarProperty Name="UnitWeight" ColumnName="UnitWeight" />
-                <ScalarProperty Name="BackgndImage" ColumnName="BackgndImage" />
-                <ScalarProperty Name="WorkAreaTop" ColumnName="WorkAreaTop" />
-                <ScalarProperty Name="WorkAreaLeft" ColumnName="WorkAreaLeft" />
-                <ScalarProperty Name="WorkAreaWidth" ColumnName="WorkAreaWidth" />
-                <ScalarProperty Name="WorkAreaHeight" ColumnName="WorkAreaHeight" />
-                <ScalarProperty Name="BtnCloseTop" ColumnName="BtnCloseTop" />
-                <ScalarProperty Name="BtnCloseLeft" ColumnName="BtnCloseLeft" />
-                <ScalarProperty Name="FaceImage" ColumnName="FaceImage" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
                 <ScalarProperty Name="OwnerTimeout" ColumnName="OwnerTimeout" />
+                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FaceImage" ColumnName="FaceImage" />
+                <ScalarProperty Name="BtnCloseLeft" ColumnName="BtnCloseLeft" />
+                <ScalarProperty Name="BtnCloseTop" ColumnName="BtnCloseTop" />
+                <ScalarProperty Name="WorkAreaHeight" ColumnName="WorkAreaHeight" />
+                <ScalarProperty Name="WorkAreaWidth" ColumnName="WorkAreaWidth" />
+                <ScalarProperty Name="WorkAreaLeft" ColumnName="WorkAreaLeft" />
+                <ScalarProperty Name="WorkAreaTop" ColumnName="WorkAreaTop" />
+                <ScalarProperty Name="BackgndImage" ColumnName="BackgndImage" />
+                <ScalarProperty Name="UnitWeight" ColumnName="UnitWeight" />
+                <ScalarProperty Name="MaxStackSize" ColumnName="MaxStackSize" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="MaxContSize" ColumnName="MaxContSize" />
+                <ScalarProperty Name="IsDoor" ColumnName="IsDoor" />
+                <ScalarProperty Name="IsDevice" ColumnName="IsDevice" />
+                <ScalarProperty Name="IsTool" ColumnName="IsTool" />
+                <ScalarProperty Name="IsUnmovableobject" ColumnName="IsUnmovableobject" />
+                <ScalarProperty Name="IsMovableObject" ColumnName="IsMovableObject" />
+                <ScalarProperty Name="IsContainer" ColumnName="IsContainer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personal_lands">
+            <EntityTypeMapping TypeName="LifModel.personal_lands">
+              <MappingFragment StoreEntitySet="personal_lands">
+                <ScalarProperty Name="IsTemp" ColumnName="IsTemp" />
+                <ScalarProperty Name="GeoID2" ColumnName="GeoID2" />
+                <ScalarProperty Name="GeoID1" ColumnName="GeoID1" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CharID" ColumnName="CharID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="prices">
             <EntityTypeMapping TypeName="LifModel.prices">
               <MappingFragment StoreEntitySet="prices">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="objectid" ColumnName="objectid" />
                 <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="objectid" ColumnName="objectid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="race">
+            <EntityTypeMapping TypeName="LifModel.race">
+              <MappingFragment StoreEntitySet="race">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="LifModel.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="skill_type">
+            <EntityTypeMapping TypeName="LifModel.skill_type">
+              <MappingFragment StoreEntitySet="skill_type">
+                <ScalarProperty Name="GMMessageID" ColumnName="GMMessageID" />
+                <ScalarProperty Name="MasterMessageID" ColumnName="MasterMessageID" />
+                <ScalarProperty Name="SecondaryStat" ColumnName="SecondaryStat" />
+                <ScalarProperty Name="PrimaryStat" ColumnName="PrimaryStat" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="skills">
+            <EntityTypeMapping TypeName="LifModel.skills">
+              <MappingFragment StoreEntitySet="skills">
+                <ScalarProperty Name="LockStatus" ColumnName="LockStatus" />
+                <ScalarProperty Name="SkillAmount" ColumnName="SkillAmount" />
+                <ScalarProperty Name="SkillTypeID" ColumnName="SkillTypeID" />
+                <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="titles">
             <EntityTypeMapping TypeName="LifModel.titles">
               <MappingFragment StoreEntitySet="titles">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TitleMessageID" ColumnName="TitleMessageID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="f_deleteItem" FunctionName="LifModel.Store.f_deleteItem" />
+          <FunctionImportMapping FunctionImportName="f_fromGeoID" FunctionName="LifModel.Store.f_fromGeoID" />
+          <EntitySetMapping Name="logs">
+            <EntityTypeMapping TypeName="LifModel.logs">
+              <MappingFragment StoreEntitySet="logs">
+                <ScalarProperty Name="steamid" ColumnName="steamid" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

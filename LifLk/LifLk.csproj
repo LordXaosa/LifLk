@@ -190,13 +190,33 @@
       <DependentUpon>LifDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BuyItemModel.cs" />
     <Compile Include="Models\character.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\character_effects.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\character_titles.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\chars_deathlog.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\claims.cs">
       <DependentUpon>LifDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\containers.cs">
       <DependentUpon>LifDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\custom_texts.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbAdditions.cs" />
+    <Compile Include="Models\effects.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\effects_sets.cs">
       <DependentUpon>LifDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\equipment_slots.cs">
@@ -208,7 +228,22 @@
     <Compile Include="Models\guilds.cs">
       <DependentUpon>LifDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\guild_actions_processed.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\guild_actions_queue.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\guild_lands.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\guild_roles.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\guild_standings.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\guild_standing_types.cs">
       <DependentUpon>LifDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\guild_types.cs">
@@ -219,6 +254,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\items.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\item_effects.cs">
       <DependentUpon>LifDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LifDB.Context.cs">
@@ -236,10 +274,35 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LifDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\lifdscp_online_character.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lifdscp_online_history.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\logs.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\objects_types.cs">
       <DependentUpon>LifDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\personal_lands.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\prices.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\race.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\roles.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SellItemModel.cs" />
+    <Compile Include="Models\skills.cs">
+      <DependentUpon>LifDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\skill_type.cs">
       <DependentUpon>LifDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\titles.cs">
@@ -1112,7 +1175,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Shop.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -1128,6 +1191,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Character\Edit.cshtml" />
     <Content Include="Views\Character\Index.cshtml" />
+    <Content Include="Views\Home\Sell.cshtml" />
+    <Content Include="Views\Home\Buy.cshtml" />
+    <Content Include="Views\Home\BuyItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

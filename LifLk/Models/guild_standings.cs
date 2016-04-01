@@ -12,17 +12,15 @@ namespace LifLk.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class titles
+    public partial class guild_standings
     {
-        public titles()
-        {
-            this.character_titles = new HashSet<character_titles>();
-        }
-    
         public long ID { get; set; }
-        public string Name { get; set; }
-        public long TitleMessageID { get; set; }
+        public long GuildID1 { get; set; }
+        public long GuildID2 { get; set; }
+        public byte StandingTypeID { get; set; }
     
-        public virtual ICollection<character_titles> character_titles { get; set; }
+        public virtual guild_standing_types guild_standing_types { get; set; }
+        public virtual guilds guilds { get; set; }
+        public virtual guilds guilds1 { get; set; }
     }
 }

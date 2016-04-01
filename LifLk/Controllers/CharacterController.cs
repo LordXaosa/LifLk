@@ -37,6 +37,7 @@ namespace LifLk.Controllers
                 return RedirectToAction("Index", "Home");
             }
             decimal steamId = decimal.Parse(Session["userSteamId"].ToString());
+            Session["charId"] = id.Value;
             if (steamId != character.account.SteamID)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);

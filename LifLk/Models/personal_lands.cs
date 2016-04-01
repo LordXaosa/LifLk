@@ -12,20 +12,21 @@ namespace LifLk.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class guild_roles
+    public partial class personal_lands
     {
-        public guild_roles()
+        public personal_lands()
         {
-            this.character = new HashSet<character>();
-            this.guild_actions_queue = new HashSet<guild_actions_queue>();
-            this.guild_type_role_msgs = new HashSet<guild_type_role_msgs>();
+            this.claims = new HashSet<claims>();
         }
     
-        public byte ID { get; set; }
+        public long ID { get; set; }
+        public long CharID { get; set; }
         public string Name { get; set; }
+        public long GeoID1 { get; set; }
+        public long GeoID2 { get; set; }
+        public byte IsTemp { get; set; }
     
-        public virtual ICollection<character> character { get; set; }
-        public virtual ICollection<guild_actions_queue> guild_actions_queue { get; set; }
-        public virtual ICollection<guild_type_role_msgs> guild_type_role_msgs { get; set; }
+        public virtual character character { get; set; }
+        public virtual ICollection<claims> claims { get; set; }
     }
 }

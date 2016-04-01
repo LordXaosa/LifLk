@@ -12,17 +12,14 @@ namespace LifLk.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class titles
+    public partial class character_effects
     {
-        public titles()
-        {
-            this.character_titles = new HashSet<character_titles>();
-        }
-    
         public long ID { get; set; }
-        public string Name { get; set; }
-        public long TitleMessageID { get; set; }
+        public byte PlayerEffectID { get; set; }
+        public long CharacterID { get; set; }
+        public long Magnitude { get; set; }
+        public long DurationLeft { get; set; }
     
-        public virtual ICollection<character_titles> character_titles { get; set; }
+        public virtual character character { get; set; }
     }
 }

@@ -17,6 +17,8 @@ namespace LifLk.Models
         public objects_types()
         {
             this.containers = new HashSet<containers>();
+            this.effects = new HashSet<effects>();
+            this.effects1 = new HashSet<effects>();
             this.items = new HashSet<items>();
             this.prices = new HashSet<prices>();
             this.objects_types1 = new HashSet<objects_types>();
@@ -48,6 +50,8 @@ namespace LifLk.Models
         public Nullable<long> OwnerTimeout { get; set; }
     
         public virtual ICollection<containers> containers { get; set; }
+        public virtual ICollection<effects> effects { get; set; }
+        public virtual ICollection<effects> effects1 { get; set; }
         public virtual ICollection<items> items { get; set; }
         public virtual ICollection<prices> prices { get; set; }
         public virtual ICollection<objects_types> objects_types1 { get; set; }

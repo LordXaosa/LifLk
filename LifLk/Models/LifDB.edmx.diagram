@@ -4,40 +4,89 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cd74a53ad3ae4dd1b97e6c57e3ef3c14" Name="Diagram1">
-        <EntityTypeShape EntityType="LifModel.account" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LifModel.character" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LifModel.containers" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LifModel.custom_texts" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LifModel.equipment_slots" Width="1.5" PointX="12.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="LifModel.features" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="LifModel.guild_roles" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LifModel.guild_type_role_msgs" Width="1.5" PointX="7.5" PointY="16.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LifModel.guild_types" Width="1.5" PointX="3" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LifModel.guilds" Width="1.5" PointX="5.25" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LifModel.items" Width="1.5" PointX="10.5" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LifModel.objects_types" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LifModel.prices" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LifModel.titles" Width="1.5" PointX="7.75" PointY="2.25" IsExpanded="true" />
-        <AssociationConnector Association="LifModel.FK_AccountID" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_character_EquipmentContainerID" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_character_guild_roles" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_equipment_slots_character" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_GuildID" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_RootContainerID" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_ContainersObjectTypeID" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_ContanersFeaturesID" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_ItemsContainerID" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_ParentID" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_FeauturesCustomTextID" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_equipment_slots_items" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_ItemsFeaturesID" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_guild_type_role_msgs_guild_roles" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_guild_type_role_msgs_guild_types" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_guilds_guild_types" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_ItemsObjectTypeID" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FK_objectstypes" ManuallyRouted="false" />
-        <AssociationConnector Association="LifModel.FKObjectsTypesParentID" ManuallyRouted="false" />
+      <Diagram DiagramId="cd74a53ad3ae4dd1b97e6c57e3ef3c14" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="LifModel.account" Width="1.5" PointX="6" PointY="28.875" />
+        <EntityTypeShape EntityType="LifModel.character" Width="1.5" PointX="8.25" PointY="17.75" />
+        <EntityTypeShape EntityType="LifModel.character_effects" Width="1.5" PointX="10.5" PointY="16.75" />
+        <EntityTypeShape EntityType="LifModel.character_titles" Width="1.5" PointX="13.5" PointY="25.5" />
+        <EntityTypeShape EntityType="LifModel.chars_deathlog" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LifModel.claims" Width="1.5" PointX="12.75" PointY="33.625" />
+        <EntityTypeShape EntityType="LifModel.containers" Width="1.5" PointX="6" PointY="8.25" />
+        <EntityTypeShape EntityType="LifModel.custom_texts" Width="1.5" PointX="1.5" PointY="5.25" />
+        <EntityTypeShape EntityType="LifModel.effects" Width="1.5" PointX="6" PointY="3.5" />
+        <EntityTypeShape EntityType="LifModel.effects_sets" Width="1.5" PointX="8.25" PointY="3.875" />
+        <EntityTypeShape EntityType="LifModel.equipment_slots" Width="1.5" PointX="13.5" PointY="22.375" />
+        <EntityTypeShape EntityType="LifModel.features" Width="1.5" PointX="3.75" PointY="5" />
+        <EntityTypeShape EntityType="LifModel.guild_actions_processed" Width="1.5" PointX="10.5" PointY="32.75" />
+        <EntityTypeShape EntityType="LifModel.guild_actions_queue" Width="1.5" PointX="10.5" PointY="20.625" />
+        <EntityTypeShape EntityType="LifModel.guild_lands" Width="1.5" PointX="5.25" PointY="37.375" />
+        <EntityTypeShape EntityType="LifModel.guild_roles" Width="1.5" PointX="0.75" PointY="16.5" />
+        <EntityTypeShape EntityType="LifModel.guild_standing_types" Width="1.5" PointX="8.25" PointY="14.625" />
+        <EntityTypeShape EntityType="LifModel.guild_standings" Width="1.5" PointX="5.25" PointY="22.25" />
+        <EntityTypeShape EntityType="LifModel.guild_type_role_msgs" Width="1.5" PointX="3" PointY="18.375" />
+        <EntityTypeShape EntityType="LifModel.guild_types" Width="1.5" PointX="0.75" PointY="19.375" />
+        <EntityTypeShape EntityType="LifModel.guilds" Width="1.5" PointX="3" PointY="21.5" />
+        <EntityTypeShape EntityType="LifModel.item_effects" Width="1.5" PointX="13.5" PointY="5.75" />
+        <EntityTypeShape EntityType="LifModel.items" Width="1.5" PointX="11.25" PointY="6.625" />
+        <EntityTypeShape EntityType="LifModel.lifdscp_online_character" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LifModel.lifdscp_online_history" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LifModel.objects_types" Width="1.5" PointX="3.75" PointY="7.875" />
+        <EntityTypeShape EntityType="LifModel.personal_lands" Width="1.5" PointX="10.5" PointY="29.5" />
+        <EntityTypeShape EntityType="LifModel.prices" Width="1.5" PointX="6" PointY="12.375" />
+        <EntityTypeShape EntityType="LifModel.race" Width="1.5" PointX="6" PointY="26.625" />
+        <EntityTypeShape EntityType="LifModel.roles" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LifModel.skill_type" Width="1.5" PointX="11.25" PointY="11.75" />
+        <EntityTypeShape EntityType="LifModel.skills" Width="1.5" PointX="13.5" PointY="19.25" />
+        <EntityTypeShape EntityType="LifModel.titles" Width="1.5" PointX="11.25" PointY="39.5" />
+        <AssociationConnector Association="LifModel.FK_AccountID" />
+        <AssociationConnector Association="LifModel.FK_character_effects_character" />
+        <AssociationConnector Association="LifModel.FK_character_EquipmentContainerID" />
+        <AssociationConnector Association="LifModel.FK_character_guild_roles" />
+        <AssociationConnector Association="LifModel.FK_character_race" />
+        <AssociationConnector Association="LifModel.FK_character_titles_character" />
+        <AssociationConnector Association="LifModel.FK_CharacterID" />
+        <AssociationConnector Association="LifModel.FK_equipment_slots_character" />
+        <AssociationConnector Association="LifModel.FK_guild_actions_processed_character1" />
+        <AssociationConnector Association="LifModel.FK_guild_actions_queue_character1" />
+        <AssociationConnector Association="LifModel.FK_guild_actions_queue_character2" />
+        <AssociationConnector Association="LifModel.FK_guild_lands_character" />
+        <AssociationConnector Association="LifModel.FK_GuildID" />
+        <AssociationConnector Association="LifModel.FK_RootContainerID" />
+        <AssociationConnector Association="LifModel.FK_character_titles_titles" />
+        <AssociationConnector Association="LifModel.FK_claims_guild_lands" />
+        <AssociationConnector Association="LifModel.FK_claims_personal_lands" />
+        <AssociationConnector Association="LifModel.FK_ContainersObjectTypeID" />
+        <AssociationConnector Association="LifModel.FK_ContanersFeaturesID" />
+        <AssociationConnector Association="LifModel.FK_ItemsContainerID" />
+        <AssociationConnector Association="LifModel.FK_ParentID" />
+        <AssociationConnector Association="LifModel.FK_FeauturesCustomTextID" />
+        <AssociationConnector Association="LifModel.FK_effects_result_potion_objects_types" />
+        <AssociationConnector Association="LifModel.FK_effects_result_preparation_objects_types" />
+        <AssociationConnector Association="LifModel.FK_effects_sets_effects_1" />
+        <AssociationConnector Association="LifModel.FK_effects_sets_effects_2" />
+        <AssociationConnector Association="LifModel.FK_effects_sets_effects_3" />
+        <AssociationConnector Association="LifModel.FK_item_effects_effects" />
+        <AssociationConnector Association="LifModel.FK_equipment_slots_items" />
+        <AssociationConnector Association="LifModel.FK_ItemsFeaturesID" />
+        <AssociationConnector Association="LifModel.FK_guild_actions_queue_guild_roles" />
+        <AssociationConnector Association="LifModel.FK_guild_actions_queue_guild_standing_types" />
+        <AssociationConnector Association="LifModel.FK_guild_actions_queue_guild_types" />
+        <AssociationConnector Association="LifModel.FK_guild_actions_queue_guilds1" />
+        <AssociationConnector Association="LifModel.FK_guild_actions_queue_guilds2" />
+        <AssociationConnector Association="LifModel.FK_guild_lands_guilds" />
+        <AssociationConnector Association="LifModel.FK_guild_type_role_msgs_guild_roles" />
+        <AssociationConnector Association="LifModel.FK_guild_standings_guild_standing_types" />
+        <AssociationConnector Association="LifModel.FK_guild_standings_guilds1" />
+        <AssociationConnector Association="LifModel.FK_guild_standings_guilds2" />
+        <AssociationConnector Association="LifModel.FK_guild_type_role_msgs_guild_types" />
+        <AssociationConnector Association="LifModel.FK_guilds_guild_types" />
+        <AssociationConnector Association="LifModel.FK_ItemEffectsItemID" />
+        <AssociationConnector Association="LifModel.FK_ItemsObjectTypeID" />
+        <AssociationConnector Association="LifModel.FK_objectstypes" />
+        <AssociationConnector Association="LifModel.FKObjectsTypesParentID" />
+        <AssociationConnector Association="LifModel.FK_SkillTypeID" />
+        <AssociationConnector Association="LifModel.FK_SkillTypeParentID" />
+        <EntityTypeShape EntityType="LifModel.logs" Width="1.5" PointX="0.75" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,17 +12,12 @@ namespace LifLk.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class titles
+    public partial class logs
     {
-        public titles()
-        {
-            this.character_titles = new HashSet<character_titles>();
-        }
-    
-        public long ID { get; set; }
-        public string Name { get; set; }
-        public long TitleMessageID { get; set; }
-    
-        public virtual ICollection<character_titles> character_titles { get; set; }
+        public long id { get; set; }
+        public System.DateTime date { get; set; }
+        public string message { get; set; }
+        public string ip { get; set; }
+        public Nullable<long> steamid { get; set; }
     }
 }

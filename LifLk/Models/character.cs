@@ -16,7 +16,14 @@ namespace LifLk.Models
     {
         public character()
         {
+            this.character_effects = new HashSet<character_effects>();
+            this.character_titles = new HashSet<character_titles>();
+            this.skills = new HashSet<skills>();
             this.equipment_slots = new HashSet<equipment_slots>();
+            this.guild_actions_processed = new HashSet<guild_actions_processed>();
+            this.guild_actions_queue = new HashSet<guild_actions_queue>();
+            this.guild_actions_queue1 = new HashSet<guild_actions_queue>();
+            this.personal_lands = new HashSet<personal_lands>();
         }
     
         public long ID { get; set; }
@@ -61,9 +68,17 @@ namespace LifLk.Models
         public Nullable<System.DateTime> DeleteTimestamp { get; set; }
     
         public virtual account account { get; set; }
+        public virtual ICollection<character_effects> character_effects { get; set; }
         public virtual containers containers { get; set; }
         public virtual guild_roles guild_roles { get; set; }
+        public virtual race race { get; set; }
+        public virtual ICollection<character_titles> character_titles { get; set; }
+        public virtual ICollection<skills> skills { get; set; }
         public virtual ICollection<equipment_slots> equipment_slots { get; set; }
+        public virtual ICollection<guild_actions_processed> guild_actions_processed { get; set; }
+        public virtual ICollection<guild_actions_queue> guild_actions_queue { get; set; }
+        public virtual ICollection<guild_actions_queue> guild_actions_queue1 { get; set; }
+        public virtual ICollection<personal_lands> personal_lands { get; set; }
         public virtual guilds guilds { get; set; }
         public virtual containers containers1 { get; set; }
     }

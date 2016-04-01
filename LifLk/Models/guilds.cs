@@ -17,6 +17,11 @@ namespace LifLk.Models
         public guilds()
         {
             this.character = new HashSet<character>();
+            this.guild_actions_queue = new HashSet<guild_actions_queue>();
+            this.guild_actions_queue1 = new HashSet<guild_actions_queue>();
+            this.guild_lands = new HashSet<guild_lands>();
+            this.guild_standings = new HashSet<guild_standings>();
+            this.guild_standings1 = new HashSet<guild_standings>();
         }
     
         public long ID { get; set; }
@@ -29,6 +34,11 @@ namespace LifLk.Models
         public Nullable<System.DateTime> DeleteTimestamp { get; set; }
     
         public virtual ICollection<character> character { get; set; }
+        public virtual ICollection<guild_actions_queue> guild_actions_queue { get; set; }
+        public virtual ICollection<guild_actions_queue> guild_actions_queue1 { get; set; }
+        public virtual ICollection<guild_lands> guild_lands { get; set; }
+        public virtual ICollection<guild_standings> guild_standings { get; set; }
+        public virtual ICollection<guild_standings> guild_standings1 { get; set; }
         public virtual guild_types guild_types { get; set; }
     }
 }

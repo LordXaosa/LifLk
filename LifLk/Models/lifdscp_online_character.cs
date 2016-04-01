@@ -12,17 +12,9 @@ namespace LifLk.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class titles
+    public partial class lifdscp_online_character
     {
-        public titles()
-        {
-            this.character_titles = new HashSet<character_titles>();
-        }
-    
-        public long ID { get; set; }
-        public string Name { get; set; }
-        public long TitleMessageID { get; set; }
-    
-        public virtual ICollection<character_titles> character_titles { get; set; }
+        public long CharacterID { get; set; }
+        public System.DateTime LoggedInAt { get; set; }
     }
 }

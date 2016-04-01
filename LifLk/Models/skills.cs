@@ -12,17 +12,15 @@ namespace LifLk.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class titles
+    public partial class skills
     {
-        public titles()
-        {
-            this.character_titles = new HashSet<character_titles>();
-        }
-    
         public long ID { get; set; }
-        public string Name { get; set; }
-        public long TitleMessageID { get; set; }
+        public long CharacterID { get; set; }
+        public long SkillTypeID { get; set; }
+        public long SkillAmount { get; set; }
+        public sbyte LockStatus { get; set; }
     
-        public virtual ICollection<character_titles> character_titles { get; set; }
+        public virtual character character { get; set; }
+        public virtual skill_type skill_type { get; set; }
     }
 }

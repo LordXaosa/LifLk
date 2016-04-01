@@ -17,6 +17,7 @@ namespace LifLk.Models
         public items()
         {
             this.equipment_slots = new HashSet<equipment_slots>();
+            this.item_effects = new HashSet<item_effects>();
         }
     
         public long ID { get; set; }
@@ -31,6 +32,7 @@ namespace LifLk.Models
         public virtual containers containers { get; set; }
         public virtual ICollection<equipment_slots> equipment_slots { get; set; }
         public virtual features features { get; set; }
+        public virtual ICollection<item_effects> item_effects { get; set; }
         public virtual objects_types objects_types { get; set; }
     }
 }

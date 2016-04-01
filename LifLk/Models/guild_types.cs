@@ -16,6 +16,7 @@ namespace LifLk.Models
     {
         public guild_types()
         {
+            this.guild_actions_queue = new HashSet<guild_actions_queue>();
             this.guild_type_role_msgs = new HashSet<guild_type_role_msgs>();
             this.guilds = new HashSet<guilds>();
         }
@@ -25,6 +26,7 @@ namespace LifLk.Models
         public string Name { get; set; }
         public long MessageID { get; set; }
     
+        public virtual ICollection<guild_actions_queue> guild_actions_queue { get; set; }
         public virtual ICollection<guild_type_role_msgs> guild_type_role_msgs { get; set; }
         public virtual ICollection<guilds> guilds { get; set; }
     }
