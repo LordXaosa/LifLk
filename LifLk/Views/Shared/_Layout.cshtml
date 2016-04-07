@@ -22,12 +22,13 @@
                 <span class="icon-bar"></span>
             </button>
             @Html.ActionLink("Личный кабинет", "Index", "Home", null, new {@class = "navbar-brand"})
-            @if (Session["charId"] != null)
-            {
-                @Html.ActionLink("Магазин", "Buy", "Home", null, new {@class = "navbar-brand"})
-            }
+            @Html.ActionLink("Магазин", "Buy", "Home", null, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <!--<li>@Html.ActionLink("Главная", "Index", "Home")</li>-->
+                <!--<li>@Html.ActionLink("Рынок", "About", "Home")</li>-->
+            </ul>
             @Html.Partial("_LoginPartial")
         </div>
     </div>

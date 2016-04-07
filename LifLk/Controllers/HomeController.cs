@@ -21,17 +21,13 @@ namespace LifLk.Controllers
                 if (Session["userSteamId"] == null)
                 {
                     HttpContext.GetOwinContext().Authentication.SignOut();
-                    Session["charId"] = null;
-                    Session["userSteamId"] = null;
                     return RedirectToAction("Index", "Home");
                 }
                 decimal steamId = decimal.Parse(Session["userSteamId"].ToString());
-                account acc = db.account.Where(p => p.SteamID == steamId).Include(p=>p.character).FirstOrDefault();
+                account acc = db.account.Where(p => p.SteamID == steamId).FirstOrDefault();
                 if (acc == null)
                 {
                     HttpContext.GetOwinContext().Authentication.SignOut();
-                    Session["charId"] = null;
-                    Session["userSteamId"] = null;
                     return View();
                 }
                 return View(acc);
@@ -41,36 +37,11 @@ namespace LifLk.Controllers
 
         public ActionResult Buy()
         {
-            if (Session["userSteamId"] == null)
-            {
-                HttpContext.GetOwinContext().Authentication.SignOut();
-                Session["charId"] = null;
-                Session["userSteamId"] = null;
-                return RedirectToAction("Index", "Home");
-            }
-            if (Session["charId"] == null)
-            {
-                HttpContext.GetOwinContext().Authentication.SignOut();
-                Session["charId"] = null;
-                Session["userSteamId"] = null;
-                return RedirectToAction("Index", "Home");
-            }
-            List<prices> prices = db.prices.Where(p=>p.objects_types.FaceImage.Contains("Items")).Include(p=>p.objects_types).ToList();
-            /*List<BuyItemModel> items = new List<BuyItemModel>();
-            foreach (prices price in prices)
-            {
-                BuyItemModel i = new BuyItemModel();
-                i.Price = price.price;
-                i.ObjectsTypes = price.objects_types;
-                i.ObjectId = price.objectid;
-                items.Add(i);
-            }
-            return View(items);*/
+            List<prices> prices = db.prices.Where(p=>!string.IsNullOrEmpty(p.objects_types.FaceImage) ).ToList();
             return View(prices.Select(p => new BuyItemModel()
             {
                 ObjectsTypes = p.objects_types,
-                Price = p.price,
-                ObjectId = p.objectid
+                Price = p.price
             }).ToList());
         }
 

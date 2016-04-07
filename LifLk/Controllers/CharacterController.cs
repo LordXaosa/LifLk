@@ -26,15 +26,13 @@ namespace LifLk.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            character character = db.character.Where(p=>p.ID==id).Include(p=>p.account).Include(p=>p.containers).Include(p=>p.containers1).Include(p=>p.equipment_slots).FirstOrDefault();
+            character character = await db.character.FindAsync(id);
             if (character == null)
             {
                 return HttpNotFound();
             }
             if (Session["userSteamId"] == null)
             {
-                Session["charId"] = null;
-                Session["userSteamId"] = null;
                 HttpContext.GetOwinContext().Authentication.SignOut();
                 return RedirectToAction("Index", "Home");
             }
