@@ -290,6 +290,8 @@ namespace LifLk.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
+            Session["charId"] = null;
+            Session["userSteamId"] = null;
             return RedirectToAction("Index", "Home");
         }
 
