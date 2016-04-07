@@ -27,7 +27,7 @@ namespace LifLk
             
             var options = new SteamAuthenticationOptions
             {
-                ApplicationKey = "D1B966B943125B996AACF10C795382BB",
+                ApplicationKey = "E9A0984C5418D574C16692F3D5D058F8",
                 Provider = new OpenIDAuthenticationProvider // Steam is based on OpenID
                 {
                     OnAuthenticated = async context =>

@@ -312,7 +312,8 @@ html {
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: bold;
   line-height: 1.428571429;
   color: #333333;
   background-color: #ffffff;
@@ -335,7 +336,7 @@ textarea {
 }
 
 a {
-  color: #428bca;
+  color: #421615;
   text-decoration: none;
 }
 
@@ -592,6 +593,8 @@ ol ol {
 }
 
 dl {
+  position:relative;
+  float: left;
   margin-bottom: 20px;
 }
 
@@ -4934,7 +4937,7 @@ a.list-group-item.active > .badge,
   font-weight: 200;
   line-height: 2.1428571435;
   color: inherit;
-  background-color: #eeeeee;
+  background-color: none;
 }
 
 .jumbotron h1 {

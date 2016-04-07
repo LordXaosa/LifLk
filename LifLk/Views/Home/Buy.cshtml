@@ -5,13 +5,13 @@
     ViewBag.Title = "Buy";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="items-inventory">
-    @foreach (BuyItemModel item in Model)
-    {
-        <div>
-            <a href="@Url.Action("BuyItem", "Home",new {id=@item.ObjectsTypes.ID})"><img src="@Url.Content("~/" + item.ObjectsTypes.FaceImage)" title="@item.ObjectsTypes.Name&#13;Цена:@item.GoldPrice золотых, @item.SilverPrice серебрянных и @item.CopperPrice медных монет или их эквивалент за качество 50" /></a>
-        </div>
-    }
+<div class="items-buy">
+    <div class="itemsbuytop">
+        @foreach (BuyItemModel item in Model)
+        {
+            <div>
+                <a href="@Url.Action("BuyItem", "Home",new {id=@item.ObjectsTypes.ID})"><img src="@Url.Content("~/" + item.ObjectsTypes.FaceImage)" title="@item.ObjectsTypes.Name&#13;Цена:@item.GoldPrice золотых, @item.SilverPrice серебрянных и @item.CopperPrice медных монет или их эквивалент за качество 50" /></a>
+            </div>
+        }
+    </div>
 </div>
-

@@ -6,171 +6,47 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Просмотр персонажа</h2>
 
 <div>
-    <h4>character</h4>
-    <hr />
-<dl class="dl-horizontal">
-
-<dt>
-    Имя:
-</dt>
-
-<dd>
-    @Html.DisplayFor(model => model.Name)
-</dd>
-
-<dt>
-    Фамилия:
-</dt>
-
-<dd>
-    @Html.DisplayFor(model => model.LastName)
-</dd>
-
-
-<dt>
-    Раса:
-</dt>
-
-<dd>
-    @Html.DisplayFor(model => model.race.Name)
-</dd>
-
-<dt>
-    Карма:
-</dt>
-
-<dd>
-    @(Model.Alignment/1000000)
-</dd>
-
-<dt>
-    Сила:
-</dt>
-
-<dd>
-    @(Model.Strength/1000000)
-</dd>
-
-
-<dt>
-    Ловкость:
-</dt>
-
-<dd>
-    @(Model.Agility / 1000000)
-</dd>
-
-<dt>
-    Интеллект:
-</dt>
-
-<dd>
-    @(Model.Intellect / 1000000)
-</dd>
-
-<dt>
-    Сила воли:
-</dt>
-
-<dd>
-    @(Model.Willpower / 1000000)
-</dd>
-
-<dt>
-    Конституция:
-</dt>
-
-<dd>
-    @(Model.Constitution / 1000000)
-</dd>
-
-
-<dt>
-    Очки здоровья:
-</dt>
-
-<dd>
-    @(Model.HardHP / 1000000)
-</dd>
-
-<dt>
-    Очки марафонской выносливости:
-</dt>
-
-<dd>
-    @(Model.HardStam / 1000000)
-</dd>
-
-<dt>
-    Очки сознания:
-</dt>
-
-<dd>
-    @(Model.SoftHP / 1000000)
-</dd>
-
-<dt>
-    Очки спринтерской выносливости:
-</dt>
-
-<dd>
-    @(Model.SoftStam / 1000000)
-</dd>
-
-<dt>
-    Удача:
-</dt>
-
-<dd>
-    @(Model.Luck / 1000000.0d)
-</dd>
-
-<dt>
-    Роль в гильдии:
-</dt>
-
-<dd>
-    @Html.DisplayFor(model => model.guild_roles.Name)
-</dd>
-
-<dt>
-    Имя гильдии:
-</dt>
-
-<dd>
-    @Html.DisplayFor(model => model.guilds.Name)
-</dd>
-
-</dl>
-
-    Инвентарь:
-<div class="items-inventory">
-    @foreach (LifLk.Models.items item in Model.containers1.items)
-    {
-        <div><a href="@Url.Action("Sell", "Home", new { itemId = @item.ID })"><img src="@Url.Content("~/" + item.objects_types.FaceImage)" title="@item.objects_types.Name&#13;Количество:@item.Quantity&#13;Качество:@item.Quality&#13;Прочность:@item.Durability/@item.CreatedDurability" /></a>
-        </div>
-    }
-</div>
-    <br/>
-Персонаж:
-<div class="items-equip">
-    <img src="@Url.Content("~/art/2D/gui/equip.png")"/>
+    <h5>Для просмотра характеристик предмета, наведите на него крусор. Для продажи предмета из инвентаря, нажмите на его изображение.</h5>
     
-    @foreach (LifLk.Models.items item in Model.containers.items)
-{
-    if (item.equipment_slots.FirstOrDefault().Slot > 13)
-    {
-        continue;
-    }
-        <div class="@string.Format("item-{0}", item.equipment_slots.FirstOrDefault().Slot.ToString())" style="background: url(@Url.Content("~/" + item.objects_types.FaceImage)) center center no-repeat;" title="@item.objects_types.Name&#13;Количество:@item.Quantity&#13;Качество:@item.Quality&#13;Прочность:@item.Durability/@item.CreatedDurability">
+<dl class="dl-horizontal">
+    <table border="0" style="width: 490px;">
+        <caption></caption>
+        <tr><td>Имя:</td><td>@Html.DisplayFor(model => model.Name)</td><td>Карма:</td><td>@(Model.Alignment / 1000000)</td></tr>
+        <tr><td>Фамилия:</td><td>@Html.DisplayFor(model => model.LastName)</td><td>Удача:</td><td>@(Model.Luck / 1000000.0d)</td></tr>
+        <tr><td>Раса:</td><td>@Html.DisplayFor(model => model.race.Name)</td><td>Сила:</td><td>@(Model.Strength / 1000000)</td></tr>
+        <tr><td>Гильдия:</td><td>@Html.DisplayFor(model => model.guilds.Name)</td><td>Ловкость:</td><td>@(Model.Agility / 1000000)</td></tr>
+        <tr><td>Роль в гильдии:</td><td>@Html.DisplayFor(model => model.guild_roles.Name)</td><td>Интеллект:</td><td>@(Model.Intellect / 1000000)</td></tr>
+        <tr><td>Здоровье:</td><td>@(Model.HardHP / 1000000)</td><td>Сила воли:</td><td>@(Model.Willpower / 1000000)</td></tr>
+        <tr><td>Сознание:</td><td>@(Model.SoftHP / 1000000)</td><td>Конституция:</td><td>@(Model.Constitution / 1000000)</td></tr>
+        <tr><td>Спр.выносливость:</td><td>@(Model.SoftStam / 1000000)</td></tr>
+        <tr><td>Мар.выносливость:</td><td>@(Model.HardStam / 1000000)</td></tr>
+    </table>
+</dl>
+   
+        <div class="items-equip">
+        <img src="@Url.Content("~/art/2D/gui/equip.png")" />
+
+        @foreach (LifLk.Models.items item in Model.containers.items)
+        {
+            if (item.equipment_slots.FirstOrDefault().Slot > 13)
+            {
+                continue;
+            }
+            <div class="@string.Format("item-{0}", item.equipment_slots.FirstOrDefault().Slot.ToString())" style="background: url(@Url.Content("~/" + item.objects_types.FaceImage)) center center no-repeat;" title="@item.objects_types.Name&#13;Количество:@item.Quantity&#13;Качество:@item.Quality&#13;Прочность:@item.Durability/@item.CreatedDurability">
+            </div>
+        }
+    </div>
+    <div class="itemsinventorytop">
+        <div class="items-inventory">
+            @foreach (LifLk.Models.items item in Model.containers1.items)
+            {
+                <div>
+                    <a href="@Url.Action("Sell", "Home", new { itemId = @item.ID })"><img src="@Url.Content("~/" + item.objects_types.FaceImage)" title="@item.objects_types.Name&#13;Количество:@item.Quantity&#13;Качество:@item.Quality&#13;Прочность:@item.Durability/@item.CreatedDurability" /></a>
+                </div>
+            }
         </div>
-    }
-</div>
-</div>
-<p>
-    @Html.ActionLink("Перейти в ГМ шоп", "Buy", "Home")
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    </div>
+    </div>

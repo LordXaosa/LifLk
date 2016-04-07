@@ -4,9 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>BuyItem</h2>
+<h2>Покупка вещей</h2>
 Вы хотите купить
-<img src="@Url.Content("~/" + Model.ObjectsTypes.FaceImage)"></img>
+<img src="@Url.Content("~/" + Model.ObjectsTypes.FaceImage)">
 <br/>
 @using (Html.BeginForm("BuyItem", "Home", FormMethod.Post))
 {

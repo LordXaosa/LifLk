@@ -1,12 +1,23 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url(../art/2D/gui/background2.png);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 70px;
+    padding-right: 50px;
+    padding-bottom: 100px;
+    padding-top: 50px;
+    background-image: url(../art/2D/gui/craft_tool_window.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -34,30 +45,86 @@ input[type="checkbox"].input-validation-error {
 }
 
 .validation-summary-errors {
-    color: #b94a48;
+    color: #520100;
 }
-
 .validation-summary-valid {
     display: none;
 }
+.ietmsbuytop
+{
+    position: relative;
+    background-image: url(../art/2D/gui/bgshop.png);
+    width: 95%;
+    height: 95%;
+    overflow: auto;
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+.items-buy {
+    position: relative;
+    background-image: url(../art/2D/gui/bgshop.png);
+    background-size: cover;
+    width: 1014px;
+    height: 697px;
+    overflow: auto;
+    padding-bottom: 9px;
+    padding-top: 9px;
+    padding-left: 11px;
+    padding-right: 7px;
+    margin-left: 10px;
+}
+
 .items-inventory
 {
-  width:500px;
-    max-height: 700px;
+    position:relative;
+    background-image: none;
+    width: 430px;
+    height: 300px;
     overflow: auto;
+    margin-left: 15px;
+}
+.itemsinventorytop
+{
+    position: relative;
+    float: left;
+    background-image: url(../art/2D/gui/bag_center.png);
+    width: 490px;
+    height: 340px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    margin-top: 20px;
+    
 }
 .items-equip {
-    width:900px;
-    height: 800px;
-    overflow: hidden;
     position: relative;
+    float: right;
+    width: 560px;
+    height: 100%;
+    overflow: hidden;
+    padding-left: 17px;  
+    
+      
 }
 .items-inventory div
 {
-    width: 50px;
-    height: 50px;
+    max-width: 100%;
+    max-height: 100%;
     float: left;
     overflow: auto;
+
+}
+.items-buy div 
+{
+    max-width: 100%;
+    max-height: 100%;
+    float: left;
+    overflow: auto;
+}
+::-webkit-scrollbar {
+
+width: 0px;
+
 }
 .items-equip div
 {
@@ -179,8 +246,8 @@ input[type="checkbox"].input-validation-error {
 .item-12
 {
     position: absolute;
-    top: 65px;
-    left: 643px;
+    top: 30px;
+    left: 435px;
     width: 100%;
     height: 100%;
     max-width: 128px;
@@ -197,10 +264,11 @@ input[type="checkbox"].input-validation-error {
     max-height: 128px;
 }
 .items-inventory div img {
-   height: 100%;
+   height: 70%;
    /*width: 100%;*/
 }
 .items-equip div img {
    height: 100%;
+   width: 100%;
    /*width: 100%;*/
 }
