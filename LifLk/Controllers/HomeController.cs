@@ -80,13 +80,7 @@ namespace LifLk.Controllers
                 return RedirectToAction("Index", "Home");
             }
             long charId = long.Parse(Session["charId"].ToString());
-            lifdscp_online_character online = db.lifdscp_online_character.FirstOrDefault(p => p.CharacterID == charId);
-            if (online != null)
-            {
-                ModelState.AddModelError("", "Персонаж должен быть не в сети!");
-                AddLog(string.Format("[BUY][PRE][ERROR]Char online. Item id:{0} quantity: {1} price: {2} char: {3}", model.ObjectId, model.Quantity, model.Price, charId));
-                return RedirectToAction("Buy", "Home");
-            }
+            
             character ch = db.character.Find(charId);
             if (ch == null)
             {
@@ -98,6 +92,14 @@ namespace LifLk.Controllers
             {
                 AddLog(string.Format("[BUY][PRE][ERROR]No price. Item id:{0} quantity: {1} price: {2} char: {3}", model.ObjectId, model.Quantity, model.Price, charId));
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            lifdscp_online_character online = db.lifdscp_online_character.FirstOrDefault(p => p.CharacterID == charId);
+            if (online != null)
+            {
+                ModelState.AddModelError("", "Персонаж должен быть не в сети!");
+                AddLog(string.Format("[BUY][PRE][ERROR]Char online. Item id:{0} quantity: {1} price: {2} char: {3}", model.ObjectId, model.Quantity, model.Price, charId));
+                //return RedirectToAction("Buy", "Home");
+                return View(model);
             }
             AddLog(string.Format("[BUY][PRE][SUCCESS]Item id:{0} quantity: {1} price: {2} char: {3}", model.ObjectId, model.Quantity, model.Price, charId));
             return View(model);
@@ -216,14 +218,6 @@ namespace LifLk.Controllers
                 return RedirectToAction("Index", "Home");
             }
             long charId = long.Parse(Session["charId"].ToString());
-            lifdscp_online_character online = db.lifdscp_online_character.FirstOrDefault(p => p.CharacterID == charId);
-            if (online != null)
-            {
-                ModelState.AddModelError("", "Персонаж должен быть не в сети!");
-                AddLog(string.Format("[SELL][PRE][ERROR]Char online. char: {0}", charId));
-                return Sell(itemId);
-                //return View(model);
-            }
             character ch = db.character.Find(charId);
             if (ch == null)
             {
@@ -233,6 +227,14 @@ namespace LifLk.Controllers
             SellItemModel model = new SellItemModel();
             model.ItemId = itemId.Value;
             model.Item = db.items.FirstOrDefault(p => p.ID == itemId.Value);
+            lifdscp_online_character online = db.lifdscp_online_character.FirstOrDefault(p => p.CharacterID == charId);
+            if (online != null)
+            {
+                ModelState.AddModelError("", "Персонаж должен быть не в сети!");
+                AddLog(string.Format("[SELL][PRE][ERROR]Char online. char: {0}", charId));
+                //return Sell(itemId);
+                return View(model);
+            }
             prices price = model.Item.objects_types.prices.FirstOrDefault();
             if (price == null)
             {
