@@ -21,19 +21,19 @@ namespace LifLk.Models
 
         public long GoldPrice
         {
-            get { return (long)(Price/100/100/100); }
+            get { return (long)(Price/1000/1000/100); }
         }
 
         public long SilverPrice
         {
-            get { return (long)((Price - GoldPrice*100*100*100)/100/100); }
+            get { return (long)((Price - GoldPrice*1000*1000*100)/1000/100); }
         }
 
         public decimal CopperPrice
         {
             get
             {
-                return (Price%10000)/100;
+                return (Price%1000000)/100;
             }
         }
 

@@ -56,16 +56,6 @@ namespace LifLk.Controllers
                 return RedirectToAction("Index", "Home");
             }
             List<prices> prices = db.prices.Where(p=>p.objects_types.FaceImage.Contains("Items")).Include(p=>p.objects_types).ToList();
-            /*List<BuyItemModel> items = new List<BuyItemModel>();
-            foreach (prices price in prices)
-            {
-                BuyItemModel i = new BuyItemModel();
-                i.Price = price.price;
-                i.ObjectsTypes = price.objects_types;
-                i.ObjectId = price.objectid;
-                items.Add(i);
-            }
-            return View(items);*/
             return View(prices.Select(p => new BuyItemModel()
             {
                 ObjectsTypes = p.objects_types,
@@ -162,11 +152,11 @@ namespace LifLk.Controllers
                 }
                 else if (p.ObjectTypeID == 1060)
                 {
-                    return 100 * 100 * p.Quantity;
+                    return 100 * 1000 * p.Quantity;
                 }
                 else if (p.ObjectTypeID == 1061)
                 {
-                    return 100 * 100 * 100 * p.Quantity;
+                    return 100 * 1000 * 1000 * p.Quantity;
                 }
                 return 0;
             });
@@ -192,9 +182,9 @@ namespace LifLk.Controllers
                 sum = sum - (finalPrice * model.Quantity);
                 //sum = sum/100;
 
-                long goldPrice = (long)(sum / 100 / 100 / 100);
-                long silverPrice = (long)((sum - goldPrice * 100 * 100 * 100) / 100 / 100);
-                long copperPrice = (long)((sum % 10000.0m)) / 100;
+                long goldPrice = (long)(sum / 1000 / 1000 / 100);
+                long silverPrice = (long)((sum - goldPrice * 1000 * 1000 * 100) / 1000 / 100);
+                long copperPrice = (long)((sum % 1000000.0m)) / 100;
 
                 
                 if (copperPrice > 0)
@@ -311,11 +301,11 @@ namespace LifLk.Controllers
                 }
                 else if (p.ObjectTypeID == 1060)
                 {
-                    return 100 * 100 * p.Quantity;
+                    return 100 * 1000 * p.Quantity;
                 }
                 else if (p.ObjectTypeID == 1061)
                 {
-                    return 100 * 100 * 100 * p.Quantity;
+                    return 100 * 1000 * 1000 * p.Quantity;
                 }
                 return 0;
             });
@@ -339,9 +329,9 @@ namespace LifLk.Controllers
                     return View(model);
                 }
                 sum += model.Price;
-                long goldPrice = (long)(sum / 100 / 100 / 100);
-                long silverPrice = (long)((sum - goldPrice * 100 * 100 * 100) / 100 / 100);
-                long copperPrice = (long)((sum % 10000.0m)) / 100;
+                long goldPrice = (long)(sum / 1000 / 1000 / 100);
+                long silverPrice = (long)((sum - goldPrice * 1000 * 1000 * 100) / 1000 / 100);
+                long copperPrice = (long)((sum % 1000000.0m)) / 100;
                 foreach (items coin in coins)
                 {
                     db.f_deleteItem((int)coin.ID);
