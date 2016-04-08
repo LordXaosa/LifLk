@@ -184,7 +184,7 @@ namespace LifLk.Controllers
 
                 long goldPrice = (long)(sum / 1000 / 1000 / 100);
                 long silverPrice = (long)((sum - goldPrice * 1000 * 1000 * 100) / 1000 / 100);
-                long copperPrice = (long)((sum % 1000000.0m)) / 100;
+                long copperPrice = (long)((sum % 100000.0m)) / 100;
 
                 
                 if (copperPrice > 0)
@@ -331,7 +331,7 @@ namespace LifLk.Controllers
                 sum += model.Price;
                 long goldPrice = (long)(sum / 1000 / 1000 / 100);
                 long silverPrice = (long)((sum - goldPrice * 1000 * 1000 * 100) / 1000 / 100);
-                long copperPrice = (long)((sum % 1000000.0m)) / 100;
+                long copperPrice = (long)((sum % 100000.0m)) / 100;
                 foreach (items coin in coins)
                 {
                     db.f_deleteItem((int)coin.ID);

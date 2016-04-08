@@ -33,7 +33,7 @@ namespace LifLk.Models
         {
             get
             {
-                return (Price%1000000)/100;
+                return (Price%100000)/100;
             }
         }
 
