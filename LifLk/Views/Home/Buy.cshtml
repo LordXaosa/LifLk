@@ -5,13 +5,39 @@
     ViewBag.Title = "Buy";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    function divhide() {
+        $("#items").hide();
+        var nImages = $("#items div a").length;
+        var loadCounter = 0;
+        //binds onload event listner to images
+        $("#items div a img").on("load", function() {
+            loadCounter++;
+            if (nImages == loadCounter) {
+                //$(this).parent().show();
+                $("#items").show();
+                //$("#loadingDiv").hide();
+            }
+        }).each(function() {
+
+            // attempt to defeat cases where load event does not fire
+            // on cached images
+            if (this.complete) $(this).trigger("load");
+        });
+    }
+
+    divhide();
+</script>
 <div class="items-buy">
-    <div class="itemsbuytop">
+    <div class="itemsbuytop" id="items">
         @foreach (BuyItemModel item in Model)
         {
             <div>
-                <a href="@Url.Action("BuyItem", "Home",new {id=@item.ObjectsTypes.ID})"><img src="@Url.Content("~/" + item.ObjectsTypes.FaceImage)" title="@item.ObjectsTypes.Name&#13;Цена:@item.GoldPrice золотых, @item.SilverPrice серебрянных и @item.CopperPrice медных монет или их эквивалент за качество 50" /></a>
+                <a href="@Url.Action("BuyItem", "Home", new {id = @item.ObjectsTypes.ID})"><img src="@Url.Content("~/" + item.ObjectsTypes.FaceImage)" title="@item.ObjectsTypes.Name&#13;Цена:@item.GoldPrice золотых, @item.SilverPrice серебрянных и @item.CopperPrice медных монет или их эквивалент за качество 50"/></a>
             </div>
         }
     </div>
+    <script>
+        divhide();
+    </script>
 </div>
