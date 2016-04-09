@@ -164,7 +164,11 @@ namespace LifLk.Controllers
             });
             decimal finalPrice = price.price * (1.0m + ((model.Quality - 50.0m) / 100.0m));
             model.Price = finalPrice * model.Quantity;
-            if (sum < finalPrice * model.Quantity)
+            if (model.Price < 100)
+            {
+                model.Price = 100;
+            }
+            if (sum < model.Price)
             {
                 //error
                 ModelState.AddModelError("", "Недостаточно средств!");
@@ -181,7 +185,7 @@ namespace LifLk.Controllers
                     AddLog(string.Format("[BUY][PRE]Confirmation. Item id:{0} quantity: {1} price: {2} char: {3}", model.ObjectId, model.Quantity, model.Price, charId));
                     return View(model);
                 }
-                sum = sum - (finalPrice * model.Quantity);
+                sum = sum - model.Price;
                 //sum = sum/100;
 
                 long goldPrice = (long)(sum / 1000 / 1000 / 100);
