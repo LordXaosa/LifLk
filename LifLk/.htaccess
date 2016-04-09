@@ -1,0 +1,15 @@
+#	Mod_security can interfere with uploading of content such as attachments. If you
+#	cannot attach files, remove the "#" from the lines below.
+#<IfModule mod_security.c>
+#	SecFilterEngine Off
+#	SecFilterScanPOST Off
+#</IfModule>
+RewriteEngine Off
+ErrorDocument 401 default
+ErrorDocument 403 default
+ErrorDocument 404 default
+ErrorDocument 405 default
+ErrorDocument 406 default
+ErrorDocument 500 default
+ErrorDocument 501 default
+ErrorDocument 503 default

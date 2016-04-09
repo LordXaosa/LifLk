@@ -6,32 +6,34 @@
 }
 
 <h2>Продажа вещей</h2>
-
-Вы хотите продать
-<img src="@Url.Content("~/" + Model.Item.objects_types.FaceImage)"></img>
 <br />
-@using (Html.BeginForm("Sell", "Home", FormMethod.Post))
-{
-    @Html.HiddenFor(m => m.ItemId)
-    //Html.HiddenFor(m => m.ConfirmBuy)
-    <text>
-        Количество:
-        @Html.TextBoxFor(model => model.Quantity)
-        <br />
-    </text>
-    if (Model.Price > 0)
+<h4>Подсказка: Вы не сможете продать вещей больше, чем есть у Вас в инвентаре</h4>
+<br />
+    Вы хотите продать
+    <img src="@Url.Content("~/" + Model.Item.objects_types.FaceImage)"></img>
+    <br />
+    @using (Html.BeginForm("Sell", "Home", FormMethod.Post))
     {
-        <text>Общая стоимость:</text>
-        @:@string.Format("{0} золотых, {1} серебрянных и {2} медных монет", Model.GoldPrice, Model.SilverPrice, Model.CopperPrice)
+        @Html.HiddenFor(m => m.ItemId)
+        //Html.HiddenFor(m => m.ConfirmBuy)
+        <text>
+            Количество:
+            @Html.TextBoxFor(model => model.Quantity)
+            <br />
+        </text>
+        if (Model.Price > 0)
+        {
+            <text>Общая стоимость:</text>
+            @:@string.Format("{0} золотых, {1} серебрянных и {2} медных монет", Model.GoldPrice, Model.SilverPrice, Model.CopperPrice)
         }
         @Html.ValidationSummary(true)
-    if (!Model.Confirm)
-    {
-        <input type="submit" value="Посчитать цену" class="btn btn-default" />
+        if (!Model.Confirm)
+        {
+            <input type="submit" value="Посчитать цену" class="btn btn-default" />
+        }
+        else
+        {
+            @Html.Hidden("Confirm", Model.Confirm);
+        <input type="submit" value="Продать" class="btn btn-default" />
+        }
     }
-    else
-    {
-        @Html.Hidden("Confirm", Model.Confirm);
-    <input type="submit" value="Продать" class="btn btn-default" />
-    }
-}

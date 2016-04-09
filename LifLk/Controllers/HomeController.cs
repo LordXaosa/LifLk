@@ -317,7 +317,7 @@ namespace LifLk.Controllers
             });
             decimal finalPrice = price.price * (1.0m + ((model.Item.Quality - 50.0m) / 100.0m));
             model.Price = finalPrice * model.Quantity;
-            model.Price = model.Price / 4.0m;
+            model.Price = model.Price / 2;
             if (!model.Confirm)
             {
                 model.Confirm = true;
@@ -378,6 +378,13 @@ namespace LifLk.Controllers
             log.ip = HttpContext.Request.UserHostAddress;
             db.logs.Add(log);
             db.SaveChanges();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
         }
     }
 }

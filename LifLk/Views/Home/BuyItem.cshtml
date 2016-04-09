@@ -5,34 +5,37 @@
 }
 
 <h2>Покупка вещей</h2>
-Вы хотите купить
-<img src="@Url.Content("~/" + Model.ObjectsTypes.FaceImage)">
-<br/>
-@using (Html.BeginForm("BuyItem", "Home", FormMethod.Post))
-{
-    @Html.HiddenFor(m => m.ObjectId)
-    //Html.HiddenFor(m => m.ConfirmBuy)
-    <text>
-    Качество:
-    @Html.TextBoxFor(model => model.Quality)
-    <br/>
-    Количество:
-    @Html.TextBoxFor(model => model.Quantity)
-    <br/>
-    </text>
+<br />
+<h4>Подсказка: некоторые вещи не могут быть качества выше 99</h4>
+    <br />
+    Вы хотите купить
+    <img src="@Url.Content("~/" + Model.ObjectsTypes.FaceImage)">
+    <br />
+    @using (Html.BeginForm("BuyItem", "Home", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.ObjectId)
+        //Html.HiddenFor(m => m.ConfirmBuy)
+        <text>
+            Качество:
+            @Html.TextBoxFor(model => model.Quality)
+            <br />
+            Количество:
+            @Html.TextBoxFor(model => model.Quantity)
+            <br />
+        </text>
         if (Model.Price > 0)
         {
             <text>Общая стоимость:</text>
             @:@string.Format("{0} золотых, {1} серебрянных и {2} медных монет или их эквивалент", Model.GoldPrice, Model.SilverPrice, Model.CopperPrice)
         }
-    @Html.ValidationSummary(true)
-    if (!Model.ConfirmBuy)
-    {
-        <input type="submit" value="Посчитать цену" class="btn btn-default"/>
+        @Html.ValidationSummary(true)
+        if (!Model.ConfirmBuy)
+        {
+            <input type="submit" value="Посчитать цену" class="btn btn-default" />
+        }
+        else
+        {
+            @Html.Hidden("ConfirmBuy", Model.ConfirmBuy);
+        <input type="submit" value="Купить" class="btn btn-default" />
+        }
     }
-    else
-    {
-        @Html.Hidden("ConfirmBuy", Model.ConfirmBuy);
-        <input type="submit" value="Купить" class="btn btn-default"/>
-    }
-}
