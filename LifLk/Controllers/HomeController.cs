@@ -352,7 +352,7 @@ namespace LifLk.Controllers
                 if (model.Quantity == model.Item.Quantity)
                 {
                     db.f_deleteItem(model.ItemId);
-                    AddLog(string.Format("[SELL][SUCCESS]Item id:{0} quantity: {1} (all) price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId));
+                    AddLog(string.Format("[SELL][SUCCESS]Item id:{0} quantity: {1} (all) quality: {4} price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId, model.Item.Quality));
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -360,7 +360,7 @@ namespace LifLk.Controllers
                     items item = db.items.Find(model.ItemId);
                     item.Quantity -= model.Quantity;
                     db.SaveChanges();
-                    AddLog(string.Format("[SELL][SUCCESS]Item id:{0} quantity: {1} price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId));
+                    AddLog(string.Format("[SELL][SUCCESS]Item id:{0} quantity: {1} quality: {4} price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId, model.Item.Quality));
                     return RedirectToAction("Index", "Home");
                 }
             }
