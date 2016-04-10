@@ -371,20 +371,14 @@ namespace LifLk.Controllers
         {
             logs log = new logs();
             log.message = message;
-            if (Session["steamId"] != null)
+            if (Session["userSteamId"] != null)
             {
-                log.steamid = long.Parse(Session["steamId"].ToString());
+                log.steamid = long.Parse(Session["userSteamId"].ToString());
             }
             log.ip = HttpContext.Request.UserHostAddress;
+            log.date = DateTime.Now;
             db.logs.Add(log);
             db.SaveChanges();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }
