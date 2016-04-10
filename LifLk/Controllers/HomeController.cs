@@ -242,15 +242,15 @@ namespace LifLk.Controllers
             prices price = model.Item.objects_types.prices.FirstOrDefault();
             if (price == null)
             {
-                AddLog(string.Format("[SELL][PRE][ERROR]No price. Item id:{0} quantity: {1} price: {2} char: {3}", model.ItemId, model.Quantity, model.Price, charId));
+                AddLog(string.Format("[SELL][PRE][ERROR]No price. Item id:{0} quantity: {1} price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId));
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             if (ch.RootContainerID != model.Item.ContainerID)
             {
-                AddLog(string.Format("[SELL][PRE][ERROR]You are not owner!. Item id:{0} quantity: {1} price: {2} char: {3}", model.ItemId, model.Quantity, model.Price, charId));
+                AddLog(string.Format("[SELL][PRE][ERROR]You are not owner!. Item id:{0} quantity: {1} price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId));
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
-            AddLog(string.Format("[SELL][PRE][SUCCESS]Item id:{0} quantity: {1} price: {2} char: {3}", model.ItemId, model.Quantity, model.Price, charId));
+            AddLog(string.Format("[SELL][PRE][SUCCESS]Item id:{0} quantity: {1} price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId));
             return View(model);
         }
         [HttpPost]
@@ -283,7 +283,7 @@ namespace LifLk.Controllers
             prices price = model.Item.objects_types.prices.FirstOrDefault();
             if (price == null)
             {
-                AddLog(string.Format("[SELL][ERROR]No price. Item id:{0} quantity: {1} price: {2} char: {3}", model.ItemId, model.Quantity, model.Price, charId));
+                AddLog(string.Format("[SELL][ERROR]No price. Item id:{0} quantity: {1} price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId));
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             if (!ModelState.IsValid)
@@ -317,12 +317,12 @@ namespace LifLk.Controllers
             });
             decimal finalPrice = price.price * (1.0m + ((model.Item.Quality - 50.0m) / 100.0m));
             model.Price = finalPrice * model.Quantity;
-            model.Price = model.Price / 2;
+            model.Price = model.Price / 4;
             if (!model.Confirm)
             {
                 model.Confirm = true;
                 ModelState.AddModelError("","Нажмите еще раз для подтверждения продажи");
-                AddLog(string.Format("[SELL][PRE]Item id:{0} quantity: {1} price: {2} char: {3}", model.ItemId, model.Quantity, model.Price, charId));
+                AddLog(string.Format("[SELL][PRE]Item id:{0} quantity: {1} price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId));
                 return View(model);
             }
             else
@@ -352,7 +352,7 @@ namespace LifLk.Controllers
                 if (model.Quantity == model.Item.Quantity)
                 {
                     db.f_deleteItem(model.ItemId);
-                    AddLog(string.Format("[SELL][SUCCESS]Item id:{0} quantity: {1} (all) price: {2} char: {3}", model.ItemId, model.Quantity, model.Price, charId));
+                    AddLog(string.Format("[SELL][SUCCESS]Item id:{0} quantity: {1} (all) price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId));
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -360,7 +360,7 @@ namespace LifLk.Controllers
                     items item = db.items.Find(model.ItemId);
                     item.Quantity -= model.Quantity;
                     db.SaveChanges();
-                    AddLog(string.Format("[SELL][SUCCESS]Item id:{0} quantity: {1} price: {2} char: {3}", model.ItemId, model.Quantity, model.Price,charId));
+                    AddLog(string.Format("[SELL][SUCCESS]Item id:{0} quantity: {1} price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId));
                     return RedirectToAction("Index", "Home");
                 }
             }
