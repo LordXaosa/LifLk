@@ -142,6 +142,23 @@ namespace LifLk.Controllers
                 AddLog(string.Format("[BUY][ERROR]No price. Item id:{0} quantity: {1} price: {2} char: {3}", model.ObjectId, model.Quantity, model.Price, charId));
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            double charWeight = 0.0d;
+            foreach (items item in ch.containers.items)
+            {
+                charWeight += (double)(item.objects_types.UnitWeight*item.Quantity)/1000.0d;
+            }
+            foreach (items item in ch.containers1.items)
+            {
+                charWeight += (double)(item.objects_types.UnitWeight * item.Quantity) / 1000.0d;
+            }
+            double afterWeight = (double)(charWeight + ((model.ObjectsTypes.UnitWeight*model.Quantity)/1000.0d));
+            double maxWeight = (((ch.Willpower/1000000.0d)*2) + 100);
+            if (afterWeight >= (maxWeight*2)-1)
+            {
+                ModelState.AddModelError("", "Недостаточно места в инвентаре!");
+                AddLog(string.Format("[BUY][ERROR]No place in inventory. Item id:{0} quantity: {1} price: {2} char: {3}", model.ObjectId, model.Quantity, model.Price, charId));
+                return BuyItem((int)model.ObjectsTypes.ID);
+            }
             
             List<items> coins = ch.containers1.items.Where(
                                         p => p.ObjectTypeID == 1059 || p.ObjectTypeID == 1060 || p.ObjectTypeID == 1061)
@@ -204,7 +221,7 @@ namespace LifLk.Controllers
                 {
                     db.f_deleteItem((int)coin.ID);
                 }
-                AddLog(string.Format("[BUY][SUCCESS]Item id:{0} quantity: {1} price: {2} char: {3}", model.ObjectId, model.Quantity, model.Price, charId));
+                AddLog(string.Format("[BUY][SUCCESS]Item id:{0} quantity: {1} quality: {4} price: {2} char: {3}", model.ObjectId, model.Quantity, model.Price, charId, model.Quality));
             }
             return RedirectToAction("Index","Home");
         }
@@ -318,6 +335,7 @@ namespace LifLk.Controllers
             decimal finalPrice = price.price * (1.0m + ((model.Item.Quality - 50.0m) / 100.0m));
             model.Price = finalPrice * model.Quantity;
             model.Price = model.Price / 4;
+            model.Price = Math.Truncate(model.Price);
             if (!model.Confirm)
             {
                 model.Confirm = true;
