@@ -14,7 +14,7 @@ namespace LifLk.Models
         [Range(1, int.MaxValue)]
         public int Quantity { get; set; }
         [Required]
-        [Range(1,99)]
+        [Range(1,100)]
         public int Quality { get; set; }
 
         public bool ConfirmBuy { get; set; }
