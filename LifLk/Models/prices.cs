@@ -17,6 +17,7 @@ namespace LifLk.Models
         public long id { get; set; }
         public long objectid { get; set; }
         public long price { get; set; }
+        public long sellprice { get; set; }
     
         public virtual objects_types objects_types { get; set; }
     }

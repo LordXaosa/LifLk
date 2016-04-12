@@ -356,7 +356,8 @@
           </Key>
           <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="objectid" Type="uint" Nullable="false" />
-          <Property Name="price" Type="uint" Nullable="false" />
+          <Property Name="price" Type="ubigint" Nullable="false" />
+          <Property Name="sellprice" Type="ubigint" Nullable="false" />
         </EntityType>
         <EntityType Name="race">
           <Key>
@@ -1883,6 +1884,7 @@
           <Property Name="objectid" Type="Int64" Nullable="false" />
           <Property Name="price" Type="Int64" Nullable="false" />
           <NavigationProperty Name="objects_types" Relationship="LifModel.FK_objectstypes" FromRole="prices" ToRole="objects_types" />
+          <Property Name="sellprice" Type="Int64" Nullable="false" />
         </EntityType>
         <EntityType Name="race">
           <Key>
@@ -2894,6 +2896,7 @@
           <EntitySetMapping Name="prices">
             <EntityTypeMapping TypeName="LifModel.prices">
               <MappingFragment StoreEntitySet="prices">
+                <ScalarProperty Name="sellprice" ColumnName="sellprice" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="objectid" ColumnName="objectid" />
                 <ScalarProperty Name="id" ColumnName="id" />

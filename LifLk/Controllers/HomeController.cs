@@ -259,8 +259,16 @@ namespace LifLk.Controllers
             prices price = model.Item.objects_types.prices.FirstOrDefault();
             if (price == null)
             {
+                ModelState.AddModelError("", "Эту вещь нельзя продать");
                 AddLog(string.Format("[SELL][PRE][ERROR]No price. Item id:{0} quantity: {1} price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId));
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View(model);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (price.sellprice == 0)
+            {
+                ModelState.AddModelError("", "Эту вещь нельзя продать");
+                AddLog(string.Format("[SELL][PRE][ERROR]No sell price. Item id:{0} quantity: {1} price: {2} char: {3}", model.ItemId, model.Quantity, model.Price, charId));
+                return View(model);
             }
             if (ch.RootContainerID != model.Item.ContainerID)
             {
@@ -300,8 +308,16 @@ namespace LifLk.Controllers
             prices price = model.Item.objects_types.prices.FirstOrDefault();
             if (price == null)
             {
+                ModelState.AddModelError("", "Эту вещь нельзя продать");
                 AddLog(string.Format("[SELL][ERROR]No price. Item id:{0} quantity: {1} price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId));
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View(model);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (price.sellprice == 0)
+            {
+                ModelState.AddModelError("", "Эту вещь нельзя продать");
+                AddLog(string.Format("[SELL][ERROR]No sell price. Item id:{0} quantity: {1} price: {2} char: {3}", model.ItemId, model.Quantity, model.Price, charId));
+                return Sell(model.ItemId);
             }
             if (!ModelState.IsValid)
             {
@@ -332,9 +348,9 @@ namespace LifLk.Controllers
                 }
                 return 0;
             });
-            decimal finalPrice = price.price * (1.0m + ((model.Item.Quality - 50.0m) / 100.0m));
+            decimal finalPrice = price.sellprice * (1.0m + ((model.Item.Quality - 50.0m) / 100.0m));
             model.Price = finalPrice * model.Quantity;
-            model.Price = model.Price / 4;
+            //model.Price = model.Price / 4;
             model.Price = Math.Truncate(model.Price);
             if (!model.Confirm)
             {
