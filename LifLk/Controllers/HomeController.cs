@@ -142,6 +142,12 @@ namespace LifLk.Controllers
                 AddLog(string.Format("[BUY][ERROR]No price. Item id:{0} quantity: {1} price: {2} char: {3}", model.ObjectId, model.Quantity, model.Price, charId));
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            if (model.Quantity > model.ObjectsTypes.MaxStackSize)
+            {
+                ModelState.AddModelError("", "Нельзя купить более " + model.ObjectsTypes.MaxStackSize + " штуки!");
+                AddLog(string.Format("[BUY][ERROR]Max stack size. Item id:{0} quantity: {1} price: {2} char: {3}", model.ObjectId, model.Quantity, model.Price, charId));
+                return BuyItem((int)model.ObjectsTypes.ID);
+            }
             double charWeight = 0.0d;
             foreach (items item in ch.containers.items)
             {
@@ -248,6 +254,12 @@ namespace LifLk.Controllers
             SellItemModel model = new SellItemModel();
             model.ItemId = itemId.Value;
             model.Item = db.items.FirstOrDefault(p => p.ID == itemId.Value);
+            if (model.Item == null)
+            {
+                AddLog(string.Format("[SELL][PRE][ERROR]Null item!. Item id:{0} quantity: {1} price: {2} char: {3}", model.Item.ObjectTypeID, model.Quantity, model.Price, charId));
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            model.Quantity = (int)model.Item.Quantity;
             lifdscp_online_character online = db.lifdscp_online_character.FirstOrDefault(p => p.CharacterID == charId);
             if (online != null)
             {
